@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>СБОРКА SMM Agent — Диаграмма системы</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #15151f;
+  --accent: #DFFF00;
+  --telegram: #229ED9;
+  --linkedin: #0A66C2;
+  --openrouter: #8B5CF6;
+  --groq: #F97316;
+  --gemini: #4285F4;
+  --memory: #A78BFA;
+  --core: #10B981;
+  --infra: #6B7280;
+  --text: #E5E5E5;
+  --text-dim: #888;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  padding: 24px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header h1 .badge {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* DIAGRAM CONTAINER */
+.diagram-container {
+  width: 100%;
+  height: calc(100vh - 100px);
+  position: relative;
+  overflow: auto;
+}
+
+.diagram-wrapper {
+  min-width: 1400px;
+  min-height: 900px;
+  position: relative;
+  padding: 40px;
+}
+
+/* SVG LAYER FOR CONNECTIONS */
+.connections-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* NODES */
+.node {
+  position: absolute;
+  background: var(--surface);
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.node:hover {
+  transform: scale(1.05);
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.node-icon {
+  font-size: 20px;
+}
+
+.node-label {
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.node-sub {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  display: block;
+}
+
+/* NODE TYPES */
+.node-user { border-color: var(--telegram); background: rgba(34,158,217,0.1); }
+.node-telegram { border-color: var(--telegram); background: rgba(34,158,217,0.15); }
+.node-core { border-color: var(--accent); background: rgba(223,255,0,0.1); }
+.node-engine { border-color: var(--core); background: rgba(16,185,129,0.1); }
+.node-ai { border-color: var(--openrouter); background: rgba(139,92,246,0.1); }
+.node-groq { border-color: var(--groq); background: rgba(249,115,22,0.1); }
+.node-gemini { border-color: var(--gemini); background: rgba(66,133,244,0.1); }
+.node-memory { border-color: var(--memory); background: rgba(167,139,250,0.1); }
+.node-linkedin { border-color: var(--linkedin); background: rgba(10,102,194,0.1); }
+.node-infra { border-color: var(--infra); background: rgba(107,114,128,0.15); }
+
+/* MAIN CORE NODE */
+.node-main {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(223,255,0,0.15), rgba(16,185,129,0.1));
+  padding: 20px 28px;
+  border-width: 3px;
+}
+
+.node-main .node-icon { font-size: 28px; }
+.node-main .node-label { font-size: 1rem; font-weight: 600; }
+
+/* CONNECTION LINES */
+.connection {
+  stroke-width: 2;
+  fill: none;
+  opacity: 0.6;
+  transition: opacity 0.3s, stroke-width 0.3s;
+}
+
+.connection:hover {
+  opacity: 1;
+  stroke-width: 3;
+}
+
+.connection-animated {
+  stroke-dasharray: 8 4;
+  animation: flowDash 1s linear infinite;
+}
+
+@keyframes flowDash {
+  to { stroke-dashoffset: -12; }
+}
+
+/* ARROW MARKERS */
+.arrow-marker {
+  fill: currentColor;
+}
+
+/* TOOLTIP */
+.tooltip {
+  position: fixed;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  max-width: 280px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.tooltip.active { opacity: 1; }
+
+.tooltip h4 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.tooltip p {
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.tooltip code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255,255,255,0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* ZOOM CONTROLS */
+.zoom-controls {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.zoom-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.zoom-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--accent);
+}
+
+/* LABELS FOR GROUPS */
+.group-label {
+  position: absolute;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  opacity: 0.5;
+  z-index: 5;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>
+    <span>🏗️</span>
+    СБОРКА SMM Agent
+    <span class="badge">v5.2</span>
+  </h1>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background: var(--telegram)"></div> Telegram</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--accent)"></div> Core</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--core)"></div> AI Engines</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--openrouter)"></div> AI Models</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--memory)"></div> Memory</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--linkedin)"></div> LinkedIn</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--infra)"></div> Infra</div>
+  </div>
+</div>
+
+<div class="diagram-container">
+  <div class="diagram-wrapper" id="diagram">
+
+    <!-- SVG CONNECTIONS -->
+    <svg class="connections-layer" id="connections">
+      <defs>
+        <!-- Arrow markers for different colors -->
+        <marker id="arrow-telegram" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#229ED9"/>
+        </marker>
+        <marker id="arrow-accent" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#DFFF00"/>
+        </marker>
+        <marker id="arrow-core" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#10B981"/>
+        </marker>
+        <marker id="arrow-openrouter" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#8B5CF6"/>
+        </marker>
+        <marker id="arrow-groq" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#F97316"/>
+        </marker>
+        <marker id="arrow-gemini" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#4285F4"/>
+        </marker>
+        <marker id="arrow-memory" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#A78BFA"/>
+        </marker>
+        <marker id="arrow-linkedin" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#0A66C2"/>
+        </marker>
+        <marker id="arrow-infra" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#6B7280"/>
+        </marker>
+      </defs>
+    </svg>
+
+    <!-- GROUP LABELS -->
+    <div class="group-label" style="top: 60px; left: 100px;">User Input</div>
+    <div class="group-label" style="top: 60px; left: 540px;">Core System</div>
+    <div class="group-label" style="top: 60px; left: 950px;">AI Models</div>
+    <div class="group-label" style="top: 380px; left: 100px;">AI Engines</div>
+    <div class="group-label" style="top: 380px; left: 950px;">Memory System</div>
+    <div class="group-label" style="top: 650px; left: 100px;">Infrastructure</div>
+    <div class="group-label" style="top: 650px; left: 540px;">Publishing</div>
+
+    <!-- NODES -->
+
+    <!-- User & Telegram -->
+    <div class="node node-user" id="user" style="left: 80px; top: 180px;"
+         data-tooltip="Пользователь|Отправляет команды через Telegram: /пост, /status, /help">
+      <span class="node-icon">👤</span>
+      <div><span class="node-label">User</span><span class="node-sub">команды</span></div>
+    </div>
+
+    <div class="node node-telegram" id="tg-api" style="left: 240px; top: 180px;"
+         data-tooltip="Telegram Bot API|Long polling, inline keyboards, sendMessage, sendPhoto|api.telegram.org">
+      <span class="node-icon">💬</span>
+      <div><span class="node-label">Telegram API</span><span class="node-sub">Bot API</span></div>
+    </div>
+
+    <!-- CORE -->
+    <div class="node node-main node-core" id="bot" style="left: 500px; top: 160px;"
+         data-tooltip="SborkaBot|Главный модуль агента. 3000+ строк кода. Polling loop, обработка команд, оркестрация всех компонентов.|bot.py">
+      <span class="node-icon">🤖</span>
+      <div><span class="node-label">SborkaBot</span><span class="node-sub">bot.py · Core</span></div>
+    </div>
+
+    <div class="node node-telegram" id="keyboards" style="left: 500px; top: 280px;"
+         data-tooltip="Inline Keyboards|UI компонент: кнопки Approve/Reject/Regenerate/Edit. Callback handler.|inline_keyboards.py">
+      <span class="node-icon">⌨️</span>
+      <div><span class="node-label">Inline Keyboards</span><span class="node-sub">UI callbacks</span></div>
+    </div>
+
+    <!-- AI MODELS -->
+    <div class="node node-ai" id="openrouter" style="left: 900px; top: 100px;"
+         data-tooltip="OpenRouter|PRIMARY. Gemini 2.5 Flash, Llama 3.3 70B, DeepSeek R1. Бесплатный tier.|openrouter.ai/api/v1">
+      <span class="node-icon">🚀</span>
+      <div><span class="node-label">OpenRouter</span><span class="node-sub">primary</span></div>
+    </div>
+
+    <div class="node node-groq" id="groq" style="left: 1100px; top: 100px;"
+         data-tooltip="Groq|FALLBACK 1. Llama 3.3 70B Versatile. 100K токенов/день бесплатно.|api.groq.com">
+      <span class="node-icon">⚡</span>
+      <div><span class="node-label">Groq</span><span class="node-sub">fallback</span></div>
+    </div>
+
+    <div class="node node-gemini" id="gemini" style="left: 1000px; top: 200px;"
+         data-tooltip="Google Gemini|Генерация картинок. 2 img/min, 500-1000/day. Конструктивизм стиль.|gemini_image.py">
+      <span class="node-icon">🎨</span>
+      <div><span class="node-label">Gemini</span><span class="node-sub">images</span></div>
+    </div>
+
+    <!-- AI ENGINES -->
+    <div class="node node-engine" id="self-refine" style="left: 80px; top: 420px;"
+         data-tooltip="Self-Refine Engine|Critique → Refine → Iterate. Score ≥ 0.7 для завершения. Max 3 итерации.|self_refine.py">
+      <span class="node-icon">🔄</span>
+      <div><span class="node-label">Self-Refine</span><span class="node-sub">critique loop</span></div>
+    </div>
+
+    <div class="node node-engine" id="reflexion" style="left: 250px; top: 420px;"
+         data-tooltip="Reflexion|Learning from feedback. Анализ episodic памяти, генерация rules.|reflexion.py">
+      <span class="node-icon">🧠</span>
+      <div><span class="node-label">Reflexion</span><span class="node-sub">learning</span></div>
+    </div>
+
+    <div class="node node-engine" id="confidence" style="left: 80px; top: 520px;"
+         data-tooltip="Confidence Scoring|4 фактора: self_refine_score, topic_familiarity, approval_rate, model_reliability.|confidence.py">
+      <span class="node-icon">📊</span>
+      <div><span class="node-label">Confidence</span><span class="node-sub">scoring</span></div>
+    </div>
+
+    <div class="node node-engine" id="autonomy" style="left: 250px; top: 520px;"
+         data-tooltip="Autonomy Manager|4 уровня: Shadow → Draft → Bounded → Autonomous. Circuit Breaker.|autonomy.py">
+      <span class="node-icon">🎚️</span>
+      <div><span class="node-label">Autonomy</span><span class="node-sub">4 levels</span></div>
+    </div>
+
+    <!-- MEMORY -->
+    <div class="node node-memory" id="memory-mgr" style="left: 900px; top: 420px;"
+         data-tooltip="Memory Manager|Управление 4 типами памяти. Get/set rules, patterns, episodes.|memory_manager.py">
+      <span class="node-icon">🗄️</span>
+      <div><span class="node-label">Memory Manager</span><span class="node-sub">coordinator</span></div>
+    </div>
+
+    <div class="node node-memory" id="procedural" style="left: 1100px; top: 380px;"
+         data-tooltip="Procedural Memory|КАК делать: версионированные промпты, learned rules, patterns.|prompts/, rules.json">
+      <span class="node-icon">📋</span>
+      <div><span class="node-label">Procedural</span><span class="node-sub">prompts</span></div>
+    </div>
+
+    <div class="node node-memory" id="semantic" style="left: 1100px; top: 460px;"
+         data-tooltip="Semantic Memory|ЧТО знаем: topics, vocabulary (forbidden/recommended), brand_voice.|semantic/*.json">
+      <span class="node-icon">📚</span>
+      <div><span class="node-label">Semantic</span><span class="node-sub">knowledge</span></div>
+    </div>
+
+    <div class="node node-memory" id="episodic" style="left: 1100px; top: 540px;"
+         data-tooltip="Episodic Memory|История: feedback по дням, все генерации, decisions. JSONL формат.|episodic/*.jsonl">
+      <span class="node-icon">📝</span>
+      <div><span class="node-label">Episodic</span><span class="node-sub">history</span></div>
+    </div>
+
+    <div class="node node-memory" id="working" style="left: 1100px; top: 620px;"
+         data-tooltip="Working Memory|Текущий контекст: session state, autonomy level, circuit breaker.|state.json">
+      <span class="node-icon">⚙️</span>
+      <div><span class="node-label">Working</span><span class="node-sub">session</span></div>
+    </div>
+
+    <!-- INFRASTRUCTURE -->
+    <div class="node node-infra" id="github" style="left: 80px; top: 700px;"
+         data-tooltip="GitHub|Repository: TimmyZinin/sborka-smm-bot. Auto-deploy on push to main.|github.com">
+      <span class="node-icon">🐙</span>
+      <div><span class="node-label">GitHub</span><span class="node-sub">repo</span></div>
+    </div>
+
+    <div class="node node-infra" id="railway" style="left: 250px; top: 700px;"
+         data-tooltip="Railway|Docker hosting. Python 3.11-slim, auto-restart, Europe/Moscow TZ.|railway.app">
+      <span class="node-icon">🚂</span>
+      <div><span class="node-label">Railway</span><span class="node-sub">hosting</span></div>
+    </div>
+
+    <!-- PUBLISHING -->
+    <div class="node node-linkedin" id="linkedin-pub" style="left: 500px; top: 700px;"
+         data-tooltip="LinkedIn Publisher|OAuth 2.0, UGC Posts API v2. Токен живёт 60 дней.|linkedin_publisher.py">
+      <span class="node-icon">📤</span>
+      <div><span class="node-label">LinkedIn Publisher</span><span class="node-sub">API v2</span></div>
+    </div>
+
+    <div class="node node-linkedin" id="linkedin" style="left: 700px; top: 700px;"
+         data-tooltip="LinkedIn|Публикация текстовых постов. Лимит 3000 символов.|linkedin.com">
+      <span class="node-icon">💼</span>
+      <div><span class="node-label">LinkedIn</span><span class="node-sub">profile</span></div>
+    </div>
+
+    <div class="node node-telegram" id="tg-channels" style="left: 700px; top: 790px;"
+         data-tooltip="Telegram Channels|Публикация постов и картинок в каналы и группы.|СБОРКА Team">
+      <span class="node-icon">📢</span>
+      <div><span class="node-label">Telegram</span><span class="node-sub">channels</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div class="tooltip" id="tooltip"></div>
+
+<!-- ZOOM CONTROLS -->
+<div class="zoom-controls">
+  <button class="zoom-btn" onclick="zoom(0.1)">+</button>
+  <button class="zoom-btn" onclick="zoom(-0.1)">−</button>
+  <button class="zoom-btn" onclick="resetZoom()">↺</button>
+</div>
+
+<script>
+// Connection definitions: [fromId, toId, color, animated, label]
+const connections = [
+  // User flow
+  ['user', 'tg-api', '#229ED9', true],
+  ['tg-api', 'bot', '#229ED9', true],
+
+  // Core to Keyboards
+  ['bot', 'keyboards', '#DFFF00', false],
+
+  // Core to AI Models
+  ['bot', 'openrouter', '#8B5CF6', true],
+  ['bot', 'groq', '#F97316', true],
+  ['bot', 'gemini', '#4285F4', true],
+
+  // OpenRouter fallback to Groq
+  ['openrouter', 'groq', '#F97316', false],
+
+  // Core to AI Engines
+  ['bot', 'self-refine', '#10B981', true],
+  ['bot', 'reflexion', '#10B981', false],
+  ['bot', 'confidence', '#10B981', false],
+  ['bot', 'autonomy', '#10B981', false],
+
+  // Self-Refine uses AI models
+  ['self-refine', 'openrouter', '#8B5CF6', true],
+
+  // Reflexion reads episodic
+  ['reflexion', 'episodic', '#A78BFA', true],
+  ['reflexion', 'procedural', '#A78BFA', false],
+
+  // Confidence reads memory
+  ['confidence', 'episodic', '#A78BFA', false],
+
+  // Autonomy uses working memory
+  ['autonomy', 'working', '#A78BFA', false],
+
+  // Core to Memory Manager
+  ['bot', 'memory-mgr', '#A78BFA', false],
+
+  // Memory Manager to memory types
+  ['memory-mgr', 'procedural', '#A78BFA', false],
+  ['memory-mgr', 'semantic', '#A78BFA', false],
+  ['memory-mgr', 'episodic', '#A78BFA', false],
+  ['memory-mgr', 'working', '#A78BFA', false],
+
+  // Infrastructure
+  ['github', 'railway', '#6B7280', true],
+  ['railway', 'bot', '#6B7280', true],
+
+  // Publishing
+  ['bot', 'linkedin-pub', '#0A66C2', true],
+  ['linkedin-pub', 'linkedin', '#0A66C2', true],
+  ['bot', 'tg-channels', '#229ED9', true],
+  ['keyboards', 'tg-api', '#229ED9', false],
+];
+
+// Draw connections
+function drawConnections() {
+  const svg = document.getElementById('connections');
+  const wrapper = document.getElementById('diagram');
+
+  // Clear existing paths
+  svg.querySelectorAll('path').forEach(p => p.remove());
+
+  connections.forEach(([fromId, toId, color, animated]) => {
+    const from = document.getElementById(fromId);
+    const to = document.getElementById(toId);
+
+    if (!from || !to) return;
+
+    const fromRect = from.getBoundingClientRect();
+    const toRect = to.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+
+    // Calculate centers relative to wrapper
+    const x1 = fromRect.left + fromRect.width / 2 - wrapperRect.left + wrapper.scrollLeft;
+    const y1 = fromRect.top + fromRect.height / 2 - wrapperRect.top + wrapper.scrollTop;
+    const x2 = toRect.left + toRect.width / 2 - wrapperRect.left + wrapper.scrollLeft;
+    const y2 = toRect.top + toRect.height / 2 - wrapperRect.top + wrapper.scrollTop;
+
+    // Create curved path
+    const midX = (x1 + x2) / 2;
+    const midY = (y1 + y2) / 2;
+
+    // Calculate control point for curve
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    // Curve intensity based on distance
+    const curveOffset = Math.min(dist * 0.2, 50);
+
+    // Perpendicular offset for curve
+    const cx = midX - (dy / dist) * curveOffset * 0.3;
+    const cy = midY + (dx / dist) * curveOffset * 0.3;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`);
+    path.setAttribute('stroke', color);
+    path.setAttribute('class', 'connection' + (animated ? ' connection-animated' : ''));
+    path.setAttribute('marker-end', `url(#arrow-${getMarkerName(color)})`);
+
+    svg.appendChild(path);
+  });
+}
+
+function getMarkerName(color) {
+  const map = {
+    '#229ED9': 'telegram',
+    '#DFFF00': 'accent',
+    '#10B981': 'core',
+    '#8B5CF6': 'openrouter',
+    '#F97316': 'groq',
+    '#4285F4': 'gemini',
+    '#A78BFA': 'memory',
+    '#0A66C2': 'linkedin',
+    '#6B7280': 'infra'
+  };
+  return map[color] || 'accent';
+}
+
+// Tooltip
+const tooltip = document.getElementById('tooltip');
+
+document.querySelectorAll('.node').forEach(node => {
+  node.addEventListener('mouseenter', (e) => {
+    const data = node.dataset.tooltip;
+    if (!data) return;
+
+    const [title, ...rest] = data.split('|');
+    const desc = rest.slice(0, -1).join(' ');
+    const code = rest[rest.length - 1];
+
+    tooltip.innerHTML = `
+      <h4>${title}</h4>
+      <p>${desc || ''}</p>
+      ${code ? `<code>${code}</code>` : ''}
+    `;
+
+    tooltip.classList.add('active');
+  });
+
+  node.addEventListener('mousemove', (e) => {
+    tooltip.style.left = e.clientX + 15 + 'px';
+    tooltip.style.top = e.clientY + 15 + 'px';
+  });
+
+  node.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('active');
+  });
+});
+
+// Zoom
+let currentZoom = 1;
+
+function zoom(delta) {
+  currentZoom = Math.max(0.5, Math.min(1.5, currentZoom + delta));
+  document.getElementById('diagram').style.transform = `scale(${currentZoom})`;
+  document.getElementById('diagram').style.transformOrigin = 'top left';
+  setTimeout(drawConnections, 10);
+}
+
+function resetZoom() {
+  currentZoom = 1;
+  document.getElementById('diagram').style.transform = 'scale(1)';
+  drawConnections();
+}
+
+// Initial draw
+window.addEventListener('load', () => {
+  drawConnections();
+});
+
+window.addEventListener('resize', drawConnections);
+
+// Redraw on scroll
+document.querySelector('.diagram-container').addEventListener('scroll', () => {
+  // Debounce
+  clearTimeout(window.scrollTimeout);
+  window.scrollTimeout = setTimeout(drawConnections, 50);
+});
+</script>
+
+</body>
+</html>
