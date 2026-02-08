@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 дня практики — Сценарии бесплатных роликов</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --plum: #4A2040;
+  --plum-light: #6B3A5E;
+  --terracotta: #C4735B;
+  --terracotta-light: #D4937F;
+  --gold: #C9A94E;
+  --gold-light: #DCC47A;
+  --sage: #8BA888;
+  --sage-deep: #5C7A59;
+  --sand: #F5EDE3;
+  --cream: #FDF8F2;
+  --charcoal: #2D2A2E;
+  --mist: #D4CFC7;
+  --blush: #E8C4B8;
+  --lavender: #B8A9C9;
+  --warm-white: #FDFAF6;
+  
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Sans 3', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--charcoal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--plum);
+  color: white;
+  padding: 60px 40px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -20%;
+  width: 140%;
+  height: 220%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(196,115,91,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(184,169,201,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.header-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--terracotta-light);
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.header h1 em {
+  font-style: italic;
+  color: var(--blush);
+}
+
+.header-sub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ===== OVERVIEW STRIP ===== */
+.overview-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: white;
+  border-bottom: 1px solid var(--mist);
+}
+
+.overview-item {
+  padding: 28px 24px;
+  text-align: center;
+  border-right: 1px solid var(--mist);
+  transition: background 0.3s;
+}
+
+.overview-item:last-child { border-right: none; }
+.overview-item:hover { background: var(--sand); }
+
+.overview-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--terracotta);
+}
+
+.overview-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--plum);
+  margin-top: 4px;
+}
+
+/* ===== LOGIC SECTION ===== */
+.logic-section {
+  max-width: 900px;
+  margin: 50px auto 0;
+  padding: 0 30px;
+}
+
+.logic-title {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logic-title .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 8px;
+}
+
+.logic-title h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--plum);
+}
+
+.logic-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+}
+
+.logic-card {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 28px 22px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 16px rgba(74,32,64,0.05);
+}
+
+.logic-card .step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--plum);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.logic-card h4 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--plum);
+  margin-bottom: 6px;
+}
+
+.logic-card p {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.5;
+}
+
+.logic-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  flex-shrink: 0;
+  color: var(--terracotta);
+  font-size: 20px;
+}
+
+/* ===== DAY SECTIONS ===== */
+.day-section {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 30px;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--mist);
+}
+
+.day-badge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: white;
+  font-family: var(--font-display);
+}
+
+.day-badge .day-num {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.day-badge .day-label {
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.day-1 .day-badge { background: linear-gradient(135deg, var(--terracotta), #D4937F); }
+.day-2 .day-badge { background: linear-gradient(135deg, var(--sage-deep), var(--sage)); }
+.day-3 .day-badge { background: linear-gradient(135deg, var(--plum), var(--plum-light)); }
+
+.day-meta h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--plum);
+  margin-bottom: 4px;
+}
+
+.day-meta h2 em { font-style: italic; }
+
+.day-meta .day-subtitle {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+}
+
+.day-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--sand);
+  color: var(--plum);
+}
+
+/* ===== TASK BOX ===== */
+.task-box {
+  background: white;
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(74,32,64,0.04);
+  border-left: 4px solid var(--gold);
+}
+
+.task-box .task-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.task-box p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--mist), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  left: -27px;
+  top: 8px;
+}
+
+.day-1 .timeline-dot { background: var(--terracotta); }
+.day-2 .timeline-dot { background: var(--sage); }
+.day-3 .timeline-dot { background: var(--plum); }
+
+.timeline-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 12px rgba(74,32,64,0.04);
+}
+
+.timeline-card .time-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #aaa;
+  font-family: var(--font-body);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.timeline-card h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--plum);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.timeline-card p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #666;
+}
+
+.timeline-card .quote-block {
+  background: var(--sand);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 12px;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--plum);
+  line-height: 1.6;
+  border-left: 3px solid var(--terracotta);
+}
+
+/* ===== TECHNIQUES LIST ===== */
+.techniques-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.tech-card {
+  background: var(--sand);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.tech-card .tech-phase {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.tech-card .tech-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--plum);
+  font-weight: 600;
+}
+
+.tech-card .tech-desc {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.phase-mens { color: var(--terracotta); }
+.phase-fol { color: var(--sage-deep); }
+.phase-ov { color: var(--gold); }
+.phase-lut { color: var(--lavender); }
+
+/* ===== RESULT BAR ===== */
+.result-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  margin-top: 16px;
+}
+
+.day-1 .result-bar { background: linear-gradient(135deg, rgba(196,115,91,0.08), rgba(196,115,91,0.03)); border: 1px solid rgba(196,115,91,0.15); }
+.day-2 .result-bar { background: linear-gradient(135deg, rgba(139,168,136,0.08), rgba(139,168,136,0.03)); border: 1px solid rgba(139,168,136,0.15); }
+.day-3 .result-bar { background: linear-gradient(135deg, rgba(74,32,64,0.06), rgba(74,32,64,0.02)); border: 1px solid rgba(74,32,64,0.1); }
+
+.result-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.result-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--plum);
+}
+
+.result-text strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+/* ===== CTA SECTION ===== */
+.cta-strip {
+  margin-top: 12px;
+  padding: 14px 18px;
+  background: rgba(201,169,78,0.06);
+  border-radius: 10px;
+  border: 1px dashed var(--gold);
+}
+
+.cta-strip p {
+  font-size: 13px;
+  color: var(--plum);
+}
+
+.cta-strip strong {
+  color: var(--terracotta);
+}
+
+/* ===== FUNNEL SECTION ===== */
+.funnel-section {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  padding: 0 30px;
+}
+
+.funnel-section .logic-title {
+  margin-bottom: 28px;
+}
+
+.funnel-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 40px;
+}
+
+.funnel-flow::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--terracotta), var(--sage), var(--plum), var(--gold));
+}
+
+.funnel-step {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 12px 0;
+}
+
+.funnel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  left: -28px;
+  top: 18px;
+  border: 2px solid white;
+}
+
+.funnel-dot.d0 { background: var(--terracotta); }
+.funnel-dot.d1 { background: var(--terracotta-light); }
+.funnel-dot.d2 { background: var(--sage); }
+.funnel-dot.d3 { background: var(--plum); }
+.funnel-dot.d4 { background: var(--gold); }
+
+.funnel-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: #aaa;
+  min-width: 90px;
+  letter-spacing: 0.5px;
+  padding-top: 3px;
+}
+
+.funnel-content {
+  background: white;
+  border-radius: 10px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 8px rgba(74,32,64,0.04);
+  flex: 1;
+}
+
+.funnel-content h5 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--plum);
+  margin-bottom: 3px;
+}
+
+.funnel-content p {
+  font-size: 12px;
+  color: #888;
+}
+
+/* ===== TECH SPECS ===== */
+.specs-section {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 0 30px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.spec-card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 12px rgba(74,32,64,0.04);
+}
+
+.spec-card .spec-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.spec-card h5 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--plum);
+  margin-bottom: 8px;
+}
+
+.spec-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.spec-card li {
+  font-size: 12.5px;
+  color: #777;
+  padding: 3px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.spec-card li::before {
+  content: '·';
+  position: absolute;
+  left: 4px;
+  color: var(--terracotta);
+  font-weight: 700;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--plum);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 30px;
+  font-size: 12px;
+}
+
+.footer strong {
+  color: var(--blush);
+  font-weight: 500;
+}
+
+/* ===== DIVIDER ===== */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px 0;
+  color: var(--mist);
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--mist);
+}
+
+.section-divider span {
+  font-size: 18px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header { padding: 40px 24px 36px; }
+  .header h1 { font-size: 30px; }
+  .overview-strip { grid-template-columns: 1fr; }
+  .overview-item { border-right: none; border-bottom: 1px solid var(--mist); }
+  .overview-item:last-child { border-bottom: none; }
+  .logic-flow { flex-direction: column; align-items: center; }
+  .logic-arrow { transform: rotate(90deg); width: auto; height: 30px; }
+  .day-header { flex-direction: column; text-align: center; }
+  .day-tags { justify-content: center; }
+  .techniques-grid { grid-template-columns: 1fr; }
+  .specs-grid { grid-template-columns: 1fr; }
+  .funnel-time { min-width: 70px; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="header-label">Лид-магнит · Бесплатная микро-трансформация</div>
+  <h1>3 дня практики <em>под твою фазу цикла</em></h1>
+  <p class="header-sub">Полные сценарии трёх видео-роликов: структура, тайминги, реплики, техники, монтаж и воронка доставки</p>
+</div>
+
+<!-- ===== OVERVIEW STRIP ===== -->
+<div class="overview-strip">
+  <div class="overview-item">
+    <div class="overview-num">67</div>
+    <div class="overview-label">минут контента</div>
+  </div>
+  <div class="overview-item">
+    <div class="overview-num">8</div>
+    <div class="overview-label">техник и асан</div>
+  </div>
+  <div class="overview-item">
+    <div class="overview-num">4×3</div>
+    <div class="overview-label">модификации по фазам</div>
+  </div>
+</div>
+
+<!-- ===== LOGIC ===== -->
+<div class="logic-section">
+  <div class="logic-title">
+    <div class="label">Стратегическая логика</div>
+    <h2>Каждый день — новый слой доверия</h2>
+  </div>
+  <div class="logic-flow">
+    <div class="logic-card">
+      <div class="step-num">1</div>
+      <h4>Ага-момент</h4>
+      <p>Разрыв шаблона: впервые понимает, почему одна йога то помогает, то нет</p>
+    </div>
+    <div class="logic-arrow">→</div>
+    <div class="logic-card">
+      <div class="step-num">2</div>
+      <h4>Телесный эффект</h4>
+      <p>Ощутимый физический результат за 10 минут дыхания — доказательство метода</p>
+    </div>
+    <div class="logic-arrow">→</div>
+    <div class="logic-card">
+      <div class="step-num">3</div>
+      <h4>Готовый инструмент</h4>
+      <p>12-минутный ритуал на каждый день → привычка → потребность в системе</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ДЕНЬ 1 ==================== -->
+<div class="day-section day-1">
+  <div class="day-header">
+    <div class="day-badge">
+      <span class="day-label">день</span>
+      <span class="day-num">1</span>
+    </div>
+    <div class="day-meta">
+      <h2>«Узнай свою фазу — <em>и почувствуй разницу</em>»</h2>
+      <div class="day-subtitle">22 минуты · Универсальная практика с модификациями</div>
+      <div class="day-tags">
+        <span class="tag">🎯 Цель: ага-момент</span>
+        <span class="tag">⏱ 5 мин теория + 17 мин практика</span>
+        <span class="tag">📍 Выходит сразу</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-box">
+    <div class="task-label">Задача ролика</div>
+    <p>Женщина впервые понимает, почему одна и та же практика иногда даёт энергию, а иногда — истощает. Установить доверие к Кристине как к эксперту. Дать первый результат ДО покупки.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">00:00 — 05:00</div>
+        <h4>Часть 1 · Вступление (talking head)</h4>
+        <p><strong>Хук:</strong> «Если ты чувствовала, что йога тебе не подходит — дело не в тебе. Дело в том, что практика не учитывала самое важное.»</p>
+        <p style="margin-top:8px"><strong>Мини-теория:</strong> 4 фазы цикла за 2 минуты — менструация, фолликулярная, овуляция, лютеиновая. Визуальная схема на экране. Простым языком, без медицинского жаргона.</p>
+        <div class="quote-block">
+          «Четыре фазы — четыре энергии. Менструация — отпусти. Фолликулярная — расти. Овуляция — пик. Лютеиновая — замедлись.»
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">05:00 — 07:00</div>
+        <h4>Настройка и дыхание</h4>
+        <p>Рука на живот + грудь. 3 цикла осознанного дыхания. Для менструации — это и есть вся практика сегодня.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">07:00 — 13:00</div>
+        <h4>Разминка + связка стоя</h4>
+        <p><strong>Кошка-корова</strong> с боковыми вариациями (массаж надпочечников) → <strong>мини-виньяса</strong> (Тадасана → Уттанасана → низкий выпад). Модификации по фазам: лютеиновая — колено вниз, фолликулярная/овуляция — руки вверх.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">13:00 — 16:00</div>
+        <h4>⭐ Ключевой момент: тазовое дно</h4>
+        <p><strong>Баддха Конасана</strong> + мягкая мула бандха. «Представь, что поднимаешь лёгкий шар — от промежности вверх. Не сжатие — мягкий подъём.» 6–8 циклов. Подводка к полному модулю на курсе.</p>
+        <div class="quote-block">
+          «Большинство женщин чувствуют эффект сразу — тепло, ощущение центрированности, опоры.»
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">16:00 — 22:00</div>
+        <h4>Расслабление + закрытие</h4>
+        <p><strong>Супта Баддха Конасана</strong> → шавасана → выход. Задание: записать день цикла, энергию (1–5), одно слово о состоянии — в Telegram-бот.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-bar">
+    <div class="result-icon">✨</div>
+    <div class="result-text">
+      <strong>Результат дня 1</strong>
+      Первый опыт осознанной женской практики. Понимание: «Мой цикл — не помеха, а навигатор.»
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <p>🌙 <strong>CTA (мягкий):</strong> «Завтра — дыхание. Техника, которая за 10 минут снижает кортизол и помогает при ПМС, тревожности и бессоннице.»</p>
+  </div>
+</div>
+
+<div class="section-divider"><span>🌿</span></div>
+
+<!-- ==================== ДЕНЬ 2 ==================== -->
+<div class="day-section day-2">
+  <div class="day-header">
+    <div class="day-badge">
+      <span class="day-label">день</span>
+      <span class="day-num">2</span>
+    </div>
+    <div class="day-meta">
+      <h2>«Дыхание, которое <em>меняет гормональный фон</em>»</h2>
+      <div class="day-subtitle">20 минут · Пранаяма + научное обоснование</div>
+      <div class="day-tags">
+        <span class="tag">🎯 Цель: телесный эффект</span>
+        <span class="tag">⏱ 4 мин теория + 13 мин практика</span>
+        <span class="tag">📍 Через 24 часа</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-box">
+    <div class="task-label">Задача ролика</div>
+    <p>Дать «вау-эффект» — дыхательные техники ощущаются мгновенно. Углубить экспертность через физиологию (кортизол, парасимпатика, блуждающий нерв). Показать: это не «ещё одна йога», а система.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">00:00 — 04:00</div>
+        <h4>Часть 1 · Вступление + наука</h4>
+        <p><strong>Хук:</strong> «Одна дыхательная техника. 10 минут. И тело начнёт вырабатывать окситоцин вместо кортизола. Это не мистика — это физиология.»</p>
+        <p style="margin-top:8px"><strong>Мини-теория:</strong> Связь дыхания с гормонами. Хронический стресс = хроническое неправильное дыхание. Нади Шодхана снижает кортизол на 20–25% за 12 минут. Бхрамари стимулирует блуждающий нерв → влияние на яичники и щитовидную.</p>
+        <div class="quote-block">
+          «Определённые ритмы дыхания активируют парасимпатическую нервную систему — ту, которая отвечает за восстановление и женские гормоны.»
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">05:30 — 10:30</div>
+        <h4>⭐ Техника 1: Нади Шодхана</h4>
+        <p><strong>Попеременное дыхание через ноздри.</strong> Вишну Мудра (крупный план руки). Ритм: вдох 4 — задержка 2 — выдох 4. 8 полных циклов. Счёт вслух первые 3, потом — мягкие указания.</p>
+        <p style="margin-top:6px"><em>Модификация для менструации / лютеиновой: без задержки, просто чередование.</em></p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">10:30 — 14:30</div>
+        <h4>⭐ Техника 2: Бхрамари</h4>
+        <p><strong>Гудящее дыхание «пчелы».</strong> Шанмукхи Мудра (закрыть уши). Вдох через нос → мягкое гудение на выдохе 15 сек. 6 циклов. «Не контролируй тон — любой звук правильный.»</p>
+        <div class="quote-block">
+          «Послушай тишину после звука. Это одно из самых ценных состояний — когда ум замолкает не потому что ты его заставила, а потому что тело нашло покой.»
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">14:30 — 20:00</div>
+        <h4>Интеграция + закрытие</h4>
+        <p>Шавасана сидя — 1.5 мин тишины. Задание: Нади Шодхана вечером перед сном + записать качество сна. Отметить в Telegram-боте.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-bar">
+    <div class="result-icon">🌊</div>
+    <div class="result-text">
+      <strong>Результат дня 2</strong>
+      Ощутимый физический эффект: спокойствие, тишина в голове, улучшение сна. «Многие впервые засыпают без телефона в руках.»
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <p>🌙 <strong>CTA (мягкий):</strong> «Завтра — финал. Мини-ритуал 12 минут, который заменяет 45-минутный класс. Самая ценная часть. Не пропускай.»</p>
+  </div>
+</div>
+
+<div class="section-divider"><span>🌿</span></div>
+
+<!-- ==================== ДЕНЬ 3 ==================== -->
+<div class="day-section day-3">
+  <div class="day-header">
+    <div class="day-badge">
+      <span class="day-label">день</span>
+      <span class="day-num">3</span>
+    </div>
+    <div class="day-meta">
+      <h2>«Утренний ритуал: <em>12 минут, которые меняют день</em>»</h2>
+      <div class="day-subtitle">25 минут · 4 варианта под 4 фазы · Финальный ролик</div>
+      <div class="day-tags">
+        <span class="tag">🎯 Цель: готовый инструмент</span>
+        <span class="tag">⏱ 4 мин теория + 17 мин практика + 4 мин CTA</span>
+        <span class="tag">📍 Через 48 часов</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-box">
+    <div class="task-label">Задача ролика</div>
+    <p>Дать ежедневный инструмент, который женщина захочет повторять → привычка → осознание, что нужна полная система → конверсия. Самый сильный CTA из трёх дней.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">00:00 — 04:00</div>
+        <h4>Часть 1 · Рефлексия + структура ритуала</h4>
+        <p><strong>Хук:</strong> «12 минут утром. Каждый день. Под твою фазу. Не рутина из Pinterest — ритуал, который подстраивается под тебя.»</p>
+        <p style="margin-top:8px"><strong>Структура 4×3 минуты:</strong> Дыхание → Движение → Ключевая асана → Интеграция. Каждая часть меняется по фазе.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">04:00 — 07:00</div>
+        <h4>Блок 1 · Дыхание — пробуждение</h4>
+        <div class="techniques-grid">
+          <div class="tech-card">
+            <div class="tech-phase phase-mens">🔴 Менструация</div>
+            <div class="tech-name">Дыхание животом</div>
+            <div class="tech-desc">Вдох 4 — выдох 6. Максимально мягко</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-fol">🟢 Фолликулярная</div>
+            <div class="tech-name">Капалабхати</div>
+            <div class="tech-desc">Короткие активные выдохи, 2×20 циклов</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-ov">🟡 Овуляция</div>
+            <div class="tech-name">Уджайи</div>
+            <div class="tech-desc">Океанический звук. Энергия и фокус</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-lut">🟣 Лютеиновая</div>
+            <div class="tech-name">Нади Шодхана</div>
+            <div class="tech-desc">Попеременное дыхание, 5 циклов</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">07:00 — 12:00</div>
+        <h4>Блок 2 · Движение — разминка</h4>
+        <p><strong>Общее начало:</strong> Тадасана → плечи → круги шеей</p>
+        <div class="techniques-grid">
+          <div class="tech-card">
+            <div class="tech-phase phase-mens">🔴 Менструация</div>
+            <div class="tech-name">Свободные покачивания</div>
+            <div class="tech-desc">Маятник. Без формы. Просто движение</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-fol">🟢 Фолликулярная</div>
+            <div class="tech-name">Сурья Намаскар ×3</div>
+            <div class="tech-desc">Классическое приветствие солнцу</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-ov">🟡 Овуляция</div>
+            <div class="tech-name">Сурья + Вирабхадрасана I</div>
+            <div class="tech-desc">Больше силы, больше пространства</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-lut">🟣 Лютеиновая</div>
+            <div class="tech-name">Кошка-корова + круги тазом</div>
+            <div class="tech-desc">С закрытыми глазами. Медленно</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">12:00 — 16:00</div>
+        <h4>Блок 3 · Одна ключевая асана</h4>
+        <p>«Одна поза. Не пять, не десять. Одна, но осознанно.»</p>
+        <div class="techniques-grid">
+          <div class="tech-card">
+            <div class="tech-phase phase-mens">🔴 Менструация</div>
+            <div class="tech-name">Супта Баддха Конасана</div>
+            <div class="tech-desc">Лёжа, стопы вместе, 2 минуты</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-fol">🟢 Фолликулярная</div>
+            <div class="tech-name">Уткатасана (стул)</div>
+            <div class="tech-desc">Сила бёдер. 2×5 дыханий</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-ov">🟡 Овуляция</div>
+            <div class="tech-name">Врикшасана (дерево)</div>
+            <div class="tech-desc">Баланс + фокус. По 5 дыханий</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-phase phase-lut">🟣 Лютеиновая</div>
+            <div class="tech-name">Пашчимоттанасана</div>
+            <div class="tech-desc">Наклон сидя. Гравитация. 8 дыханий</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">16:00 — 18:00</div>
+        <h4>Блок 4 · Интеграция — 2 мин тишины</h4>
+        <p>Руки на нижнюю часть живота. Дыхание в ладони. Визуализация: свет разливается по животу. Аффирмация: «Я благодарю своё тело за то, что оно несёт меня через этот день.»</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="time-badge">18:00 — 25:00</div>
+        <h4>Часть 3 · Закрытие и продажа</h4>
+        <p><strong>Итог 3 дней</strong> → Презентация курса (14 модулей, без давления) → 3 тарифа (9 900 / 24 900 / 89 000 ₽) → Рассрочка → 7 дней на возврат.</p>
+        <div class="quote-block">
+          «Если за 3 дня ты почувствовала хоть один сдвиг — представь, что будет за 3 месяца. Твоё тело — не проблема, которую нужно решать. Это мудрость, которую нужно слушать.»
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-bar">
+    <div class="result-icon">🔑</div>
+    <div class="result-text">
+      <strong>Результат дня 3</strong>
+      Готовый 12-минутный ритуал на каждый день. Ощущение: «Мне нужна полная система.» Конверсия на курс.
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <p>🔥 <strong>CTA (финальный):</strong> 3 тарифа + рассрочка + промокод FIRST500 (−500₽ для тех, кто решится в первые 48 часов)</p>
+  </div>
+</div>
+
+<!-- ===== FUNNEL ===== -->
+<div class="funnel-section">
+  <div class="logic-title">
+    <div class="label">Автоматическая воронка доставки</div>
+    <h2>Telegram-бот: тайминги отправки</h2>
+  </div>
+
+  <div class="funnel-flow">
+    <div class="funnel-step">
+      <div class="funnel-dot d0"></div>
+      <div class="funnel-time">Сразу</div>
+      <div class="funnel-content">
+        <h5>📩 Приветствие + Ролик 1</h5>
+        <p>«Привет! Вот твоя первая практика. Расстели коврик — начинаем.»</p>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-dot d1"></div>
+      <div class="funnel-time">+24 часа</div>
+      <div class="funnel-content">
+        <h5>📩 Напоминание + Ролик 2</h5>
+        <p>«Как ты после вчера? Сегодня — дыхание. 10 минут, которые удивят.»</p>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-dot d2"></div>
+      <div class="funnel-time">+48 часов</div>
+      <div class="funnel-content">
+        <h5>📩 Напоминание + Ролик 3</h5>
+        <p>«Финальная практика. Самая ценная. Готовишься к утреннему ритуалу?»</p>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-dot d3"></div>
+      <div class="funnel-time">+54 часа</div>
+      <div class="funnel-content">
+        <h5>💬 «Как тебе 3 дня?» + ссылка на курс</h5>
+        <p>Промокод FIRST500 (−500₽). Мягкая подводка: «Для тех, кто хочет пойти глубже.»</p>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-dot d4"></div>
+      <div class="funnel-time">+96 часов</div>
+      <div class="funnel-content">
+        <h5>💬 Follow-up (если не купила)</h5>
+        <p>«Остались вопросы?» + FAQ + последний день промокода</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TECH SPECS ===== -->
+<div class="specs-section">
+  <div class="logic-title">
+    <div class="label">Продакшн</div>
+    <h2>Технические требования к съёмке</h2>
+  </div>
+
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-icon">🎥</div>
+      <h5>Камера и ракурсы</h5>
+      <ul>
+        <li>Минимум 1080p, предпочтительно 4K</li>
+        <li>2 ракурса: фронтальный + верхний (для асан на полу)</li>
+        <li>Статичная камера, без ручной тряски</li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">💡</div>
+      <h5>Свет и атмосфера</h5>
+      <ul>
+        <li>Мягкий рассеянный + боковой из окна</li>
+        <li>Тёплая температура 4000–4500K</li>
+        <li>Фон: бежевая стена, растение, свеча</li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🎤</div>
+      <h5>Звук и музыка</h5>
+      <ul>
+        <li>Петличный микрофон, отдельная дорожка</li>
+        <li>Фоновая музыка только во время практики</li>
+        <li>Royalty-free, ambient/nature. Без мантр</li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">👗</div>
+      <h5>Стиль и одежда</h5>
+      <ul>
+        <li>Однотонная: терракотовый, sage, sand, dusty rose</li>
+        <li>Коврик натуральный: бежевый или пробковый</li>
+        <li>Без принтов, логотипов, ярких цветов</li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">✂️</div>
+      <h5>Монтаж</h5>
+      <ul>
+        <li>Интро 3 сек: логотип на кремовом фоне</li>
+        <li>Субтитры: крупные, белые с тенью, всегда</li>
+        <li>Cross-fade 0.5 сек, без жёстких переходов</li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">📱</div>
+      <h5>Графика и CTA</h5>
+      <ul>
+        <li>Круговой таймер при удержании поз</li>
+        <li>Названия фаз + схема цикла при объяснении</li>
+        <li>Мягкая плашка CTA в последние 30 сек</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <strong>Кристина Халитова · Авторский курс женской йоги</strong><br>
+  Сценарии 3 бесплатных роликов · Лид-магнит «3 дня практики под твою фазу цикла» · 2025
+</div>
+
+</body>
+</html>
