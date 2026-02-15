@@ -1,98 +1,622 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инфографика от Claude | Тим Зинин</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            color: #fff;
-            padding: 40px 20px;
-        }
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #00d4ff, #00ff88);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle { color: #888; margin-bottom: 40px; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .card:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-4px);
-            border-color: #00d4ff;
-        }
-        .card h3 { margin-bottom: 8px; font-size: 1.1rem; }
-        .card p { color: #888; font-size: 0.9rem; line-height: 1.5; }
-        .card .date { color: #555; font-size: 0.8rem; margin-top: 12px; }
-        .card .tag {
-            display: inline-block;
-            padding: 4px 10px;
-            background: rgba(108,92,231,0.2);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            color: #a89bff;
-            margin-bottom: 12px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 60px;
-            color: #444;
-            font-size: 0.85rem;
-        }
-        footer a { color: #00d4ff; text-decoration: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tim Zinin — Projects & Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a27;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.2);
+  --text: #e8e8f0;
+  --text-dim: #8888a0;
+  --text-muted: #555566;
+  --accent-blue: #00d4ff;
+  --accent-green: #00ff88;
+  --accent-purple: #6c5ce7;
+  --accent-orange: #fdcb6e;
+  --accent-pink: #fd79a8;
+  --accent-teal: #00cec9;
+  --glow-blue: rgba(0,212,255,0.15);
+  --glow-green: rgba(0,255,136,0.15);
+  --glow-purple: rgba(108,92,231,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Onest', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* --- HERO --- */
+.hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(108,92,231,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- LAYOUT --- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- SECTION --- */
+.section {
+  margin-bottom: 64px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.section-icon {
+  font-size: 1.5rem;
+}
+.section-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.section-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--surface2);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* --- GRIDS --- */
+.grid-projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.grid-infographics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* --- PROJECT CARD --- */
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--accent-blue));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.project-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  background: var(--surface2);
+}
+.project-card:hover::before { opacity: 1; }
+
+.project-emoji {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+.project-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.project-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 16px;
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tag-python { background: rgba(52,152,219,0.15); color: #5dade2; }
+.tag-react { background: rgba(97,218,251,0.15); color: #61dafb; }
+.tag-ai { background: rgba(108,92,231,0.15); color: #a89bff; }
+.tag-telegram { background: rgba(34,158,217,0.15); color: #229ED9; }
+.tag-lms { background: rgba(45,90,61,0.15); color: #5daa72; }
+.tag-marketing { background: rgba(253,203,110,0.15); color: #fdcb6e; }
+.tag-live { background: rgba(0,255,136,0.15); color: #00ff88; }
+.tag-public { background: rgba(0,212,255,0.1); color: #00d4ff; }
+.tag-private { background: rgba(255,255,255,0.05); color: #666; }
+
+.project-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.project-link {
+  font-size: 0.75rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.project-link:hover { color: var(--accent-green); }
+
+/* --- INFOGRAPHIC CARD --- */
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.info-card:hover {
+  border-color: var(--accent-purple);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(108,92,231,0.15);
+}
+.info-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(108,92,231,0.2);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: #a89bff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.info-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.info-desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.info-date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.info-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: all 0.3s;
+}
+.info-card:hover .info-arrow {
+  color: var(--accent-purple);
+  transform: translateY(-50%) translateX(4px);
+}
+
+/* --- FOOTER --- */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+footer a { color: var(--accent-blue); text-decoration: none; }
+footer a:hover { color: var(--accent-green); }
+
+/* --- NAV --- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+.nav a:hover { color: var(--accent-blue); }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  .hero-name { font-size: 2rem; }
+  .hero-stats { gap: 24px; }
+  .stat-num { font-size: 1.4rem; }
+  .grid-projects, .grid-infographics {
+    grid-template-columns: 1fr;
+  }
+  .nav { gap: 16px; font-size: 0.75rem; }
+  .hero { padding-top: 100px; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎨 Инфографика от Claude</h1>
-        <p class="subtitle">Коллекция мануалов и визуализаций</p>
 
-        <div class="grid">
-            <a href="pages/sborka-smm-diagram.html" class="card">
-                <span class="tag">Диаграмма</span>
-                <h3>🔗 СБОРКА SMM Agent — Граф связей</h3>
-                <p>Интерактивная диаграмма: узлы, связи, потоки данных. Наведите на узел для деталей.</p>
-                <div class="date">5 февраля 2026</div>
-            </a>
-            <a href="pages/sborka-smm-architecture.html" class="card">
-                <span class="tag">Архитектура</span>
-                <h3>🏗️ СБОРКА SMM Agent — Инфраструктура</h3>
-                <p>Полная архитектура AI-агента: Self-Refine, Reflexion, 4 типа памяти, multi-model fallback, деплой на Railway.</p>
-                <div class="date">5 февраля 2026</div>
-            </a>
-            <a href="pages/ai-agents-guide.html" class="card">
-                <span class="tag">ИИ-агенты</span>
-                <h3>🤖 Мир ИИ-Агентов: Полное Руководство</h3>
-                <p>От первого агента до команды автономных помощников. Архитектура, фреймворки, расходы и пошаговый план.</p>
-                <div class="date">5 февраля 2025</div>
-            </a>
-        </div>
+<nav class="nav">
+  <a href="#projects">Проекты</a>
+  <a href="#infographics">Инфографика</a>
+  <a href="#research">Deep Research</a>
+  <a href="https://github.com/TimmyZinin" target="_blank">GitHub</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-name">Tim Zinin</div>
+  <p class="hero-sub">AI-продукты, образовательные платформы и мульти-агентные системы. Строю бизнесы с Claude.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">19</div>
+      <div class="stat-label">Репозиториев</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">AI-агентов</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2 500+</div>
+      <div class="stat-label">Тестов</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Инфографик</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <span class="section-icon">🚀</span>
+    <span class="section-title">Проекты</span>
+    <span class="section-count">8 проектов</span>
+  </div>
+
+  <div class="grid-projects">
+
+    <!-- Zinin Corporation -->
+    <div class="project-card" style="--card-accent: #6c5ce7;">
+      <div class="project-emoji">🏢</div>
+      <div class="project-name">Zinin Corporation</div>
+      <div class="project-desc">Мульти-агентная AI-система на CrewAI. 6 агентов (CEO, CFO, CTO, SMM, Creative, CPO), 17 scheduled jobs, proactive system, smart routing, memory. 2 308 тестов.</div>
+      <div class="project-tags">
+        <span class="tag tag-ai">CrewAI</span>
+        <span class="tag tag-python">Python</span>
+        <span class="tag tag-telegram">Telegram</span>
+        <span class="tag tag-live">LIVE</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/TimmyZinin/zinin-corporation" target="_blank" class="project-link">GitHub (public)</a>
+      </div>
     </div>
 
-    <footer>
-        Сделано с помощью <a href="https://claude.ai" target="_blank">Claude AI</a> •
-        <a href="https://github.com/TimmyZinin" target="_blank">TimmyZinin</a>
-    </footer>
+    <!-- Frozen Club -->
+    <div class="project-card" style="--card-accent: #2D5A3D;">
+      <div class="project-emoji">❄️</div>
+      <div class="project-name">Frozen Club</div>
+      <div class="project-desc">Закрытый клуб мастеров педикюра Кати Басковой. Полный пакет запуска: 6 курсов (93 урока), 30 email-серий, 65 постов, 4 лид-магнита, 5 воронок, тарифная сетка.</div>
+      <div class="project-tags">
+        <span class="tag tag-lms">LMS</span>
+        <span class="tag tag-marketing">Marketing</span>
+        <span class="tag tag-public">51 файл</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/TimmyZinin/frozen-club" target="_blank" class="project-link">GitHub</a>
+        <a href="https://timmyzinin.github.io/frozen-club/" target="_blank" class="project-link">Документация</a>
+      </div>
+    </div>
+
+    <!-- Frozen Nail -->
+    <div class="project-card" style="--card-accent: #4FC3F7;">
+      <div class="project-emoji">💅</div>
+      <div class="project-name">Frozen Nail Bot</div>
+      <div class="project-desc">Telegram-бот + Mini App для школы подологии Екатерины Басковой. Каталог курсов, онлайн-запись, lead capture. FastAPI + Aiogram 3.24 + SQLAlchemy. 25 тестов.</div>
+      <div class="project-tags">
+        <span class="tag tag-python">FastAPI</span>
+        <span class="tag tag-telegram">Telegram</span>
+        <span class="tag tag-private">Private</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/TimmyZinin/frozen-nail" target="_blank" class="project-link">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Cryptomarketologi -->
+    <div class="project-card" style="--card-accent: #fdcb6e;">
+      <div class="project-emoji">📊</div>
+      <div class="project-name">Крипто Маркетологи</div>
+      <div class="project-desc">Telegram-бот + Mini App + сайт для клуба КРМКТЛ (215 членов, ~$350 MRR). Каталог вендоров, тиры подписки, спонсорские фичи, 6 cron jobs. 116 тестов.</div>
+      <div class="project-tags">
+        <span class="tag tag-python">FastAPI</span>
+        <span class="tag tag-telegram">Telegram</span>
+        <span class="tag tag-live">LIVE</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/TimmyZinin/cryptomarketologi-bot" target="_blank" class="project-link">Bot (GitHub)</a>
+        <a href="https://github.com/TimmyZinin/cryptomarketologi" target="_blank" class="project-link">Website</a>
+      </div>
+    </div>
+
+    <!-- Sborka Career Bot -->
+    <div class="project-card" style="--card-accent: #00cec9;">
+      <div class="project-emoji">🚀</div>
+      <div class="project-name">СБОРКА Career Bot</div>
+      <div class="project-desc">Telegram-бот для карьерного трекера. 55 фич, геймификация, TMA Mini App, AI-coach, воронка, вебинары. 579 тестов, 9 спринтов.</div>
+      <div class="project-tags">
+        <span class="tag tag-python">Python</span>
+        <span class="tag tag-telegram">Telegram</span>
+        <span class="tag tag-ai">AI Coach</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/TimmyZinin/sborka-career-bot" target="_blank" class="project-link">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Sborka Website -->
+    <div class="project-card" style="--card-accent: #61dafb;">
+      <div class="project-emoji">🌐</div>
+      <div class="project-name">СБОРКА Website</div>
+      <div class="project-desc">Лендинг карьерного акселератора. React + Vite + TypeScript + Tailwind + shadcn/ui. 16 секций, адаптивный дизайн, Vercel.</div>
+      <div class="project-tags">
+        <span class="tag tag-react">React</span>
+        <span class="tag tag-public">Vercel</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/TimmyZinin/sborka" target="_blank" class="project-link">GitHub</a>
+        <a href="https://sborka-nine.vercel.app" target="_blank" class="project-link">Сайт</a>
+      </div>
+    </div>
+
+    <!-- Sborka SMM Agent -->
+    <div class="project-card" style="--card-accent: #fd79a8;">
+      <div class="project-emoji">📱</div>
+      <div class="project-name">СБОРКА SMM Agent</div>
+      <div class="project-desc">AI-агент для автоматизации контента. Self-Refine, Reflexion, 4 типа памяти, multi-model fallback. Dashboard на Next.js + Gravity UI.</div>
+      <div class="project-tags">
+        <span class="tag tag-ai">AI Agent</span>
+        <span class="tag tag-python">FastAPI</span>
+        <span class="tag tag-react">Next.js</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/TimmyZinin/sborka-smm-bot" target="_blank" class="project-link">Bot</a>
+        <a href="https://github.com/TimmyZinin/sborka-smm-dashboard" target="_blank" class="project-link">Dashboard</a>
+      </div>
+    </div>
+
+    <!-- Demarx Exchange -->
+    <div class="project-card" style="--card-accent: #F97316;">
+      <div class="project-emoji">🏦</div>
+      <div class="project-name">Demarx Exchange</div>
+      <div class="project-desc">Бизнес-анализ и маркетинговая стратегия для криптобиржи White Label. Инфографики, конкурентный анализ, ценообразование, команда.</div>
+      <div class="project-tags">
+        <span class="tag tag-marketing">Marketing</span>
+        <span class="tag tag-private">Research</span>
+      </div>
+      <div class="project-links">
+        <a href="pages/demarx-exchange.html" class="project-link">Бизнес-анализ</a>
+        <a href="pages/demarx-strategy.html" class="project-link">Стратегия</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INFOGRAPHICS -->
+<section class="section" id="infographics">
+  <div class="section-header">
+    <span class="section-icon">🎨</span>
+    <span class="section-title">Инфографика & Визуализации</span>
+    <span class="section-count">7 штук</span>
+  </div>
+
+  <div class="grid-infographics">
+
+    <a href="pages/ai-agents-guide.html" class="info-card">
+      <span class="info-tag">Deep Research</span>
+      <div class="info-title">🤖 Мир ИИ-Агентов: Полное Руководство</div>
+      <div class="info-desc">От первого агента до команды автономных помощников. Архитектура, фреймворки, расходы и пошаговый план.</div>
+      <div class="info-date">Февраль 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="pages/sborka-smm-diagram.html" class="info-card">
+      <span class="info-tag">Интерактив</span>
+      <div class="info-title">🔗 СБОРКА SMM Agent — Граф связей</div>
+      <div class="info-desc">Интерактивная диаграмма: узлы, связи, потоки данных. Наведите на узел для деталей.</div>
+      <div class="info-date">5 февраля 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="pages/sborka-smm-architecture.html" class="info-card">
+      <span class="info-tag">Архитектура</span>
+      <div class="info-title">🏗️ СБОРКА SMM Agent — Инфраструктура</div>
+      <div class="info-desc">Self-Refine, Reflexion, 4 типа памяти, multi-model fallback, Railway deploy.</div>
+      <div class="info-date">5 февраля 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="pages/demarx-exchange.html" class="info-card">
+      <span class="info-tag">Бизнес</span>
+      <div class="info-title">🏦 DIMMAR Exchange — Бизнес-анализ</div>
+      <div class="info-desc">White Label криптобиржа: бизнес-модель, конкуренты, команда, риски, ценообразование.</div>
+      <div class="info-date">Февраль 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="pages/demarx-strategy.html" class="info-card">
+      <span class="info-tag">Стратегия</span>
+      <div class="info-title">📈 DIMMAR Exchange — Маркетинговая стратегия</div>
+      <div class="info-desc">AI-powered маркетинговая стратегия 2026: позиционирование, лидогенерация, ценообразование.</div>
+      <div class="info-date">Февраль 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="pages/oauth_guide.html" class="info-card">
+      <span class="info-tag">Гайд</span>
+      <div class="info-title">🔐 OAuth Setup Guide</div>
+      <div class="info-desc">Пошаговая настройка LinkedIn и Threads OAuth для Zinin Corporation.</div>
+      <div class="info-date">Февраль 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="pages/yoga-3videos/index.html" class="info-card">
+      <span class="info-tag">Контент</span>
+      <div class="info-title">🧘 3 дня практики — Сценарии роликов</div>
+      <div class="info-desc">Сценарии бесплатных видео для проекта «Женская йога». 3 дня практики.</div>
+      <div class="info-date">Февраль 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- DEEP RESEARCH -->
+<section class="section" id="research">
+  <div class="section-header">
+    <span class="section-icon">🔬</span>
+    <span class="section-title">Deep Research & Документация</span>
+    <span class="section-count">3 ресурса</span>
+  </div>
+
+  <div class="grid-infographics">
+
+    <a href="https://timmyzinin.github.io/frozen-club/" target="_blank" class="info-card">
+      <span class="info-tag">Документация</span>
+      <div class="info-title">❄️ Frozen Club — Полный пакет запуска</div>
+      <div class="info-desc">51 файл: 6 курсов, 30 email-серий, 65 постов, 4 лид-магнита, 5 воронок. Навигация, поиск.</div>
+      <div class="info-date">13 февраля 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="https://github.com/TimmyZinin/sborka-guide" target="_blank" class="info-card">
+      <span class="info-tag">Гайд</span>
+      <div class="info-title">🚀 СБОРКА Guide</div>
+      <div class="info-desc">Документация и гайд по карьерному акселератору СБОРКА.</div>
+      <div class="info-date">13 февраля 2026</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+    <a href="https://github.com/TimmyZinin/zinin-corporation" target="_blank" class="info-card">
+      <span class="info-tag">Open Source</span>
+      <div class="info-title">🏢 Zinin Corporation — AI Corp</div>
+      <div class="info-desc">Исходный код мульти-агентной системы. 6 агентов, CrewAI, MCP-серверы, proactive system.</div>
+      <div class="info-date">Обновляется ежедневно</div>
+      <span class="info-arrow">→</span>
+    </a>
+
+  </div>
+</section>
+
+</div>
+
+<footer>
+  Tim Zinin &copy; 2026 &nbsp;•&nbsp;
+  Сделано с <a href="https://claude.ai" target="_blank">Claude AI</a> &nbsp;•&nbsp;
+  <a href="https://github.com/TimmyZinin" target="_blank">GitHub</a>
+</footer>
+
 </body>
 </html>

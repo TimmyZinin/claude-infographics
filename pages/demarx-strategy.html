@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIMMAR EXCHANGE — AI-Powered Маркетинг Стратегия 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800;900&family=Onest:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06060b;
+  --surface: #0e0e18;
+  --surface2: #151522;
+  --surface3: #1c1c2e;
+  --accent: #8b5cf6;
+  --accent2: #a78bfa;
+  --accent-glow: rgba(139,92,246,0.25);
+  --gold: #f59e0b;
+  --gold2: #fbbf24;
+  --green: #10b981;
+  --green2: #34d399;
+  --red: #ef4444;
+  --cyan: #06b6d4;
+  --cyan2: #22d3ee;
+  --pink: #ec4899;
+  --orange: #f97316;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --border: rgba(139,92,246,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Onest', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: white; }
+
+/* NOISE OVERLAY */
+.noise {
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+/* NAVIGATION */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(6,6,11,0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+.nav.scrolled { background: rgba(6,6,11,0.95); }
+.nav-inner {
+  max-width: 1400px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 800; font-size: 16px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 4px; overflow-x: auto; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-link {
+  padding: 8px 14px; border-radius: 8px;
+  font-size: 12px; font-weight: 500;
+  color: var(--text2); cursor: pointer;
+  transition: var(--transition); white-space: nowrap;
+  border: none; background: none;
+}
+.nav-link:hover { color: var(--text); background: var(--surface2); }
+.nav-link.active { color: var(--accent2); background: rgba(139,92,246,0.1); }
+
+/* CONTAINER */
+.container { max-width: 1300px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding-top: 64px;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139,92,246,0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6,182,212,0.08), transparent),
+    radial-gradient(ellipse 40% 30% at 10% 60%, rgba(245,158,11,0.05), transparent);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: 
+    linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+}
+.hero-content { position: relative; z-index: 1; width: 100%; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: 100px;
+  background: rgba(139,92,246,0.08);
+  border: 1px solid rgba(139,92,246,0.2);
+  font-size: 12px; color: var(--accent2);
+  font-weight: 500; margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease both;
+}
+.hero-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s 0.1s ease both;
+}
+.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent), var(--cyan2), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 18px; color: var(--text2); max-width: 700px;
+  margin-bottom: 48px; line-height: 1.8;
+  animation: fadeInUp 0.8s 0.2s ease both;
+}
+.hero-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px; max-width: 900px;
+  animation: fadeInUp 0.8s 0.3s ease both;
+}
+.hero-stat {
+  padding: 20px 24px; border-radius: var(--radius-sm);
+  background: var(--surface); border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.hero-stat:hover { border-color: var(--accent); transform: translateY(-2px); }
+.hero-stat-value {
+  font-family: 'Unbounded', sans-serif; font-size: 28px;
+  font-weight: 800; margin-bottom: 4px;
+}
+.hero-stat-label { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECTIONS */
+section { padding: 100px 0; position: relative; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+section h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800; margin-bottom: 20px; line-height: 1.2;
+}
+section .section-desc {
+  font-size: 16px; color: var(--text2); max-width: 700px; margin-bottom: 48px;
+}
+
+/* DIVIDER */
+.divider {
+  height: 1px; max-width: 1300px; margin: 0 auto;
+  background: linear-gradient(90deg, transparent, var(--border), var(--accent), var(--border), transparent);
+}
+
+/* CARDS */
+.card {
+  padding: 28px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.card:hover { border-color: rgba(139,92,246,0.3); transform: translateY(-2px); }
+.card h3 { font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.card p { font-size: 14px; color: var(--text2); line-height: 1.8; }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+
+/* TABS */
+.tabs {
+  display: flex; gap: 4px; margin-bottom: 32px;
+  overflow-x: auto; padding-bottom: 4px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 10px 20px; border-radius: 10px;
+  font-size: 13px; font-weight: 500;
+  color: var(--text2); cursor: pointer;
+  background: var(--surface); border: 1px solid var(--border);
+  transition: var(--transition); white-space: nowrap;
+}
+.tab:hover { color: var(--text); border-color: rgba(139,92,246,0.3); }
+.tab.active {
+  background: rgba(139,92,246,0.12); color: var(--accent2);
+  border-color: rgba(139,92,246,0.3);
+}
+.tab-content { display: none; animation: fadeIn 0.4s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* EXPANDABLE / ACCORDION */
+.accordion { margin-bottom: 12px; }
+.accordion-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px; border-radius: var(--radius-sm);
+  background: var(--surface); border: 1px solid var(--border);
+  cursor: pointer; transition: var(--transition);
+  font-size: 14px; font-weight: 600;
+}
+.accordion-header:hover { border-color: rgba(139,92,246,0.3); }
+.accordion-header .arrow {
+  transition: transform 0.3s ease; font-size: 12px; color: var(--text3);
+}
+.accordion.open .accordion-header {
+  border-color: var(--accent);
+  background: rgba(139,92,246,0.06);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+.accordion.open .arrow { transform: rotate(180deg); }
+.accordion-body {
+  display: none; padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  font-size: 14px; color: var(--text2); line-height: 1.9;
+}
+.accordion.open .accordion-body { display: block; animation: fadeIn 0.3s ease; }
+
+/* TAG / BADGE */
+.tag {
+  display: inline-flex; padding: 4px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tag.purple { background: rgba(139,92,246,0.12); color: var(--accent2); }
+.tag.green { background: rgba(16,185,129,0.12); color: var(--green2); }
+.tag.gold { background: rgba(245,158,11,0.12); color: var(--gold2); }
+.tag.cyan { background: rgba(6,182,212,0.12); color: var(--cyan2); }
+.tag.red { background: rgba(239,68,68,0.12); color: #f87171; }
+.tag.pink { background: rgba(236,72,153,0.12); color: #f472b6; }
+.tag.orange { background: rgba(249,115,22,0.12); color: #fb923c; }
+
+/* COMPARISON TABLE */
+.comp-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px; overflow: hidden;
+  border-radius: var(--radius); border: 1px solid var(--border);
+}
+.comp-table th {
+  padding: 14px 16px; text-align: left;
+  background: var(--surface2); color: var(--text2);
+  font-weight: 600; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 1px;
+  border-bottom: 1px solid var(--border);
+}
+.comp-table td {
+  padding: 12px 16px; border-bottom: 1px solid rgba(139,92,246,0.06);
+  color: var(--text2); vertical-align: top;
+}
+.comp-table tr:hover td { background: rgba(139,92,246,0.03); }
+.comp-table tr:last-child td { border-bottom: none; }
+
+/* TOOL CARD */
+.tool-card {
+  padding: 24px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+  transition: var(--transition); position: relative; overflow: hidden;
+}
+.tool-card:hover { border-color: rgba(139,92,246,0.4); transform: translateY(-3px); }
+.tool-card .tool-header {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
+}
+.tool-card .tool-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.tool-card .tool-name {
+  font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 600;
+}
+.tool-card .tool-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--green2);
+}
+.tool-card .tool-desc { font-size: 13px; color: var(--text2); line-height: 1.8; }
+.tool-card .tool-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.tool-card a {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 14px; padding: 8px 16px; border-radius: 8px;
+  background: rgba(139,92,246,0.1); color: var(--accent2);
+  text-decoration: none; font-size: 12px; font-weight: 500;
+  transition: var(--transition);
+}
+.tool-card a:hover { background: rgba(139,92,246,0.2); }
+
+/* TIMELINE / ROADMAP */
+.timeline { position: relative; padding-left: 40px; }
+.timeline::before {
+  content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--cyan), var(--green), var(--gold));
+}
+.timeline-item { position: relative; margin-bottom: 32px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -32px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.timeline-item.cyan::before { background: var(--cyan); box-shadow: 0 0 0 2px var(--cyan); }
+.timeline-item.green::before { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+.timeline-item.gold::before { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+.timeline-item .tl-title {
+  font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 4px;
+}
+.timeline-item .tl-period {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent2); margin-bottom: 10px;
+}
+.timeline-item .tl-body { font-size: 13px; color: var(--text2); line-height: 1.8; }
+.timeline-item .tl-body ul { margin-top: 8px; padding-left: 18px; }
+.timeline-item .tl-body li { margin-bottom: 4px; }
+
+/* METRIC BARS */
+.metric-bar-wrap { margin-bottom: 16px; }
+.metric-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: 13px; margin-bottom: 6px; color: var(--text2);
+}
+.metric-bar-label span:last-child {
+  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+}
+.metric-bar {
+  height: 8px; border-radius: 4px; background: var(--surface2); overflow: hidden;
+}
+.metric-bar-fill {
+  height: 100%; border-radius: 4px; transition: width 1.5s ease;
+}
+.metric-bar-fill.purple { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.metric-bar-fill.gold { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+.metric-bar-fill.green { background: linear-gradient(90deg, var(--green), var(--green2)); }
+.metric-bar-fill.cyan { background: linear-gradient(90deg, var(--cyan), var(--cyan2)); }
+.metric-bar-fill.red { background: linear-gradient(90deg, #dc2626, var(--red)); }
+.metric-bar-fill.pink { background: linear-gradient(90deg, var(--pink), #f472b6); }
+
+/* SOCIAL PLATFORM CARD */
+.platform-card {
+  padding: 20px; border-radius: var(--radius-sm);
+  background: var(--surface); border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.platform-card:hover { border-color: rgba(139,92,246,0.3); }
+.platform-card .pl-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.platform-card .pl-icon { font-size: 28px; }
+.platform-card .pl-name { font-weight: 700; font-size: 15px; }
+.platform-card .pl-audience {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--cyan2);
+}
+.platform-card .pl-stars { margin: 10px 0; }
+.platform-card .pl-stars .star { color: var(--gold); font-size: 14px; }
+.platform-card .pl-stars .star.empty { color: var(--text3); }
+.platform-card .pl-detail { font-size: 12px; color: var(--text2); line-height: 1.7; }
+
+/* PRICING */
+.pricing-card {
+  padding: 32px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+  transition: var(--transition); text-align: center;
+}
+.pricing-card:hover { transform: translateY(-4px); }
+.pricing-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, rgba(139,92,246,0.08), var(--surface));
+  position: relative;
+}
+.pricing-card.featured::before {
+  content: 'РЕКОМЕНДУЕТСЯ'; position: absolute; top: -12px; left: 50%;
+  transform: translateX(-50%); padding: 4px 16px;
+  background: var(--accent); color: white; border-radius: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+}
+.pricing-card .price {
+  font-family: 'Unbounded', sans-serif; font-size: 36px;
+  font-weight: 900; margin: 16px 0 8px;
+}
+.pricing-card .price-period { font-size: 13px; color: var(--text3); }
+.pricing-card .features { text-align: left; margin: 24px 0; }
+.pricing-card .features li {
+  list-style: none; padding: 6px 0; font-size: 13px; color: var(--text2);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.pricing-card .features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+
+/* CTA */
+.cta-button {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), #7c3aed);
+  color: white; font-weight: 600; font-size: 15px;
+  text-decoration: none; transition: var(--transition);
+  border: none; cursor: pointer;
+}
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+.cta-button.outline {
+  background: transparent; border: 1px solid var(--accent);
+  color: var(--accent2);
+}
+
+/* FLOW DIAGRAM */
+.flow {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; margin: 20px 0;
+}
+.flow-step {
+  padding: 10px 18px; border-radius: 10px;
+  background: var(--surface2); border: 1px solid var(--border);
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.flow-arrow { color: var(--accent); font-size: 16px; }
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); max-width: 800px; width: 100%;
+  max-height: 85vh; overflow-y: auto; padding: 36px;
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:scale(0.95) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+.modal-close {
+  float: right; width: 32px; height: 32px; border-radius: 8px;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text2); cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.modal-close:hover { background: var(--red); color: white; border-color: var(--red); }
+.modal h3 { font-family: 'Unbounded', sans-serif; font-size: 20px; margin: 8px 0 16px; }
+
+/* FOOTER */
+.footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--border);
+  text-align: center; color: var(--text3); font-size: 13px;
+}
+
+/* GLOW EFFECTS */
+.glow-purple { box-shadow: 0 0 40px rgba(139,92,246,0.08); }
+.glow-cyan { box-shadow: 0 0 40px rgba(6,182,212,0.08); }
+.glow-gold { box-shadow: 0 0 40px rgba(245,158,11,0.08); }
+
+/* SEPARATOR */
+.sep {
+  display: flex; align-items: center; gap: 16px;
+  margin: 48px 0 32px; color: var(--text3); font-size: 11px;
+  text-transform: uppercase; letter-spacing: 2px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.sep::before, .sep::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* HIGHLIGHT BOX */
+.highlight-box {
+  padding: 24px; border-radius: var(--radius);
+  border-left: 3px solid var(--accent);
+  background: rgba(139,92,246,0.04);
+  margin: 20px 0;
+}
+.highlight-box.gold-box { border-left-color: var(--gold); background: rgba(245,158,11,0.04); }
+.highlight-box.green-box { border-left-color: var(--green); background: rgba(16,185,129,0.04); }
+.highlight-box.cyan-box { border-left-color: var(--cyan); background: rgba(6,182,212,0.04); }
+.highlight-box.red-box { border-left-color: var(--red); background: rgba(239,68,68,0.04); }
+
+/* KPI COUNTER */
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px; margin: 20px 0;
+}
+.kpi {
+  padding: 16px; border-radius: var(--radius-sm);
+  background: var(--surface2); text-align: center;
+}
+.kpi-value {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 22px; font-weight: 800;
+}
+.kpi-label { font-size: 11px; color: var(--text3); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* INLINE LINK */
+a.inline-link {
+  color: var(--accent2); text-decoration: none;
+  border-bottom: 1px dashed rgba(139,92,246,0.3);
+  transition: var(--transition);
+}
+a.inline-link:hover { color: var(--cyan2); border-bottom-color: var(--cyan); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  section { padding: 60px 0; }
+  .nav-links { display: none; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .comp-table { font-size: 11px; }
+  .comp-table th, .comp-table td { padding: 8px 10px; }
+  .pricing-card .price { font-size: 28px; }
+}
+
+/* STICKY TOC */
+.toc-float {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  z-index: 500; display: flex; flex-direction: column; gap: 6px;
+}
+.toc-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--text3); cursor: pointer;
+  transition: var(--transition); opacity: 0.4;
+}
+.toc-dot:hover { opacity: 1; background: var(--accent); transform: scale(1.5); }
+.toc-dot.active { opacity: 1; background: var(--accent); transform: scale(1.5); }
+@media (max-width: 1024px) { .toc-float { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">DIMMAR × AI STRATEGY</div>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="scrollToSection('hero')">Главная</button>
+      <button class="nav-link" onclick="scrollToSection('competitors')">Конкуренты</button>
+      <button class="nav-link" onclick="scrollToSection('social')">Соцсети</button>
+      <button class="nav-link" onclick="scrollToSection('ai-tools')">AI‑инструменты</button>
+      <button class="nav-link" onclick="scrollToSection('agents')">Мультиагенты</button>
+      <button class="nav-link" onclick="scrollToSection('roadmap')">Дорожная карта</button>
+      <button class="nav-link" onclick="scrollToSection('budget')">Бюджеты</button>
+      <button class="nav-link" onclick="scrollToSection('about')">О нас</button>
+    </div>
+  </div>
+</nav>
+
+<!-- FLOATING TOC -->
+<div class="toc-float" id="tocFloat">
+  <div class="toc-dot active" onclick="scrollToSection('hero')" title="Главная"></div>
+  <div class="toc-dot" onclick="scrollToSection('competitors')" title="Конкуренты"></div>
+  <div class="toc-dot" onclick="scrollToSection('social')" title="Соцсети"></div>
+  <div class="toc-dot" onclick="scrollToSection('ai-tools')" title="AI-инструменты"></div>
+  <div class="toc-dot" onclick="scrollToSection('agents')" title="Мультиагенты"></div>
+  <div class="toc-dot" onclick="scrollToSection('roadmap')" title="Дорожная карта"></div>
+  <div class="toc-dot" onclick="scrollToSection('budget')" title="Бюджеты"></div>
+  <div class="toc-dot" onclick="scrollToSection('about')" title="О нас"></div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container hero-content">
+    <div class="hero-badge"><span class="dot"></span> AI-Powered Marketing Strategy</div>
+    <h1>
+      Маркетинг нового<br>поколения для<br>
+      <span class="gradient">DIMMAR EXCHANGE</span>
+    </h1>
+    <p class="hero-sub">
+      Комплексная стратегия с AI-автоматизацией, мультиагентными системами, 
+      генеративным видео-контентом и анализом двух рынков. 
+      Исследование России и Турции, 12 AI-инструментов, 4 конкурента.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value" style="color:var(--accent)">4</div>
+        <div class="hero-stat-label">Конкурента проанализировано</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" style="color:var(--cyan)">12+</div>
+        <div class="hero-stat-label">AI-инструментов</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" style="color:var(--gold)">2</div>
+        <div class="hero-stat-label">Рынка: RU + TR</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" style="color:var(--green)">$200</div>
+        <div class="hero-stat-label">AI-стек от /мес</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ КОНКУРЕНТЫ ============ -->
+<section id="competitors">
+  <div class="container">
+    <div class="section-label">01 — Конкурентный анализ</div>
+    <h2>Как продвигаются <span style="color:var(--red)">конкуренты</span></h2>
+    <p class="section-desc">
+      Детальный анализ маркетинговых стратегий 4 основных конкурентов в сегменте криптообменных франшиз. 
+      Ни один из них не использует YouTube системно — это главное слепое пятно рынка.
+    </p>
+
+    <div class="highlight-box red-box" style="margin-bottom:32px;">
+      <strong style="color:var(--red)">🔥 КРИТИЧЕСКИЙ ИНСАЙТ:</strong> Ни один конкурент в сегменте крипто-франшиз не использует AI-инструменты для маркетинга системно. YouTube-канал с регулярным контентом — пустая ниша с нулевой конкуренцией.
+    </div>
+
+    <!-- Competitor Tabs -->
+    <div class="tabs" id="compTabs">
+      <div class="tab active" onclick="switchTab('compTabs','compContent','keine')">🏪 Keine Exchange</div>
+      <div class="tab" onclick="switchTab('compTabs','compContent','0101')">📊 0101 Exchange</div>
+      <div class="tab" onclick="switchTab('compTabs','compContent','multi')">💳 MultiKassa</div>
+      <div class="tab" onclick="switchTab('compTabs','compContent','finector')">🏦 Finector</div>
+      <div class="tab" onclick="switchTab('compTabs','compContent','compare')">📋 Сравнение</div>
+    </div>
+
+    <div id="compContent">
+      <!-- KEINE -->
+      <div class="tab-content active" data-tab="keine">
+        <div class="grid-2">
+          <div class="card">
+            <h3>🏪 Keine Exchange — лидер по масштабу</h3>
+            <div class="kpi-grid" style="margin-bottom:16px;">
+              <div class="kpi"><div class="kpi-value" style="color:var(--gold)">40+</div><div class="kpi-label">офисов</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--green)">7000+</div><div class="kpi-label">отзывов BestChange</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--accent)">2200</div><div class="kpi-label">подписчиков TG</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--red)">50%</div><div class="kpi-label">роялти</div></div>
+            </div>
+            <p>Основатель <strong>Евгений Сапожников</strong> активно выступает на крипто-конференциях (Blockchain Life, Crypto Summit). До 70% клиентов приходят через BestChange.</p>
+            <div style="margin-top:14px;">
+              <span class="tag green">Личный бренд</span>
+              <span class="tag gold">BestChange</span>
+              <span class="tag purple">Конференции</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Маркетинговые каналы</h3>
+            <div class="metric-bar-wrap"><div class="metric-bar-label"><span>BestChange</span><span>★★★★★</span></div><div class="metric-bar"><div class="metric-bar-fill green" style="width:95%"></div></div></div>
+            <div class="metric-bar-wrap"><div class="metric-bar-label"><span>Telegram (@keinenews)</span><span>★★★☆☆</span></div><div class="metric-bar"><div class="metric-bar-fill cyan" style="width:55%"></div></div></div>
+            <div class="metric-bar-wrap"><div class="metric-bar-label"><span>Каталоги франшиз</span><span>★★★★☆</span></div><div class="metric-bar"><div class="metric-bar-fill gold" style="width:80%"></div></div></div>
+            <div class="metric-bar-wrap"><div class="metric-bar-label"><span>Конференции</span><span>★★★★☆</span></div><div class="metric-bar"><div class="metric-bar-fill purple" style="width:75%"></div></div></div>
+            <div class="metric-bar-wrap"><div class="metric-bar-label"><span>YouTube</span><span>★☆☆☆☆</span></div><div class="metric-bar"><div class="metric-bar-fill red" style="width:10%"></div></div></div>
+            <div class="metric-bar-wrap"><div class="metric-bar-label"><span>Instagram/TikTok</span><span>★☆☆☆☆</span></div><div class="metric-bar"><div class="metric-bar-fill red" style="width:8%"></div></div></div>
+            <div class="highlight-box" style="margin-top:16px;">
+              <strong>Что заимствовать:</strong> BestChange как #1 канал привлечения, личный бренд основателя, присутствие на всех каталогах франшиз (franshiza.ru, businessmens.ru, topfranchise.ru, hf.ru).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 0101 -->
+      <div class="tab-content" data-tab="0101">
+        <div class="grid-2">
+          <div class="card">
+            <h3>📊 0101 Exchange — минимальный вход</h3>
+            <div class="kpi-grid" style="margin-bottom:16px;">
+              <div class="kpi"><div class="kpi-value" style="color:var(--green)">100K ₽</div><div class="kpi-label">вход (без паушального)</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--accent)">9</div><div class="kpi-label">точек</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--gold)">10</div><div class="kpi-label">дней обучение</div></div>
+            </div>
+            <p>Связан с <strong>РАКИБ</strong> (Российская Ассоциация Криптоиндустрии). Формирует финмодель за 40 минут. Обучение 10 дней в офисе в Москве. 5 из 9 точек — франчайзинговые.</p>
+          </div>
+          <div class="card">
+            <h3>Маркетинг: скудный</h3>
+            <p>Практически отсутствует маркетинг. Единственный канал — каталоги франшиз. Нет Telegram-канала, соцсетей, YouTube.</p>
+            <div class="highlight-box red-box" style="margin-top:16px;">
+              <strong>Слабое место:</strong> Полное отсутствие digital-маркетинга. Зависимость от единственного канала привлечения. Пример того, как не нужно строить маркетинг.
+            </div>
+            <div class="highlight-box green-box" style="margin-top:8px;">
+              <strong>Что заимствовать:</strong> Низкий барьер входа как маркетинговое сообщение, быстрый онбординг (финмодель за 40 минут), связь с ассоциацией для авторитетности.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MULTIKASSA -->
+      <div class="tab-content" data-tab="multi">
+        <div class="grid-2">
+          <div class="card">
+            <h3>💳 MultiKassa — tech-oriented</h3>
+            <div class="kpi-grid" style="margin-bottom:16px;">
+              <div class="kpi"><div class="kpi-value" style="color:var(--cyan)">CRM</div><div class="kpi-label">собственная система</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--green)">0.1–0.3%</div><div class="kpi-label">роялти (самое низкое)</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--accent)">~1M ₽</div><div class="kpi-label">паушальный</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--gold)">1000</div><div class="kpi-label">подписчиков TG</div></div>
+            </div>
+            <p>Основана 2022, представительства в РФ, ОАЭ, Бали. Собственная CRM-система с аналитикой, трекингом источников и финучётом.</p>
+          </div>
+          <div class="card">
+            <h3>Маркетинговые фишки</h3>
+            <div style="margin-bottom:12px;">
+              <span class="tag cyan">Калькулятор доходности</span>
+              <span class="tag green">Лид-магнит</span>
+              <span class="tag purple">CRM</span>
+              <span class="tag gold">Telegram</span>
+            </div>
+            <p>Калькулятор доходности на сайте (интерактивный). Лид-магнит: гайд «Как распознать мошенничество» (сбор email). Telegram @multikassa_channel ~1000 подписчиков.</p>
+            <div class="highlight-box green-box" style="margin-top:16px;">
+              <strong>Что заимствовать:</strong> Интерактивный калькулятор доходности на сайте, лид-магнит (гайд/чеклист) для сбора контактов, собственная CRM для партнёров.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINECTOR -->
+      <div class="tab-content" data-tab="finector">
+        <div class="grid-2">
+          <div class="card">
+            <h3>🏦 Finector — позиционирование «криптобанк»</h3>
+            <div class="kpi-grid" style="margin-bottom:16px;">
+              <div class="kpi"><div class="kpi-value" style="color:var(--gold)">5</div><div class="kpi-label">пакетов франшизы</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--green)">99–499K ₽</div><div class="kpi-label">диапазон цен</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--accent)">20%</div><div class="kpi-label">прибыли на рекламу</div></div>
+            </div>
+            <p>Виртуальные карты «Finector Platinum Card», Telegram-кошелёк @finector_bot, Zoom-экскурсии в офис. Обязательное выделение 20% прибыли на рекламу.</p>
+          </div>
+          <div class="card">
+            <h3>Интересные ходы</h3>
+            <div style="margin-bottom:12px;">
+              <span class="tag pink">Zoom-экскурсии</span>
+              <span class="tag gold">5 пакетов</span>
+              <span class="tag cyan">Telegram-бот</span>
+            </div>
+            <p>Zoom-экскурсии в офис для потенциальных партнёров — создают доверие. 5 пакетов франшизы (99K–499K ₽) — каждый найдёт свой бюджет.</p>
+            <div class="highlight-box green-box" style="margin-top:16px;">
+              <strong>Что заимствовать:</strong> Zoom-экскурсии как инструмент продаж, несколько ценовых пакетов, обязательный маркетинговый бюджет для франчайзи.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARISON -->
+      <div class="tab-content" data-tab="compare">
+        <div style="overflow-x:auto;">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Параметр</th>
+                <th>Keine</th>
+                <th>0101</th>
+                <th>MultiKassa</th>
+                <th>Finector</th>
+                <th style="color:var(--accent)">DIMMAR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Паушальный взнос</strong></td><td>1–5M ₽</td><td>0 ₽</td><td>~1M ₽</td><td>99–499K ₽</td><td style="color:var(--accent)">1.4M ₽</td></tr>
+              <tr><td><strong>Роялти</strong></td><td>50%</td><td>—</td><td>0.1–0.3%</td><td>—</td><td style="color:var(--accent)">Включено</td></tr>
+              <tr><td><strong>Офисов/точек</strong></td><td>40+</td><td>9</td><td>3 (РФ/ОАЭ/Бали)</td><td>—</td><td style="color:var(--accent)">34 страны</td></tr>
+              <tr><td><strong>Telegram</strong></td><td>2200</td><td>—</td><td>1000</td><td>Бот</td><td style="color:var(--red)">⚠️ Нет</td></tr>
+              <tr><td><strong>YouTube</strong></td><td>Минимум</td><td>—</td><td>—</td><td>—</td><td style="color:var(--red)">⚠️ Нет</td></tr>
+              <tr><td><strong>BestChange</strong></td><td>7000+ отзывов</td><td>—</td><td>—</td><td>—</td><td>27 отзывов</td></tr>
+              <tr><td><strong>CRM</strong></td><td>—</td><td>—</td><td>✅ Своя</td><td>—</td><td>✅ WL-платформа</td></tr>
+              <tr><td><strong>AI-маркетинг</strong></td><td style="color:var(--red)">❌</td><td style="color:var(--red)">❌</td><td style="color:var(--red)">❌</td><td style="color:var(--red)">❌</td><td style="color:var(--green)">🎯 ЦЕЛЬ</td></tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="sep">best practices для заимствования</div>
+
+        <div class="grid-3">
+          <div class="card"><h3>📋 Каталоги</h3><p>Присутствие на franshiza.ru, businessmens.ru, topfranchise.ru, hf.ru. До 30% B2B-лидов у конкурентов.</p></div>
+          <div class="card"><h3>⭐ BestChange</h3><p>До 70% B2C клиентов через агрегатор обменников. Стратегическое наращивание отзывов.</p></div>
+          <div class="card"><h3>👤 Личный бренд</h3><p>Конференции (Blockchain Life, Crypto Summit), YouTube, Telegram — построение экспертности основателя.</p></div>
+          <div class="card"><h3>🧮 Калькулятор</h3><p>Интерактивный калькулятор доходности на сайте — конвертирует посетителей в лиды.</p></div>
+          <div class="card"><h3>📖 Лид-магнит</h3><p>Гайд/чеклист (безопасность, как открыть обменник) в обмен на контакт. Прогревающая email-цепочка.</p></div>
+          <div class="card"><h3>🎥 Zoom-экскурсии</h3><p>Виртуальный тур по офису для потенциальных партнёров. Создаёт доверие. Масштабируемо.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ СОЦИАЛЬНЫЕ СЕТИ ============ -->
+<section id="social">
+  <div class="container">
+    <div class="section-label">02 — Ландшафт социальных сетей</div>
+    <h2>Россия vs Турция: <span style="color:var(--cyan)">два мира</span></h2>
+    <p class="section-desc">
+      DIMMAR работает на двух принципиально разных рынках с разными платформами, регуляторами и аудиторией. 
+      Стратегия обязана быть раздельной.
+    </p>
+
+    <div class="tabs" id="socialTabs">
+      <div class="tab active" onclick="switchTab('socialTabs','socialContent','russia')">🇷🇺 Россия</div>
+      <div class="tab" onclick="switchTab('socialTabs','socialContent','turkey')">🇹🇷 Турция</div>
+      <div class="tab" onclick="switchTab('socialTabs','socialContent','matrix')">📊 Матрица приоритетов</div>
+      <div class="tab" onclick="switchTab('socialTabs','socialContent','legal')">⚖️ Регулирование</div>
+    </div>
+
+    <div id="socialContent">
+      <!-- RUSSIA -->
+      <div class="tab-content active" data-tab="russia">
+        <div class="kpi-grid" style="margin-bottom:24px;">
+          <div class="kpi"><div class="kpi-value" style="color:var(--accent)">144M</div><div class="kpi-label">население</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--cyan)">133M</div><div class="kpi-label">интернет (92.2%)</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--gold)">106M</div><div class="kpi-label">в соцсетях</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--red)">~20M</div><div class="kpi-label">используют крипто</div></div>
+        </div>
+
+        <div class="highlight-box red-box" style="margin-bottom:24px;">
+          <strong>⚠️ Заблокированы:</strong> Instagram, Facebook (Meta = экстремистская организация), LinkedIn (с 2016). YouTube замедляется: ежедневная аудитория упала с 52M до 29M (−44%) за полгода.
+        </div>
+
+        <div class="grid-2">
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">📱</div>
+              <div><div class="pl-name">Telegram</div><div class="pl-audience">86M+ пользователей • 78.3% охват</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <div class="pl-detail">
+              <strong>Приоритет №1 для России.</strong> 2-й рынок глобально. 80% пользователей 12–24 лет ежедневно. 84% реагируют на контент, 50%+ комментируют. 
+              CPM крипто-тематика ~€4,55. Стоимость лида $1,50–2,50 (видео). Минимальный бюджет Telegram Ads: €500 напрямую / €3000 через партнёров. 
+              Встроенный Telegram-кошелёк для крипто.
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">🔵</div>
+              <div><div class="pl-name">VKontakte</div><div class="pl-audience">91.8M MAU • 59.5M/день</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+            <div class="pl-detail">
+              Охват 89% интернет-аудитории. VK Clips: 2,7B ежедневных просмотров. VK Ads объединяет VK/Одноклассники/Дзен. Выручка SME-рекламы +27% YoY. Рост 4% YoY (Q3 2025).
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">📰</div>
+              <div><div class="pl-name">Яндекс.Дзен</div><div class="pl-audience">80M+ пользователей • 30M/день</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div>
+            <div class="pl-detail">
+              Аудитория 25–44 года. 63% статьи, 37% видео. Отлично для прогрева: «Как выбрать криптообменник», «ТОП-5 ошибок при обмене крипты».
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">🎬</div>
+              <div><div class="pl-name">Rutube</div><div class="pl-audience">80.1M MAU • рост 264% за 2 года</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span><span class="star empty">★</span></div>
+            <div class="pl-detail">
+              Принадлежит Газпром-Медиа. Рост с 22M (апрель 2023) до 80.1M (июнь 2025). Низкая конкуренция — лёгкий захват ниши для крипто-контента.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TURKEY -->
+      <div class="tab-content" data-tab="turkey">
+        <div class="kpi-grid" style="margin-bottom:24px;">
+          <div class="kpi"><div class="kpi-value" style="color:var(--accent)">87.6M</div><div class="kpi-label">население</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--cyan)">77.3M</div><div class="kpi-label">интернет (88.3%)</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--gold)">58.5M</div><div class="kpi-label">в соцсетях</div></div>
+          <div class="kpi"><div class="kpi-value" style="color:var(--green)">40–52%</div><div class="kpi-label">владеют крипто</div></div>
+        </div>
+
+        <div class="highlight-box green-box" style="margin-bottom:24px;">
+          <strong>🇹🇷 4-й крупнейший крипто-рынок мира.</strong> 40–52% населения владеют криптовалютой. Все глобальные платформы доступны без ограничений.
+        </div>
+
+        <div class="grid-2">
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">📸</div>
+              <div><div class="pl-name">Instagram</div><div class="pl-audience">65.3M пользователей • 75.5% населения</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <div class="pl-detail">
+              <strong>Платформа №1 в Турции.</strong> 32 часа 36 минут/месяц — рекорд среди всех платформ. 53% мужчин. CPM $2–8, CPC $0,10–0,50. Активная крипто-инфлюенсерская экосистема.
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">🎵</div>
+              <div><div class="pl-name">TikTok</div><div class="pl-audience">40.2M рекламного охвата (18+)</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+            <div class="pl-detail">
+              Рост 6,6% YoY. 60,9% мужчин. 26 часов/месяц. Engagement rate ~2,65% — самый высокий. Крипто-контент растёт (@bizim_trader, @clockwisecrypto).
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">▶️</div>
+              <div><div class="pl-name">YouTube</div><div class="pl-audience">57.5M охват • 72.9%</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+            <div class="pl-detail">
+              Нет замедления/блокировки. CPM $2–6. Идеален для длинных образовательных роликов: «Как обменять крипту безопасно», «Обзор обменников».
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="pl-header">
+              <div class="pl-icon">💬</div>
+              <div><div class="pl-name">WhatsApp</div><div class="pl-audience">~60M пользователей • 88.6% охват</div></div>
+            </div>
+            <div class="pl-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span> <span style="font-size:11px;color:var(--gold)">B2B</span></div>
+            <div class="pl-detail">
+              Мессенджер №1. WhatsApp Business API. Кейс Mercedes-Benz Turkey: +63% конверсий. Идеален для B2B-нуртуринга франшизных лидов.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATRIX -->
+      <div class="tab-content" data-tab="matrix">
+        <div class="grid-2">
+          <div class="card">
+            <h3 style="color:var(--cyan)">🇷🇺 Россия</h3>
+            <div style="overflow-x:auto;">
+              <table class="comp-table" style="margin-top:12px;">
+                <thead><tr><th>Платформа</th><th>B2C</th><th>B2B</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Telegram</strong></td><td>★★★★★</td><td>★★★★☆</td></tr>
+                  <tr><td><strong>VKontakte</strong></td><td>★★★★☆</td><td>★★★☆☆</td></tr>
+                  <tr><td><strong>YouTube</strong></td><td>★★★☆☆ <span class="tag red" style="font-size:9px;">падает</span></td><td>★★★☆☆</td></tr>
+                  <tr><td><strong>Дзен</strong></td><td>★★★☆☆</td><td>★★☆☆☆</td></tr>
+                  <tr><td><strong>Rutube</strong></td><td>★★☆☆☆</td><td>★☆☆☆☆</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="color:var(--gold)">🇹🇷 Турция</h3>
+            <div style="overflow-x:auto;">
+              <table class="comp-table" style="margin-top:12px;">
+                <thead><tr><th>Платформа</th><th>B2C</th><th>B2B</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Instagram</strong></td><td>★★★★★</td><td>★★★☆☆</td></tr>
+                  <tr><td><strong>TikTok</strong></td><td>★★★★☆</td><td>★★☆☆☆</td></tr>
+                  <tr><td><strong>YouTube</strong></td><td>★★★★☆</td><td>★★★☆☆</td></tr>
+                  <tr><td><strong>Twitter/X</strong></td><td>★★★★☆</td><td>★★★★☆</td></tr>
+                  <tr><td><strong>WhatsApp</strong></td><td>★★☆☆☆</td><td>★★★★★</td></tr>
+                  <tr><td><strong>Telegram</strong></td><td>★★★☆☆</td><td>★★☆☆☆</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEGAL -->
+      <div class="tab-content" data-tab="legal">
+        <div class="grid-2">
+          <div class="card" style="border-color:rgba(6,182,212,0.2);">
+            <h3>🇷🇺 Россия — регулирование крипто</h3>
+            <ul style="list-style:none; padding:0; font-size:13px; color:var(--text2);">
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">✅ Крипто легальна как собственность</li>
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">❌ Запрещена как средство платежа</li>
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">❌ Реклама крипто как платёжного средства запрещена (2024)</li>
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">✅ Образовательный контент допустим</li>
+              <li style="padding:8px 0;">⏳ Регулирование обменников — до июля 2026 (Банк России)</li>
+            </ul>
+          </div>
+          <div class="card" style="border-color:rgba(245,158,11,0.2);">
+            <h3>🇹🇷 Турция — регулирование крипто</h3>
+            <ul style="list-style:none; padding:0; font-size:13px; color:var(--text2);">
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">📋 Лицензирование CASP обязательно с 30 июня 2025 (CMB)</li>
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">🔗 Travel Rule внедрён 25 февраля 2025 (MASAK)</li>
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">✅ Реклама только с проверяемыми данными</li>
+              <li style="padding:8px 0; border-bottom:1px solid var(--border);">❌ Запрещены обещания гарантированной доходности</li>
+              <li style="padding:8px 0;">⚠️ Нелицензированная иностранная биржа не может рекламироваться</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ AI-ИНСТРУМЕНТЫ ============ -->
+<section id="ai-tools">
+  <div class="container">
+    <div class="section-label">03 — AI-инструменты для контента</div>
+    <h2>Арсенал <span style="color:var(--accent)">AI-генерации</span></h2>
+    <p class="section-desc">
+      12+ инструментов для видео-генерации, текстового контента и SMM-автоматизации. 
+      Полный AI-стек стоит $200–500/мес — ничтожно по сравнению с конкурентным преимуществом.
+    </p>
+
+    <div class="tabs" id="aiTabs">
+      <div class="tab active" onclick="switchTab('aiTabs','aiContent','video')">🎬 Видео-генерация</div>
+      <div class="tab" onclick="switchTab('aiTabs','aiContent','text')">✍️ Текст & Копирайтинг</div>
+      <div class="tab" onclick="switchTab('aiTabs','aiContent','smm')">📱 SMM-автоматизация</div>
+      <div class="tab" onclick="switchTab('aiTabs','aiContent','stacks')">💰 Готовые стеки</div>
+    </div>
+
+    <div id="aiContent">
+      <!-- VIDEO -->
+      <div class="tab-content active" data-tab="video">
+        <div class="grid-2">
+          <div class="tool-card glow-purple">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(139,92,246,0.12);">🎭</div>
+              <div>
+                <div class="tool-name">HeyGen</div>
+                <div class="tool-price">Creator $29/мес • Business $149/мес</div>
+              </div>
+            </div>
+            <div class="tool-desc">
+              <strong style="color:var(--gold)">⭐ ПРИОРИТЕТ №1.</strong> #1 Fastest Growing Product G2 2025. 500+ AI-аватаров, клонирование голоса, перевод на 175+ языков с синхронизацией губ. Creator: неограниченные аватары до 30 мин. Business: 4K, 60 мин.
+            </div>
+            <div class="tool-tags">
+              <span class="tag purple">AI-аватары</span>
+              <span class="tag cyan">175+ языков</span>
+              <span class="tag green">Lip-sync</span>
+              <span class="tag gold">Клон голоса</span>
+            </div>
+            <a href="https://heygen.com" target="_blank">Открыть heygen.com →</a>
+          </div>
+
+          <div class="tool-card glow-cyan">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(6,182,212,0.12);">🎥</div>
+              <div>
+                <div class="tool-name">Kling AI</div>
+                <div class="tool-price">Free 66 кр/день • Pro $37/мес</div>
+              </div>
+            </div>
+            <div class="tool-desc">
+              $240M ARR (декабрь 2025), 60M+ создателей. Видео до 60 сек 1080p, расширение до 3 минут — самое длинное. Pro: 3000 кредитов.
+            </div>
+            <div class="tool-tags">
+              <span class="tag cyan">До 3 мин видео</span>
+              <span class="tag green">Free tier</span>
+              <span class="tag gold">1080p</span>
+            </div>
+            <a href="https://klingai.com" target="_blank">Открыть klingai.com →</a>
+          </div>
+
+          <div class="tool-card glow-gold">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(245,158,11,0.12);">✨</div>
+              <div>
+                <div class="tool-name">Runway</div>
+                <div class="tool-price">Standard $15/мес • Unlimited $95/мес</div>
+              </div>
+            </div>
+            <div class="tool-desc">
+              Премиум-качество. Gen-4.5/Gen-4. Unlimited: неограниченная генерация. Standard: 625 кредитов (~4–5 клипов/мес). Видео до 10 сек (расширяемо до 40), 1080p, апскейл 4K.
+            </div>
+            <div class="tool-tags">
+              <span class="tag gold">Премиум качество</span>
+              <span class="tag purple">Gen-4.5</span>
+              <span class="tag cyan">4K апскейл</span>
+            </div>
+            <a href="https://runwayml.com" target="_blank">Открыть runwayml.com →</a>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(16,185,129,0.12);">🌐</div>
+              <div>
+                <div class="tool-name">Ещё инструменты</div>
+                <div class="tool-price">от $4.70 до $89/мес</div>
+              </div>
+            </div>
+            <div class="tool-desc">
+              <strong>Google Veo 3.1</strong> ($19.99/мес) — видео до 60 сек с аудио. <strong>Pika</strong> ($10/мес) — вирусный контент. <strong>Synthesia</strong> ($18–89/мес) — корпоративный. <strong>D-ID</strong> ($4.70/мес) — бюджетный talking head, 120+ языков.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="tab-content" data-tab="text">
+        <div class="grid-2">
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(16,185,129,0.12);">🤖</div>
+              <div><div class="tool-name">ChatGPT Plus</div><div class="tool-price">$20/мес</div></div>
+            </div>
+            <div class="tool-desc">Ежедневный контент, посты в соцсетях, ответы на вопросы. Универсальный инструмент для быстрой генерации.</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(139,92,246,0.12);">🧠</div>
+              <div><div class="tool-name">Claude Pro</div><div class="tool-price">$20/мес</div></div>
+            </div>
+            <div class="tool-desc">Лонгриды, whitepaper, аналитика. 200K токенов контекстного окна — идеален для длинных документов и стратегий.</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(245,158,11,0.12);">✍️</div>
+              <div><div class="tool-name">Jasper AI Pro</div><div class="tool-price">$59/мес</div></div>
+            </div>
+            <div class="tool-desc">Brand Voice — запоминает стиль бренда. Campaign Builder — генерация целых кампаний. SEO-интеграция Surfer. Идеален для масштабирования контента.</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(6,182,212,0.12);">⚡</div>
+              <div><div class="tool-name">Copy.ai Starter</div><div class="tool-price">$49/мес</div></div>
+            </div>
+            <div class="tool-desc">Content Agent Studio — масштабирование контент-производства. Workflows для автоматизации повторяющихся задач.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMM -->
+      <div class="tab-content" data-tab="smm">
+        <div class="grid-3">
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(139,92,246,0.12);">📊</div>
+              <div><div class="tool-name">Buffer</div><div class="tool-price">от $0 (Free) / $5 за канал</div></div>
+            </div>
+            <div class="tool-desc">Бесплатный план: 3 канала. Простой, понятный, идеален для старта.</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(245,158,11,0.12);">🦉</div>
+              <div><div class="tool-name">Hootsuite</div><div class="tool-price">$99–249/мес</div></div>
+            </div>
+            <div class="tool-desc">OwlyWriter AI, social listening, аналитика. Мощный, но дорогой для старта.</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-header">
+              <div class="tool-icon" style="background:rgba(16,185,129,0.12);">📱</div>
+              <div><div class="tool-name">ContentStudio</div><div class="tool-price">$25/мес</div></div>
+            </div>
+            <div class="tool-desc">Лучшее соотношение цена/качество. AI-ассистент, планирование, аналитика.</div>
+          </div>
+        </div>
+
+        <div class="sep">telegram-боты</div>
+
+        <div class="grid-3">
+          <div class="tool-card">
+            <div class="tool-name" style="margin-bottom:8px;">Manychat</div>
+            <div class="tool-desc">от $0. Broadcasts, A/B-тесты, автоматизация. Лидер рынка чат-ботов.</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name" style="margin-bottom:8px;">SendPulse</div>
+            <div class="tool-desc">от $0. 10K сообщений/мес бесплатно. Мультиканальность (email + мессенджеры).</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-name" style="margin-bottom:8px;">n8n</div>
+            <div class="tool-desc">Self-hosted бесплатно. Low-code автоматизация. Неограниченные интеграции.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STACKS -->
+      <div class="tab-content" data-tab="stacks">
+        <div class="grid-3">
+          <div class="pricing-card">
+            <span class="tag green">Lean</span>
+            <div class="price" style="color:var(--green)">$200<span style="font-size:16px;color:var(--text3)">/мес</span></div>
+            <div class="price-period">Для старта</div>
+            <div class="features">
+              <li>HeyGen Creator ($29)</li>
+              <li>Kling Standard ($10)</li>
+              <li>ChatGPT Plus ($20)</li>
+              <li>Buffer Free ($0)</li>
+              <li>~$140 на тесты и API</li>
+            </div>
+          </div>
+          <div class="pricing-card featured">
+            <span class="tag purple">Professional</span>
+            <div class="price" style="color:var(--accent)">$500<span style="font-size:16px;color:var(--text3)">/мес</span></div>
+            <div class="price-period">Оптимальный</div>
+            <div class="features">
+              <li>HeyGen Business ($149)</li>
+              <li>Kling Pro ($37)</li>
+              <li>Runway Standard ($15)</li>
+              <li>ChatGPT Plus ($20)</li>
+              <li>Claude Pro ($20)</li>
+              <li>ContentStudio ($25)</li>
+              <li>~$234 на API и тесты</li>
+            </div>
+          </div>
+          <div class="pricing-card">
+            <span class="tag gold">Enterprise</span>
+            <div class="price" style="color:var(--gold)">$1–2K<span style="font-size:16px;color:var(--text3)">/мес</span></div>
+            <div class="price-period">Максимум</div>
+            <div class="features">
+              <li>HeyGen Business ($149)</li>
+              <li>Runway Unlimited ($95)</li>
+              <li>Kling Premier ($66)</li>
+              <li>Jasper Pro ($59)</li>
+              <li>Hootsuite Professional ($99)</li>
+              <li>Полная автоматизация TG</li>
+              <li>Dedicated AI-агенты</li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ МУЛЬТИАГЕНТНЫЕ СИСТЕМЫ ============ -->
+<section id="agents">
+  <div class="container">
+    <div class="section-label">04 — Мультиагентные системы</div>
+    <h2>AI-агенты для <span style="color:var(--green)">автоматизации</span></h2>
+    <p class="section-desc">
+      Автоматизированный маркетинговый конвейер: Research → Write → Design → Publish → Analyze с human-in-the-loop. За 4–8 недель.
+    </p>
+
+    <!-- AGENT FLOW -->
+    <div class="flow" style="margin-bottom:32px;">
+      <div class="flow-step" style="background:rgba(139,92,246,0.12);border-color:var(--accent);">🔍 Research Agent</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="background:rgba(6,182,212,0.12);border-color:var(--cyan);">✍️ Writer Agent</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="background:rgba(245,158,11,0.12);border-color:var(--gold);">📱 Platform Agents</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="background:rgba(16,185,129,0.12);border-color:var(--green);">🚀 Publisher Agent</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="background:rgba(236,72,153,0.12);border-color:var(--pink);">📊 Analytics Agent</div>
+    </div>
+
+    <div class="tabs" id="agentTabs">
+      <div class="tab active" onclick="switchTab('agentTabs','agentContent','crewai')">🤖 CrewAI</div>
+      <div class="tab" onclick="switchTab('agentTabs','agentContent','langgraph')">🔗 LangGraph</div>
+      <div class="tab" onclick="switchTab('agentTabs','agentContent','others')">📦 Другие</div>
+      <div class="tab" onclick="switchTab('agentTabs','agentContent','crew-dimmar')">🎯 Crew для DIMMAR</div>
+      <div class="tab" onclick="switchTab('agentTabs','agentContent','github')">💻 GitHub-проекты</div>
+    </div>
+
+    <div id="agentContent">
+      <!-- CREWAI -->
+      <div class="tab-content active" data-tab="crewai">
+        <div class="grid-2">
+          <div class="card glow-purple">
+            <h3>🤖 CrewAI — рекомендованный фреймворк</h3>
+            <div class="kpi-grid" style="margin-bottom:16px;">
+              <div class="kpi"><div class="kpi-value" style="color:var(--accent)">60%+</div><div class="kpi-label">Fortune 500</div></div>
+              <div class="kpi"><div class="kpi-value" style="color:var(--green)">1.4B</div><div class="kpi-label">автоматизаций</div></div>
+            </div>
+            <p>Open-source Python (MIT лицензия). Ролевая оркестрация: Agents, Tasks, Tools, Crew. Sequential и Hierarchical режимы выполнения.</p>
+            <div style="margin-top:14px;">
+              <span class="tag purple">Python</span>
+              <span class="tag green">MIT License</span>
+              <span class="tag gold">Open-source</span>
+            </div>
+            <a href="https://crewai.com" target="_blank" class="inline-link" style="display:block;margin-top:12px;">crewai.com →</a>
+          </div>
+          <div class="card">
+            <h3>Кейс: LinkedIn-постинг</h3>
+            <p>Основатель Жоау Моура создал прототип CrewAI-агента для LinkedIn-постинга. Результат:</p>
+            <div class="highlight-box green-box" style="margin-top:12px;">
+              <div style="font-family:'Unbounded',sans-serif;font-size:28px;font-weight:800;color:var(--green);margin-bottom:4px;">+600</div>
+              <div style="font-size:13px;color:var(--text2);">новых inbound-лидов/день в Clearbit через автоматизированный контент</div>
+            </div>
+            <h3 style="margin-top:20px;">Ценообразование</h3>
+            <ul style="font-size:13px; color:var(--text2); list-style:none; padding:0;">
+              <li style="padding:6px 0;">✅ Open-source: <strong>бесплатно</strong></li>
+              <li style="padding:6px 0;">☁️ Cloud Starter: <strong>$99/мес</strong> (100 исполнений)</li>
+              <li style="padding:6px 0;">☁️ Cloud Enterprise: до <strong>$120K/год</strong> (500K исполнений)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- LANGGRAPH -->
+      <div class="tab-content" data-tab="langgraph">
+        <div class="card">
+          <h3>🔗 LangGraph (LangChain)</h3>
+          <p>Графовая архитектура, циклические workflow, human-in-the-loop. Библиотека MIT, бесплатна.</p>
+          <div class="highlight-box cyan-box" style="margin-top:16px;">
+            <strong>Официальный проект:</strong> <code>langchain-ai/social-media-agent</code> на GitHub — генерация постов Twitter/LinkedIn из URL, Slack-интеграция. Готовый к форку.
+          </div>
+          <p style="margin-top:12px;">Лучше подходит, когда нужны сложные conditional-переходы между агентами, циклические проверки качества и ветвящаяся логика.</p>
+        </div>
+      </div>
+
+      <!-- OTHERS -->
+      <div class="tab-content" data-tab="others">
+        <div class="grid-2">
+          <div class="card">
+            <h3>AutoGen → Agent Framework (Microsoft)</h3>
+            <p>v0.4 переписан с акторной моделью. Асинхронный messaging, OpenTelemetry для мониторинга. Microsoft Agent Framework объединяет AutoGen + Semantic Kernel. Лучше для conversational-сценариев. Open-source бесплатно.</p>
+          </div>
+          <div class="card">
+            <h3>OpenAI Agents SDK</h3>
+            <p>Замена Swarm. Три примитива: Agents, Handoffs, Guardrails. Легковесный, минимальный код. Привязан к экосистеме OpenAI.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CREW FOR DIMMAR -->
+      <div class="tab-content" data-tab="crew-dimmar">
+        <div class="card">
+          <h3>🎯 Конкретная Crew для DIMMAR EXCHANGE</h3>
+          <div style="margin-top:16px;">
+            <div class="accordion open" onclick="toggleAccordion(this)">
+              <div class="accordion-header">
+                <span>🔍 Agent 1: Research Agent</span><span class="arrow">▼</span>
+              </div>
+              <div class="accordion-body">
+                Мониторит крипто-новости через SerperDevTool и CoinGecko API. Отслеживает действия конкурентов (Keine, MultiKassa). Выявляет трендовые темы для контента. Результат: ежедневный брифинг с 5–10 контент-идеями.
+              </div>
+            </div>
+            <div class="accordion" onclick="toggleAccordion(this)">
+              <div class="accordion-header">
+                <span>✍️ Agent 2: Writer Agent</span><span class="arrow">▼</span>
+              </div>
+              <div class="accordion-body">
+                Генерирует посты, статьи, email-рассылки с учётом brand guidelines DIMMAR. Поддерживает русский и турецкий языки. Использует шаблоны для разных форматов: новости, образовательный контент, промо.
+              </div>
+            </div>
+            <div class="accordion" onclick="toggleAccordion(this)">
+              <div class="accordion-header">
+                <span>📱 Agent 3: Platform Specialist Agents</span><span class="arrow">▼</span>
+              </div>
+              <div class="accordion-body">
+                Адаптирует контент под каждую платформу. Telegram: длинные посты с форматированием. VK: посты с хэштегами и вложениями. YouTube: описания, тайм-коды, превью-тексты. Instagram: карусели, Reels-скрипты.
+              </div>
+            </div>
+            <div class="accordion" onclick="toggleAccordion(this)">
+              <div class="accordion-header">
+                <span>🚀 Agent 4: Publisher Agent</span><span class="arrow">▼</span>
+              </div>
+              <div class="accordion-body">
+                Публикует через API в оптимальное время (на основе аналитики). Telegram Bot API, VK API, YouTube Data API. Выстраивает очередь публикаций с учётом часовых поясов (Москва, Анталья).
+              </div>
+            </div>
+            <div class="accordion" onclick="toggleAccordion(this)">
+              <div class="accordion-header">
+                <span>📊 Agent 5: Analytics Agent</span><span class="arrow">▼</span>
+              </div>
+              <div class="accordion-body">
+                Собирает метрики вовлечённости по всем платформам. Генерирует еженедельные отчёты: лучшие посты, рост подписчиков, CTR, конверсии. Выдаёт рекомендации по оптимизации контент-стратегии.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GITHUB -->
+      <div class="tab-content" data-tab="github">
+        <div class="grid-3">
+          <div class="card">
+            <h3 style="font-size:14px;">langchain-ai/<br>social-media-agent</h3>
+            <p>Twitter/LinkedIn генерация, human-in-the-loop, Slack-интеграция.</p>
+            <a href="https://github.com/langchain-ai/social-media-agent" target="_blank" class="inline-link" style="font-size:12px;">github.com →</a>
+          </div>
+          <div class="card">
+            <h3 style="font-size:14px;">Klaudiusz321/<br>social-media-agents</h3>
+            <p>Ad Campaign Manager, Analytics, Content Creator, Engagement агенты.</p>
+            <a href="https://github.com/Klaudiusz321/social-media-agents" target="_blank" class="inline-link" style="font-size:12px;">github.com →</a>
+          </div>
+          <div class="card">
+            <h3 style="font-size:14px;">ktynski/Marketing_<br>Automations_Notebooks</h3>
+            <p>SEO-планирование, конкурентный анализ, TikTok-анализ.</p>
+            <a href="https://github.com/ktynski/Marketing_Automations_Notebooks_With_GPT" target="_blank" class="inline-link" style="font-size:12px;">github.com →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ ДОРОЖНАЯ КАРТА ============ -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-label">05 — Дорожная карта внедрения</div>
+    <h2>2 недели до <span style="color:var(--green)">запуска</span></h2>
+    <p class="section-desc">
+      Примерная оценка: ~50 рабочих часов на полное внедрение всего описанного. 
+      Старт от $1,500 (10 часов). По пути я всё объясняю и передаю — 
+      вы в любой момент можете продолжить действовать самостоятельно.
+    </p>
+
+    <div class="highlight-box green-box" style="margin-bottom:32px;">
+      <strong>💡 Важно:</strong> Это супер-пессимистичный срок на случай, если будем долго раскачиваться. В реальности запуск первых каналов и контента — за дни, а не недели. Основные затраты — на мою работу. Сама автоматизация (AI-инструменты, боты, агенты) стоит удивительно дёшево.
+    </div>
+
+    <div class="timeline" style="margin-top:32px;">
+      <div class="timeline-item">
+        <div class="tl-title">Фаза 1: Быстрый запуск</div>
+        <div class="tl-period">Дни 1–3 • ~10 часов</div>
+        <div class="tl-body">
+          <ul>
+            <li>Развёртывание CrewAI с 3 агентами: <strong>Researcher, Writer, Editor</strong></li>
+            <li>Настройка brand guidelines и tone of voice для DIMMAR</li>
+            <li>Создание Telegram-канала + первые 20 постов</li>
+            <li>Регистрация на BestChange, каталогах франшиз</li>
+            <li>Настройка HeyGen: создание AI-аватара основателя</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item cyan">
+        <div class="tl-title">Фаза 2: Контент-машина</div>
+        <div class="tl-period">Дни 4–7 • ~15 часов</div>
+        <div class="tl-body">
+          <ul>
+            <li>Platform-агенты + публикация через API (Telegram, VK)</li>
+            <li>Запуск VK-сообщества и Дзен-канала</li>
+            <li>Первое AI-видео с HeyGen на русском и турецком</li>
+            <li>Калькулятор доходности на сайте</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item green">
+        <div class="tl-title">Фаза 3: Мультирынок</div>
+        <div class="tl-period">Дни 8–11 • ~15 часов</div>
+        <div class="tl-body">
+          <ul>
+            <li>Запуск YouTube-канала: первые AI-видео</li>
+            <li>Запуск Instagram для турецкого рынка</li>
+            <li>Лид-магнит: гайд «Как открыть криптообменник в 2026»</li>
+            <li>Zoom-экскурсии для потенциальных партнёров</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item gold">
+        <div class="tl-title">Фаза 4: Аналитика и передача</div>
+        <div class="tl-period">Дни 12–14 • ~10 часов</div>
+        <div class="tl-body">
+          <ul>
+            <li>Analytics Agent: настройка автоматических отчётов</li>
+            <li>Документация всех процессов для команды DIMMAR</li>
+            <li>Обучение: как работать с AI-агентами самостоятельно</li>
+            <li>Первая рекламная кампания в Telegram Ads (€500 бюджет)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-title">Далее: поддержка по запросу</div>
+        <div class="tl-period">По мере необходимости</div>
+        <div class="tl-body">
+          <ul>
+            <li>Конференции: Blockchain Life, Crypto Summit — личный бренд</li>
+            <li>WhatsApp Business API для турецких B2B-лидов</li>
+            <li>Rutube-присутствие (дублирование YouTube-контента)</li>
+            <li>SEO: SSR-рендеринг сайта, блог, landing pages по городам</li>
+            <li><strong>Вы можете продолжить всё это самостоятельно — я передаю знания по пути</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ БЮДЖЕТЫ ============ -->
+<section id="budget">
+  <div class="container">
+    <div class="section-label">06 — Бюджеты и ROI</div>
+    <h2>Инвестиции в <span style="color:var(--gold)">рост</span></h2>
+
+    <div class="grid-3">
+      <div class="pricing-card">
+        <span class="tag green">Minimum Viable</span>
+        <div class="price" style="color:var(--green)">$500<span style="font-size:14px;color:var(--text3)">/мес</span></div>
+        <div class="price-period">Lean AI Stack + минимальная реклама</div>
+        <div class="features">
+          <li>AI-инструменты: $200/мес</li>
+          <li>Telegram Ads: €500 (~$200)</li>
+          <li>Каталоги франшиз: ~$100/мес</li>
+          <li>CrewAI (open-source): бесплатно</li>
+          <li>4 AI-видео/месяц</li>
+          <li>3 платформы: TG + VK + YouTube</li>
+        </div>
+      </div>
+      <div class="pricing-card featured">
+        <span class="tag purple">Оптимальный</span>
+        <div class="price" style="color:var(--accent)">$2K<span style="font-size:14px;color:var(--text3)">/мес</span></div>
+        <div class="price-period">Professional AI + активная реклама</div>
+        <div class="features">
+          <li>AI-инструменты: $500/мес</li>
+          <li>Реклама (TG + VK Ads): $800</li>
+          <li>Каталоги + BestChange: $200</li>
+          <li>CrewAI Cloud: $99</li>
+          <li>Фрилансеры (дизайн): $400</li>
+          <li>8+ AI-видео/месяц</li>
+          <li>6 платформ: RU + TR</li>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <span class="tag gold">Агрессивный</span>
+        <div class="price" style="color:var(--gold)">$5K+<span style="font-size:14px;color:var(--text3)">/мес</span></div>
+        <div class="price-period">Enterprise AI + конференции</div>
+        <div class="features">
+          <li>AI-инструменты: $1–2K/мес</li>
+          <li>Реклама (все каналы): $2K</li>
+          <li>Конференции: $500/мес (усреднённо)</li>
+          <li>Контент-команда: $1K</li>
+          <li>Инфлюенсеры: $500</li>
+          <li>15+ AI-видео/месяц</li>
+          <li>10+ платформ: полное покрытие</li>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box green-box" style="margin-top:32px;">
+      <strong>💡 ROI-ориентир:</strong> Одна продажа франшизы White Label = 1.4M ₽ (~$14,000). При оптимальном бюджете $2K/мес, окупаемость = 1 продажа за 1.5 месяца. При текущих показателях рынка крипто-франшиз, реалистичная цель — 2–3 продажи/квартал с правильным маркетингом.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ О НАС ============ -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">07 — Об исполнителе</div>
+    <h2>Тим Зинин — <span style="color:var(--accent)">AI Marketing</span></h2>
+
+    <div class="grid-2">
+      <div class="card" style="border-color:rgba(139,92,246,0.5);background:linear-gradient(135deg, rgba(139,92,246,0.12), rgba(6,182,212,0.08));box-shadow:0 0 50px rgba(139,92,246,0.15);">
+        <h3 style="color:var(--accent2);">👤 Профиль</h3>
+        <p style="margin-bottom:16px;">
+          Web3 и крипто-маркетолог с опытом в AI-автоматизации, мультиагентных системах (CrewAI), 
+          генеративном видео-контенте и международном маркетинге (Россия, Турция, глобальный рынок).
+        </p>
+        <div style="margin-bottom:12px;">
+          <span class="tag purple">Web3 Marketing</span>
+          <span class="tag cyan">AI Automation</span>
+          <span class="tag green">CrewAI</span>
+          <span class="tag gold">Multi-Agent Systems</span>
+        </div>
+        <p>
+          Практический опыт разработки мультиагентных AI-систем
+          с интеграцией западных и российских платформ.
+        </p>
+      </div>
+      <div class="card" style="border: 2px solid var(--red);background:linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.05));box-shadow:0 0 60px rgba(239,68,68,0.15);">
+        <h3 style="color:#f87171;">💰 Условия сотрудничества</h3>
+        <div style="margin-top:16px;">
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Unbounded',sans-serif;font-size:36px;font-weight:900;color:var(--red);">$150</span>
+            <span style="font-size:14px;color:var(--text2);">/час</span>
+          </div>
+          <ul style="list-style:none; padding:0; font-size:14px; color:var(--text2); margin-top:16px;">
+            <li style="padding:8px 0;border-bottom:1px solid rgba(239,68,68,0.15);">💵 Минимальный контракт: <strong style="color:var(--text);">$1,500 (10 часов)</strong></li>
+            <li style="padding:8px 0;border-bottom:1px solid rgba(239,68,68,0.15);">💳 Оплата: <strong style="color:var(--text);">100% предоплата, крипто</strong></li>
+            <li style="padding:8px 0;border-bottom:1px solid rgba(239,68,68,0.15);">⏱️ Тайм-трекинг: <strong style="color:var(--text);">любой способ на ваш выбор</strong></li>
+            <li style="padding:8px 0;">🔗 Полная прозрачность и отчётность</li>
+          </ul>
+        </div>
+        <div class="highlight-box red-box" style="margin-top:16px;border-left-color:var(--red);">
+          <strong>Формат:</strong> Фиксированная часовая ставка, предоплата в крипто, отчётность по трекингу в удобном для вас формате. Без скрытых платежей.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px;background:linear-gradient(135deg, rgba(139,92,246,0.06), rgba(6,182,212,0.04));border-color:rgba(139,92,246,0.2);">
+      <h3>🎁 Этот документ — подарок</h3>
+      <p style="font-size:15px;color:var(--text2);line-height:1.9;">
+        Данная стратегия подготовлена бесплатно, очень быстро, в качестве бонуса и подарка для коллег из DIMMAR Exchange. 
+        Это примерная оценка — детали уточняются в процессе работы.
+        <br><br>
+        <strong style="color:var(--text);">Главное:</strong> основные затраты — на мою работу (~50 часов). 
+        Сама автоматизация (AI-инструменты, боты, агенты) стоит удивительно дёшево — от $200/мес. 
+        Можем начать с минимального контракта в $1,500 (10 часов) и двигаться по шагам.
+        <br><br>
+        <strong style="color:var(--text);">Следующий шаг:</strong> обсудить приоритеты, выбрать с чего начать и запустить первую Crew.
+      </p>
+      <div style="margin-top:20px;">
+        <a href="https://t.me/timzinin" target="_blank" class="cta-button">
+          💬 Написать в Telegram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer">
+  <div class="container">
+    <p style="margin-bottom:8px;">
+      <strong style="color:var(--text);">DIMMAR EXCHANGE × AI Marketing Strategy</strong>
+    </p>
+    <p>
+      Подготовлено <strong style="color:var(--accent2);">Тим Зинин</strong> • через <strong style="color:var(--accent2);">Семёна Сарапулова</strong> • Февраль 2026
+    </p>
+    <p style="margin-top:8px; font-size:11px;">
+      Исследование основано на открытых источниках, данных презентации White Label DIMMAR EXCHANGE (10/2025) и актуальной информации на февраль 2026.
+    </p>
+  </div>
+</div>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+// Tab switching
+function switchTab(tabGroupId, contentGroupId, tabName) {
+  const tabGroup = document.getElementById(tabGroupId);
+  const contentGroup = document.getElementById(contentGroupId);
+  
+  tabGroup.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  contentGroup.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  
+  event.target.classList.add('active');
+  contentGroup.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+}
+
+// Accordion toggle
+function toggleAccordion(el) {
+  el.classList.toggle('open');
+}
+
+// Smooth scroll
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const tocDots = document.querySelectorAll('.toc-dot');
+const sectionIds = ['hero', 'competitors', 'social', 'ai-tools', 'agents', 'roadmap', 'budget', 'about'];
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.textContent.toLowerCase().includes(current.replace('-', ''))) {
+      link.classList.add('active');
+    }
+  });
+
+  const idx = sectionIds.indexOf(current);
+  tocDots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === idx);
+  });
+});
+
+// Animate metric bars on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.metric-bar-fill').forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            bar.style.width = width;
+          });
+        });
+      });
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.metric-bar-wrap').forEach(el => {
+  observer.observe(el.parentElement);
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    const current = sectionIds.findIndex(id => {
+      const el = document.getElementById(id);
+      return el && el.getBoundingClientRect().top >= -100 && el.getBoundingClientRect().top < window.innerHeight / 2;
+    });
+    
+    let next;
+    if (e.key === 'ArrowDown') {
+      next = Math.min(current + 1, sectionIds.length - 1);
+    } else {
+      next = Math.max(current - 1, 0);
+    }
+    
+    if (next !== current && next >= 0) {
+      scrollToSection(sectionIds[next]);
+    }
+  }
+});
+</script>
+
+</body>
+</html>
