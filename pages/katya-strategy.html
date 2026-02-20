@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стратегия для Кати Басковой — миграция курсов с Telegram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface-alt: #1a2235;
+  --accent: #6366f1;
+  --accent-glow: #818cf8;
+  --accent-soft: rgba(99,102,241,0.12);
+  --green: #10b981;
+  --green-soft: rgba(16,185,129,0.12);
+  --amber: #f59e0b;
+  --amber-soft: rgba(245,158,11,0.12);
+  --rose: #f43f5e;
+  --rose-soft: rgba(244,63,94,0.1);
+  --cyan: #06b6d4;
+  --cyan-soft: rgba(6,182,212,0.12);
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --border: rgba(255,255,255,0.06);
+  --radius: 20px;
+  --warm: #e879a0;
+  --warm-soft: rgba(232,121,160,0.1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Manrope',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+body::before {
+  content:'';position:fixed;top:-40%;left:-20%;
+  width:80vw;height:80vw;
+  background:radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+body::after {
+  content:'';position:fixed;bottom:-30%;right:-20%;
+  width:70vw;height:70vw;
+  background:radial-gradient(circle,rgba(16,185,129,0.05) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+.container { max-width:820px; margin:0 auto; padding:40px 20px 80px; position:relative; z-index:1; }
+
+/* PERSONAL HEADER */
+.personal-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0; margin-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ph-from { display:flex; align-items:center; gap:12px; }
+.ph-avatar {
+  width:40px; height:40px; border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--green));
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:16px; color:#fff; flex-shrink:0;
+}
+.ph-name { font-size:13px; font-weight:600; }
+.ph-role { font-size:11px; color:var(--text-dim); }
+.ph-date { font-size:11px; color:var(--text-dim); text-align:right; }
+
+/* GREETING CARD */
+.greeting {
+  background:linear-gradient(135deg,rgba(232,121,160,0.06),rgba(99,102,241,0.06));
+  border:1px solid rgba(232,121,160,0.12); border-radius:var(--radius);
+  padding:32px 32px 28px; margin:24px 0 16px; position:relative; overflow:hidden;
+}
+.greeting::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--warm),var(--accent),var(--green));
+}
+.greeting-hi {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:22px; color:var(--warm); margin-bottom:14px; line-height:1.3;
+}
+.greeting p {
+  font-size:14.5px; color:var(--text-muted); margin-bottom:12px; line-height:1.7;
+}
+.greeting p:last-child { margin-bottom:0; }
+.greeting strong { color:var(--text); font-weight:600; }
+.greeting em { color:var(--warm); font-style:normal; font-weight:600; }
+.greeting-sign {
+  margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.05);
+  font-size:13px; color:var(--text-dim);
+}
+.greeting-sign strong { color:var(--text-muted); }
+
+/* DONE SECTION */
+.done-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px 28px; margin-bottom:16px;
+  position:relative; overflow:hidden;
+}
+.done-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--green),var(--cyan));
+}
+.done-card h3 { font-size:17px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.done-list { display:grid; gap:8px; }
+.done-item {
+  display:flex; align-items:flex-start; gap:12px; padding:12px 16px;
+  background:var(--green-soft); border:1px solid rgba(16,185,129,0.1);
+  border-radius:14px;
+}
+.done-check { color:var(--green); font-size:16px; flex-shrink:0; margin-top:1px; }
+.done-item .d-title { font-size:13.5px; font-weight:600; display:block; }
+.done-item .d-desc { font-size:12px; color:var(--text-dim); line-height:1.5; }
+
+/* HERO */
+.hero { text-align:center; padding:32px 0 40px; }
+.hero-badge {
+  display:inline-block; padding:6px 18px; border-radius:100px;
+  background:var(--rose-soft); color:var(--rose);
+  font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  margin-bottom:20px; border:1px solid rgba(244,63,94,0.2);
+}
+.hero h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,5vw,40px); font-weight:700; line-height:1.2; margin-bottom:14px;
+  background:linear-gradient(135deg,#e2e8f0 30%,var(--accent-glow) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hero p { color:var(--text-muted); font-size:15px; max-width:580px; margin:0 auto; }
+
+/* ALERT */
+.alert-box {
+  background:linear-gradient(135deg,rgba(244,63,94,0.08),rgba(244,63,94,0.03));
+  border:1px solid rgba(244,63,94,0.15); border-radius:var(--radius);
+  padding:24px 28px; margin:24px 0 40px; display:flex; gap:16px; align-items:flex-start;
+}
+.alert-icon { font-size:28px; flex-shrink:0; }
+.alert-box p { font-size:14px; color:var(--text-muted); }
+.alert-box strong { color:#fca5a5; }
+
+/* SECTION */
+.section { margin-bottom:48px; }
+.section-header { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
+.section-number {
+  width:44px; height:44px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:18px; flex-shrink:0;
+}
+.section-title { font-size:20px; font-weight:700; line-height:1.3; }
+
+/* CARDS */
+.card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px 28px; margin-bottom:16px;
+  position:relative; overflow:hidden;
+}
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.card h3 { font-size:17px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.card h3 .icon { font-size:22px; }
+.card p { color:var(--text-muted); font-size:14px; margin-bottom:10px; }
+.card p:last-child { margin-bottom:0; }
+
+.card-alt {
+  background:var(--surface-alt); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px 28px; margin-bottom:16px;
+}
+
+/* HIGHLIGHT */
+.hl {
+  padding:18px 22px; border-radius:16px; margin:16px 0;
+  font-size:14px; line-height:1.6;
+}
+.hl.green { background:var(--green-soft); border:1px solid rgba(16,185,129,0.15); color:#6ee7b7; }
+.hl.accent { background:var(--accent-soft); border:1px solid rgba(99,102,241,0.15); color:#a5b4fc; }
+.hl.amber { background:var(--amber-soft); border:1px solid rgba(245,158,11,0.15); color:#fcd34d; }
+.hl.rose { background:var(--rose-soft); border:1px solid rgba(244,63,94,0.15); color:#fca5a5; }
+.hl.cyan { background:var(--cyan-soft); border:1px solid rgba(6,182,212,0.15); color:#67e8f9; }
+.hl strong { color:#fff; font-weight:600; }
+
+/* METRICS */
+.metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:18px 0; }
+@media(max-width:540px){ .metrics { grid-template-columns:1fr; } }
+.metric {
+  text-align:center; padding:22px 14px;
+  background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:16px;
+}
+.metric-value {
+  font-size:26px; font-weight:800; display:block; margin-bottom:4px;
+}
+.metric-value.rose { color:var(--rose); }
+.metric-value.green { color:var(--green); }
+.metric-value.accent { color:var(--accent-glow); }
+.metric-value.amber { color:var(--amber); }
+.metric-value.cyan { color:var(--cyan); }
+.metric-value.grad {
+  background:linear-gradient(135deg,var(--accent-glow),var(--green));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.metric-label { font-size:11px; color:var(--text-dim); font-weight:500; line-height:1.4; }
+
+/* STEPS */
+.process { display:grid; gap:10px; margin:14px 0; }
+.step {
+  display:flex; gap:14px; align-items:flex-start;
+  padding:14px 18px; background:rgba(255,255,255,0.02);
+  border:1px solid var(--border); border-radius:14px;
+  transition:transform 0.2s, background 0.2s;
+}
+.step:hover { transform:translateX(4px); background:rgba(255,255,255,0.04); }
+.step-icon { font-size:22px; flex-shrink:0; margin-top:2px; }
+.step-content { flex:1; }
+.step-content strong { display:block; font-size:13.5px; font-weight:700; margin-bottom:3px; }
+.step-content span { font-size:12.5px; color:var(--text-muted); line-height:1.5; }
+
+/* COMPARISON TABLE */
+.tbl-wrap { overflow-x:auto; margin:16px 0; border-radius:16px; border:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead th {
+  background:var(--surface-alt); color:var(--text);
+  padding:14px 16px; text-align:left; font-weight:700; font-size:12px;
+  letter-spacing:0.5px; border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+tbody td {
+  padding:12px 16px; border-bottom:1px solid var(--border);
+  color:var(--text-muted); vertical-align:top;
+}
+tbody tr:last-child td { border-bottom:none; }
+tbody tr:hover { background:rgba(255,255,255,0.02); }
+td.name { color:var(--text); font-weight:600; white-space:nowrap; }
+.badge {
+  display:inline-block; padding:2px 8px; border-radius:6px;
+  font-size:11px; font-weight:600;
+}
+.badge.best { background:var(--green-soft); color:var(--green); }
+.badge.good { background:var(--accent-soft); color:var(--accent-glow); }
+.badge.warn { background:var(--amber-soft); color:var(--amber); }
+.badge.no { background:var(--rose-soft); color:var(--rose); }
+
+/* COMPARISON COLS */
+.comparison { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0; }
+@media(max-width:540px){ .comparison { grid-template-columns:1fr; } }
+.comp-col { padding:20px; border-radius:16px; border:1px solid var(--border); }
+.comp-col.old { background:var(--rose-soft); }
+.comp-col.new { background:var(--green-soft); }
+.comp-col .comp-label { font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:12px; display:block; }
+.comp-col.old .comp-label { color:var(--rose); }
+.comp-col.new .comp-label { color:var(--green); }
+.comp-col ul { list-style:none; }
+.comp-col li { font-size:12.5px; color:var(--text-muted); padding:4px 0; display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+.comp-col li::before { content:''; width:5px; height:5px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+.comp-col.old li::before { background:var(--rose); }
+.comp-col.new li::before { background:var(--green); }
+
+/* FUNNEL */
+.funnel-step {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 18px; margin-bottom:8px; border-radius:14px;
+  background:var(--surface); border:1px solid var(--border);
+  position:relative;
+}
+.funnel-step::after {
+  content:'↓'; position:absolute; bottom:-17px; left:50%; transform:translateX(-50%);
+  color:var(--text-dim); font-size:13px;
+}
+.funnel-step:last-child::after { display:none; }
+.funnel-step .f-icon { font-size:20px; flex-shrink:0; }
+.funnel-step .f-text { font-size:13.5px; font-weight:600; }
+.funnel-step .f-desc { font-size:11.5px; color:var(--text-dim); font-weight:400; display:block; }
+
+/* TIMELINE */
+.timeline { position:relative; padding-left:28px; margin:16px 0; }
+.timeline::before {
+  content:''; position:absolute; left:10px; top:4px; bottom:4px;
+  width:2px; background:linear-gradient(to bottom,var(--accent),var(--green));
+  border-radius:2px;
+}
+.tl-item { position:relative; margin-bottom:18px; }
+.tl-item:last-child { margin-bottom:0; }
+.tl-item::before {
+  content:''; position:absolute; left:-22px; top:6px;
+  width:10px; height:10px; border-radius:50%;
+  background:var(--accent); border:2px solid var(--bg);
+}
+.tl-item:last-child::before { background:var(--green); }
+.tl-day { font-size:11px; font-weight:700; color:var(--accent-glow); letter-spacing:0.5px; text-transform:uppercase; margin-bottom:4px; }
+.tl-text { font-size:13px; color:var(--text-muted); line-height:1.5; }
+
+/* BUDGET */
+.budget-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 0; border-bottom:1px solid var(--border);
+  font-size:13.5px;
+}
+.budget-row:last-child { border-bottom:none; }
+.budget-row .b-name { color:var(--text-muted); display:flex; align-items:center; gap:8px; }
+.budget-row .b-price { font-weight:700; }
+.budget-row .b-price.free { color:var(--green); }
+.budget-total {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 0 0; margin-top:4px; border-top:2px solid var(--accent);
+  font-size:16px; font-weight:800;
+}
+
+/* SECTION COLORS */
+.section-1 .section-number { background:var(--rose-soft); color:var(--rose); border:1px solid rgba(244,63,94,0.2); }
+.section-1 .card::before { background:var(--rose); }
+.section-2 .section-number { background:var(--accent-soft); color:var(--accent-glow); border:1px solid rgba(99,102,241,0.2); }
+.section-2 .card::before { background:var(--accent); }
+.section-3 .section-number { background:var(--cyan-soft); color:var(--cyan); border:1px solid rgba(6,182,212,0.2); }
+.section-3 .card::before { background:var(--cyan); }
+.section-4 .section-number { background:var(--amber-soft); color:var(--amber); border:1px solid rgba(245,158,11,0.2); }
+.section-4 .card::before { background:var(--amber); }
+.section-5 .section-number { background:var(--green-soft); color:var(--green); border:1px solid rgba(16,185,129,0.2); }
+.section-5 .card::before { background:var(--green); }
+
+/* DIVIDER */
+.divider { height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:36px 0; }
+
+/* CTA */
+.cta {
+  text-align:center; padding:40px 28px;
+  background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(16,185,129,0.06));
+  border:1px solid rgba(99,102,241,0.12); border-radius:var(--radius); margin-top:40px;
+}
+.cta h2 { font-family:'Playfair Display',serif; font-size:22px; margin-bottom:10px; }
+.cta p { color:var(--text-muted); font-size:14px; max-width:500px; margin:0 auto; }
+
+/* FOOTER */
+.footer {
+  margin-top:40px; padding:28px 0; border-top:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:16px;
+}
+.footer-left { display:flex; align-items:center; gap:14px; }
+.footer-logo {
+  width:36px; height:36px; border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--green));
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:14px; color:#fff; flex-shrink:0;
+}
+.footer-info .fi-name { font-size:13px; font-weight:700; }
+.footer-info .fi-desc { font-size:11px; color:var(--text-dim); }
+.footer-right { font-size:11px; color:var(--text-dim); text-align:right; }
+
+/* ANIM */
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.anim { animation:fadeUp 0.5s ease-out both; }
+.d1 { animation-delay:0.1s; } .d2 { animation-delay:0.15s; } .d3 { animation-delay:0.2s; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- PERSONAL HEADER -->
+<div class="personal-header anim">
+  <div class="ph-from">
+    <div class="ph-avatar">T</div>
+    <div>
+      <div class="ph-name">Тим • Zinin Corporation</div>
+      <div class="ph-role">Маркетинг & AI-системы</div>
+    </div>
+  </div>
+  <div class="ph-date">Подготовлено: февраль 2026</div>
+</div>
+
+<!-- GREETING -->
+<div class="greeting anim d1">
+  <div class="greeting-hi">Катя, привет! 👋</div>
+  <p>Ты озвучила важный вопрос — и он оказался даже серьёзнее, чем мы думали. Я провёл глубокий анализ ситуации с Telegram и нашёл <strong>конкретное решение</strong>, которое можно запустить за 2 недели при минимальном бюджете.</p>
+  <p>Ниже — полная стратегия: от того, что происходит с Telegram, до <em>пошагового плана</em> переноса твоих курсов по подологии на надёжные площадки. Я разобрал 9 платформ, 4 платёжные системы, решения по защите видео от слива — и собрал всё в один документ, чтобы тебе не пришлось разбираться самой.</p>
+  <p>Всё, что мы уже сделали в Telegram (демо-курсы по стерилизации, диагностике, сложным случаям) — <strong>не теряется</strong>. Контент переезжает на новую платформу, а мы добавляем защиту и автоворонки.</p>
+  <div class="greeting-sign">
+    С уважением, <strong>Тим</strong> — Zinin Corporation
+  </div>
+</div>
+
+<!-- WHAT'S ALREADY DONE -->
+<div class="done-card anim d2">
+  <h3>✅ Что я уже сделал для тебя</h3>
+  <div class="done-list">
+    <div class="done-item">
+      <div class="done-check">✓</div>
+      <div>
+        <span class="d-title">Демо-курсы в Telegram Mini App</span>
+        <span class="d-desc">Три модуля: стерилизация и безопасность, диагностика проблем, сложные состояния стоп. С тестами, оплатой и сертификатами.</span>
+      </div>
+    </div>
+    <div class="done-item">
+      <div class="done-check">✓</div>
+      <div>
+        <span class="d-title">Анализ рисков блокировки Telegram</span>
+        <span class="d-desc">Разбор текущей ситуации с Роскомнадзором, прогнозы, данные по VPN-использованию в твоей целевой аудитории.</span>
+      </div>
+    </div>
+    <div class="done-item">
+      <div class="done-check">✓</div>
+      <div>
+        <span class="d-title">Исследование альтернативных платформ</span>
+        <span class="d-desc">Проанализированы 9 курсовых платформ, 4 способа защиты видео, 3 бот-платформы и 2 email-сервиса. Всё — ниже.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HERO -->
+<div class="hero anim">
+  <div class="hero-badge">⚠️ Срочная стратегия</div>
+  <h1>Telegram блокируют.<br>Куда переносить курсы?</h1>
+  <p>Полный план действий для переноса курсов по подологии на надёжные площадки — с защитой контента, автоворонками и бюджетом от 300 ₽/мес</p>
+</div>
+
+<!-- ALERT -->
+<div class="alert-box anim d1">
+  <div class="alert-icon">🚨</div>
+  <div>
+    <p><strong>С 10 февраля 2026 года Роскомнадзор замедляет Telegram.</strong> По прогнозам — полная блокировка возможна с 1 апреля. 89% россиян уже ощущают нестабильность. Только 36% аудитории используют VPN — а среди мастеров маникюра и педикюра этот процент ещё ниже. Действовать нужно сейчас.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 1: TG Mini Apps ===== -->
+<div class="section section-1 anim d1">
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <div class="section-title">Telegram Mini Apps — временная мера, не решение</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">📱</span> Что мы уже построили внутри Telegram</h3>
+    <p>Твои демо-курсы работают как Mini App — полноценное веб-приложение внутри мессенджера. Конверсия в покупку через Mini Apps выше обычных ботов на 35%. Конструкторы вроде Unitee.Space позволяют масштабировать это за часы.</p>
+  </div>
+
+  <div class="hl rose">
+    <strong>Критический факт:</strong> Mini Apps полностью зависят от доступности Telegram. Мессенджер заблокирован = твои курсы недоступны ученикам. Всё, что мы построили, работает только пока работает Telegram.
+  </div>
+
+  <div class="card-alt">
+    <h3><span class="icon">💳</span> Оплата: Tribute vs Stars</h3>
+    <div class="comparison">
+      <div class="comp-col new">
+        <span class="comp-label">✅ Tribute (лучше)</span>
+        <ul>
+          <li>Комиссия 10%</li>
+          <li>Карты МИР и рубли</li>
+          <li>Выплаты на карту 2 раза/мес</li>
+          <li>Автоматическое открытие доступа</li>
+          <li>Работает с каналами/группами</li>
+        </ul>
+      </div>
+      <div class="comp-col old">
+        <span class="comp-label">❌ Telegram Stars</span>
+        <ul>
+          <li>Потери при конвертации 8–15%</li>
+          <li>Stars → Toncoin → P2P → рубли</li>
+          <li>Ожидание вывода 21 день</li>
+          <li>Сложный путь для аудитории</li>
+          <li>Обязательно для Mini Apps</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl amber">
+    <strong>Моя рекомендация:</strong> Пока Telegram ещё работает — используй Tribute для монетизации канала. Но параллельно строим площадку вне Telegram. И самое важное — <strong>начинай собирать email и телефоны прямо сейчас</strong>, пока есть доступ к аудитории.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 2: VK ===== -->
+<div class="section section-2 anim d2">
+  <div class="section-header">
+    <div class="section-number">2</div>
+    <div class="section-title">ВКонтакте — главная площадка для подолога</div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><span class="metric-value accent">92,5 млн</span><span class="metric-label">Пользователей VK</span></div>
+    <div class="metric"><span class="metric-value green">1,7 млрд</span><span class="metric-label">Просмотров клипов/сутки</span></div>
+    <div class="metric"><span class="metric-value amber">2,23 млрд ₽</span><span class="metric-label">Выручка VK Donut 2025</span></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🎬</span> VK Клипы — бесплатный трафик для твоей ниши</h3>
+    <p>Охват клипов в 2× выше постов (30,8% vs ~15%). Категории «образование» и «красота» — в топе по вовлечённости. Короткие ролики по 10-15 секунд с лайфхаками по уходу за стопами, демонстрацией работы с проблемными ногтями — прямой путь к мастерам, которым нужны твои знания.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🍩</span> VK Donut — подписка на контент</h3>
+    <p>Монетизация через подписку от 50 до 10 000 ₽/мес. Комиссия VK — 10%. Ограничение: только подписная модель, разовую продажу курса не сделать. Используй для мини-контента и прогрева (например, еженедельные мини-разборы случаев), а полный курс — через внешнюю платформу.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🤖</span> Senler — автоворонки в VK</h3>
+    <p>Чат-бот с автоцепочками, сегментацией и интеграцией с VK Pay. <strong>От 300 ₽/мес</strong> (2 000 сообщений/сутки). Все функции доступны на любом тарифе. Именно через него мы будем вести учеников от первого касания до покупки курса.</p>
+  </div>
+
+  <div class="hl accent">
+    <strong>Схема, которую я предлагаю:</strong> VK Клипы (короткие видео с практикой) → Сообщество → Senler-бот (лид-магнит) → Автоворонка (прогрев) → Продажа курса на платформе. Запускается за 3-4 дня.
+  </div>
+
+  <div class="card-alt">
+    <h3><span class="icon">💬</span> Мессенджер Max — что с ним?</h3>
+    <p>85 млн пользователей, предустановка на все новые смартфоны. Каналы и боты уже работают. <strong>Но:</strong> платформа «сырая» (20% негативных отзывов), экосистемы для инфобизнеса нет. Мой совет: заведи канал «на вырост», но не делай ставку — рано.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 3: PLATFORMS ===== -->
+<div class="section section-3 anim d2">
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <div class="section-title">Платформы для курсов — что подходит тебе</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🏆</span> Я изучил 9 платформ при бюджете до 5 000 ₽/мес</h3>
+    <p>iSpring и Teachbase — корпоративные LMS от 97 500 ₽/год, это не твоя история. Stepik — маркетплейс, не для бьюти-ниши. Для одного эксперта-подолога подходят 4 платформы:</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Платформа</th>
+          <th>Цена</th>
+          <th>Автоворонки</th>
+          <th>Защита видео</th>
+          <th>Оплата</th>
+          <th>Для кого</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Skillspace</td>
+          <td><span class="badge best">0 ₽ старт</span><br>3 490 ₽/мес</td>
+          <td>Авто-апселлы</td>
+          <td>Водяные знаки</td>
+          <td>2,8% + касса</td>
+          <td>Первый курс</td>
+        </tr>
+        <tr>
+          <td class="name">Антитренинги</td>
+          <td>1 781 ₽/мес<br><span style="font-size:11px;color:var(--text-dim)">за полгода</span></td>
+          <td>Через интеграции</td>
+          <td>Защита от скачивания</td>
+          <td>AT PAY</td>
+          <td>Рост школы</td>
+        </tr>
+        <tr>
+          <td class="name">Zenclass</td>
+          <td>2 160 ₽/мес<br><span style="font-size:11px;color:var(--text-dim)">за год</span></td>
+          <td><span class="badge no">Нет</span></td>
+          <td>Базовая</td>
+          <td>1,5–3,5%</td>
+          <td>Минимум затрат</td>
+        </tr>
+        <tr>
+          <td class="name">GetCourse</td>
+          <td>3 800 ₽/мес<br><span style="font-size:11px;color:var(--text-dim)">за полгода</span></td>
+          <td><span class="badge best">Мощные</span></td>
+          <td>DRM + знаки</td>
+          <td>3,5%</td>
+          <td>Масштаб</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="process">
+    <div class="step">
+      <div class="step-icon">⭐</div>
+      <div class="step-content">
+        <strong>Skillspace — мой выбор для твоего старта</strong>
+        <span>Бесплатно: 1 курс, 10 учеников, бессрочно. Можно загрузить первый модуль уже сегодня. Встроенная касса (2,8%). Безлимитное хранилище видео. Водяные знаки с ID ученика. Конструктор лендингов проще Tilda.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon">🚀</div>
+      <div class="step-content">
+        <strong>Антитренинги — когда пойдут продажи</strong>
+        <span>Плата только за активных учеников (неактивные 30+ дней не считаются). ИИ-помощник создаёт тесты из видео — тебе не нужно писать вопросы вручную. Геймификация. Мобильное приложение с push. 11 500+ школ на платформе.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon">💰</div>
+      <div class="step-content">
+        <strong>Zenclass — если нужен минимальный бюджет</strong>
+        <span>Безлимит по курсам и ученикам. Эквайринг Тинькофф от 1,5%. Работает с самозанятыми. Запуск за 1 час. Минус — нет CRM и автоворонок.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon">🏗️</div>
+      <div class="step-content">
+        <strong>GetCourse — когда оборот от 50 000 ₽/мес</strong>
+        <span>Мощнейшие автоворонки и CRM. Полная интеграция с VK. Но сложный интерфейс — на освоение 2-3 недели. Минимум 22 800 ₽ единоразово (6 мес). Это на потом.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 4: PROTECTION ===== -->
+<div class="section section-4 anim d2">
+  <div class="section-header">
+    <div class="section-number">4</div>
+    <div class="section-title">Защита контента — чтобы курсы не сливали</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🔐</span> Kinescope — DRM-защита от 500 ₽/мес</h3>
+    <p>Лучшее решение для небольших школ. DRM-шифрование (Widevine + FairPlay) блокирует запись экрана на iOS/macOS и большинстве программ Windows. Динамические водяные знаки с email ученика. Токенизированные ссылки — видео нельзя расшарить.</p>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><span class="metric-value green">100 мин</span><span class="metric-label">Бесплатный тариф</span></div>
+    <div class="metric"><span class="metric-value amber">~3 000 ₽</span><span class="metric-label">10ч видео + 100 учеников</span></div>
+    <div class="metric"><span class="metric-value accent">DRM L1</span><span class="metric-label">Уровень защиты Netflix</span></div>
+  </div>
+
+  <div class="card-alt">
+    <h3><span class="icon">🛡️</span> 4 уровня защиты — от простого к серьёзному</h3>
+    <div class="process">
+      <div class="step">
+        <div class="step-icon">1️⃣</div>
+        <div class="step-content">
+          <strong>Авторизация + ограничение доступа</strong>
+          <span>Контент только для оплативших. Ограничение по времени (90/180 дней). Есть на всех платформах.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">2️⃣</div>
+        <div class="step-content">
+          <strong>Водяные знаки с данными ученика</strong>
+          <span>Видимая метка с email/именем на видео. Психологический барьер для слива. Skillspace, Kinescope.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">3️⃣</div>
+        <div class="step-content">
+          <strong>DRM-шифрование (Kinescope)</strong>
+          <span>Widevine + FairPlay блокируют запись экрана на большинстве устройств. Чёрный экран при скриншоте.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">4️⃣</div>
+        <div class="step-content">
+          <strong>Forensic-водяные знаки</strong>
+          <span>Невидимые метки в видеопотоке. Сохраняются даже при записи камерой. Идентифицируют источник утечки.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl green">
+    <strong>Важно для твоей ниши:</strong> сообщество мастеров подологии — компактное, все друг друга знают. Утечка быстро станет известна. Видимый водяной знак с email — мощнейший барьер. Людям не хочется сливать видео со своими данными. Плюс DRM от Kinescope — и курс защищён на уровне Нетологии и Skillbox.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 5: FUNNEL + PLAN ===== -->
+<div class="section section-5 anim d3">
+  <div class="section-header">
+    <div class="section-number">5</div>
+    <div class="section-title">Автоворонка и план — что делаем дальше</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">🔄</span> Воронка продаж без лайвов и вебинаров</h3>
+    <p style="color:var(--text-muted);font-size:13px;margin-bottom:16px;">Тебе не нужно проводить прямые эфиры. Вся система работает на автомате после первоначальной настройки:</p>
+    <div style="margin:14px 0">
+      <div class="funnel-step">
+        <div class="f-icon">🎬</div>
+        <div><span class="f-text">VK Клипы / Таргет</span><span class="f-desc">Короткие видео с практикой + реклама от 1 000 ₽ на мастеров маникюра/педикюра</span></div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-icon">🎁</div>
+        <div><span class="f-text">Лид-магнит в Senler-боте</span><span class="f-desc">PDF «5 ошибок при работе со сложными стопами» или бесплатный видеоурок по диагностике</span></div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-icon">📧</div>
+        <div><span class="f-text">Автоцепочка: Senler + Email</span><span class="f-desc">5-7 сообщений за 7-10 дней с кейсами и пользой. Дублирование на почту через Unisender</span></div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-icon">💰</div>
+        <div><span class="f-text">Мини-курс 990–1 990 ₽</span><span class="f-desc">Модуль по стерилизации/безопасности на Skillspace — низкий порог входа</span></div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-icon">🎓</div>
+        <div><span class="f-text">Основной курс 5 000–15 000 ₽</span><span class="f-desc">Полная программа: диагностика + сложные случаи + сертификат</span></div>
+      </div>
+      <div class="funnel-step">
+        <div class="f-icon">⭐</div>
+        <div><span class="f-text">Допродажа</span><span class="f-desc">Менторство, разборы реальных кейсов, закрытый чат для учеников</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">📅</span> План на 2 недели — что я предлагаю сделать</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-day">Дни 1–2</div>
+        <div class="tl-text">Создать сообщество VK для подологов, подключить Senler (бесплатно), начать публикацию VK Клипов с твоими видео</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-day">Дни 3–4</div>
+        <div class="tl-text">Зарегистрироваться на Skillspace (бесплатно) или Антитренинги (14-дневный тест), перенести первый модуль курса</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-day">Дни 5–6</div>
+        <div class="tl-text">Подключить Kinescope (бесплатно, 100 мин), настроить водяные знаки. Создать Unisender, подготовить формы сбора email</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-day">Дни 7–10</div>
+        <div class="tl-text">Написать лид-магнит по подологии, 5 сообщений автоцепочки Senler, 5 email-писем в Unisender</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-day">Дни 11–14</div>
+        <div class="tl-text">Запустить тестовую рекламу VK (1 000 ₽). В Telegram-канале — призыв подписаться на VK и оставить email. Готово!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">💸</span> Бюджет — сколько это стоит</h3>
+    <div class="comparison">
+      <div class="comp-col new" style="background:var(--green-soft);">
+        <span class="comp-label">Минимальный старт</span>
+        <div class="budget-row"><span class="b-name">🤖 Senler</span><span class="b-price">300 ₽/мес</span></div>
+        <div class="budget-row"><span class="b-name">🎓 Skillspace</span><span class="b-price free">0 ₽</span></div>
+        <div class="budget-row"><span class="b-name">🔐 Kinescope</span><span class="b-price free">0 ₽</span></div>
+        <div class="budget-row"><span class="b-name">📧 Unisender</span><span class="b-price free">0 ₽</span></div>
+        <div class="budget-total"><span>Итого</span><span style="color:var(--green)">300 ₽/мес</span></div>
+      </div>
+      <div class="comp-col new" style="background:var(--accent-soft);">
+        <span class="comp-label" style="color:var(--accent-glow)">При масштабировании</span>
+        <div class="budget-row"><span class="b-name">🤖 Senler</span><span class="b-price">300 ₽/мес</span></div>
+        <div class="budget-row"><span class="b-name">🎓 Антитренинги</span><span class="b-price">1 781 ₽/мес</span></div>
+        <div class="budget-row"><span class="b-name">🔐 Kinescope</span><span class="b-price">500 ₽/мес</span></div>
+        <div class="budget-row"><span class="b-name">📧 Unisender</span><span class="b-price">700 ₽/мес</span></div>
+        <div class="budget-total"><span>Итого</span><span style="color:var(--accent-glow)">~3 300 ₽/мес</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl green" style="text-align:center; font-size:15px; padding:24px;">
+    <strong>Главный принцип:</strong><br>
+    Email-база — единственный актив, который не зависит от платформ.<br>
+    Начинай собирать адреса учеников прямо сегодня.
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta anim d3">
+  <h2>Катя, я готов запустить это вместе с тобой</h2>
+  <p>Вся инфраструктура — от VK-сообщества до загрузки курсов на платформу — ставится за 2 недели. Контент, который мы уже создали, переезжает на новую площадку. Мне нужно только твоё «да» — и стартуем.</p>
+  <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06);">
+    <p style="font-size:13px; color:var(--text-dim); margin:0;">Все вопросы — напиши мне, обсудим детали и выберем оптимальный вариант под твои задачи.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer anim d3">
+  <div class="footer-left">
+    <div class="footer-logo">Z</div>
+    <div class="footer-info">
+      <div class="fi-name">Тим • Zinin Corporation</div>
+      <div class="fi-desc">Маркетинг, AI-системы, Web3</div>
+    </div>
+  </div>
+  <div class="footer-right">
+    Документ подготовлен персонально<br>для Кати Басковой • Февраль 2026
+  </div>
+</div>
+
+</div>
+</body>
+</html>
