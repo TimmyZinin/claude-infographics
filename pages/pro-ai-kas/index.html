@@ -782,7 +782,11 @@ body {
   }
   .topics-grid { grid-template-columns: 1fr; }
   .speakers-grid { grid-template-columns: 1fr 1fr; }
-  .comic-pow { display: none; }
+  .comic-pow { font-size: 1.5rem !important; }
+  .comic-pow.pow1 { top: 3%; left: 3%; }
+  .comic-pow.pow2 { top: 5%; right: 3%; }
+  .comic-pow.pow3 { bottom: 12%; left: 3%; }
+  .comic-pow.pow4 { bottom: 8%; right: 3%; }
   .vibe-icons { gap: 1rem; }
   .vibe-icon { width: 60px; height: 60px; font-size: 1.5rem; }
   .starburst.top-right { top: 1rem; right: 1rem; width: 90px; height: 90px; }
@@ -792,6 +796,33 @@ body {
 
 @media (max-width: 480px) {
   .speakers-grid { grid-template-columns: 1fr; }
+}
+
+.ai-flip {
+  display: inline-block;
+  color: var(--pop-yellow);
+  text-shadow:
+    6px 6px 0 var(--pop-black),
+    -2px -2px 0 var(--pop-black),
+    2px -2px 0 var(--pop-black),
+    -2px 2px 0 var(--pop-black);
+  animation: aiGlow 1.5s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.ai-flip.flip {
+  animation: aiFlipIn 0.4s ease-out;
+}
+
+@keyframes aiGlow {
+  0%, 100% { filter: brightness(1); transform: scale(1); }
+  50% { filter: brightness(1.3) drop-shadow(0 0 20px rgba(255,225,32,0.6)); transform: scale(1.05); }
+}
+
+@keyframes aiFlipIn {
+  0% { transform: scaleY(0) rotateX(90deg); opacity: 0; }
+  60% { transform: scaleY(1.1) rotateX(-5deg); opacity: 1; }
+  100% { transform: scaleY(1) rotateX(0); opacity: 1; }
 }
 
 .grain {
@@ -824,7 +855,7 @@ body {
   </div>
 
   <div class="hero-badge comic-border">КАШ, ТУРЦИЯ</div>
-  <h1 class="hero-title">ПРО ИИ</h1>
+  <h1 class="hero-title">ПРО <span id="ai-flip" class="ai-flip">ИИ</span></h1>
   <p class="hero-subtitle">Про ИИ, про жизнь, про будущее</p>
   <div class="hero-date comic-border">22 ФЕВРАЛЯ 2026 · ВОСКРЕСЕНЬЕ</div>
   <p class="hero-location">Kas — самое красивое место для разговоров о будущем</p>
@@ -1068,6 +1099,17 @@ body {
 </footer>
 
 <script>
+// AI/ИИ flip animation
+const aiEl = document.getElementById('ai-flip');
+const labels = ['ИИ', 'AI'];
+let aiIdx = 0;
+setInterval(() => {
+  aiIdx = (aiIdx + 1) % labels.length;
+  aiEl.classList.add('flip');
+  setTimeout(() => { aiEl.textContent = labels[aiIdx]; }, 150);
+  setTimeout(() => { aiEl.classList.remove('flip'); }, 400);
+}, 2000);
+
 document.addEventListener('mousemove', (e) => {
   const pows = document.querySelectorAll('.comic-pow');
   const x = (e.clientX / window.innerWidth - 0.5) * 20;
