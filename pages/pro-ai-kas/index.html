@@ -549,6 +549,94 @@ body {
   text-align: center;
 }
 
+/* ===== LOCATION ===== */
+.location {
+  background: var(--pop-white);
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.location::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,180,255,0.05) 2px, transparent 2px);
+  background-size: 18px 18px;
+}
+
+.location-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.location-info {
+  background: var(--pop-black);
+  color: var(--pop-white);
+  padding: 2rem 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.location-name {
+  font-family: 'Bangers', cursive;
+  font-size: 2rem;
+  color: var(--pop-yellow);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.location-details {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.location-details strong {
+  color: var(--pop-yellow);
+}
+
+.location-photos {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 1rem;
+}
+
+.location-photos img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  filter: contrast(1.05);
+}
+
+.location-photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--pop-black);
+  color: var(--pop-yellow);
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  padding: 0.3rem 0.6rem;
+  text-align: center;
+}
+
+.location-photo-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .location-photos {
+    grid-template-columns: 1fr;
+  }
+  .location-photos img {
+    height: 200px;
+  }
+}
+
 /* ===== CTA ===== */
 .cta {
   background: linear-gradient(135deg, var(--pop-pink) 0%, var(--pop-purple) 100%);
@@ -931,6 +1019,34 @@ body {
   </div>
 </section>
 
+<!-- ===== LOCATION ===== -->
+<section class="location">
+  <h2 class="section-title" style="color: var(--pop-blue);">КАК НАС НАЙТИ?</h2>
+  <div class="location-content">
+    <div class="location-info comic-border-thick">
+      <div class="location-name">NIRVANA APART</div>
+      <div class="location-details">
+        <strong>Дальнее здание</strong> · Самый верхний этаж · <strong>Апартаменты #7</strong><br>
+        Поднимайтесь по лестнице до самого верха, дверь #7
+      </div>
+    </div>
+    <div class="location-photos">
+      <div class="location-photo-wrap comic-border">
+        <img src="img/nirvana-building.jpeg" alt="Nirvana Apart - здание" loading="lazy">
+        <div class="location-photo-caption">Дальнее здание, наверх</div>
+      </div>
+      <div class="location-photo-wrap comic-border">
+        <img src="img/nirvana-walkway.jpeg" alt="Проход к зданию" loading="lazy">
+        <div class="location-photo-caption">Проход к зданию</div>
+      </div>
+      <div class="location-photo-wrap comic-border">
+        <img src="img/nirvana-door7.jpeg" alt="Дверь #7" loading="lazy">
+        <div class="location-photo-caption">Дверь #7 — вам сюда!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== CTA ===== -->
 <section class="cta">
   <h2 class="cta-title">ХОЧЕШЬ ПРИЙТИ?</h2>
@@ -971,7 +1087,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.topic-card, .gallery-item, .speaker-card').forEach(el => {
+document.querySelectorAll('.topic-card, .gallery-item, .speaker-card, .location-photo-wrap, .location-info').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px) rotate(-2deg)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
