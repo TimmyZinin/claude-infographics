@@ -488,6 +488,114 @@ body {
 .vibe-icon:nth-child(4) { background: var(--pop-green); }
 .vibe-icon:nth-child(5) { background: var(--pop-orange); }
 
+/* ===== FAKE REVIEWS ===== */
+.reviews {
+  background: var(--pop-green);
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px);
+  background-size: 12px 12px;
+}
+
+.reviews-subtitle {
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: var(--pop-black);
+  opacity: 0.7;
+  margin-top: -1.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.review-card {
+  background: var(--pop-white);
+  padding: 2rem 1.8rem 1.5rem;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover { transform: translateY(-6px) rotate(-1deg); }
+
+.review-card::before {
+  content: '\201C';
+  font-family: 'Bangers', cursive;
+  font-size: 5rem;
+  color: var(--pop-pink);
+  opacity: 0.2;
+  position: absolute;
+  top: -0.5rem;
+  left: 0.8rem;
+  line-height: 1;
+}
+
+.review-text {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--pop-black);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid var(--pop-black);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.review-author-name {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1rem;
+  color: var(--pop-black);
+}
+
+.review-author-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.8rem;
+  color: var(--pop-pink);
+  font-weight: 700;
+}
+
+.review-stars {
+  color: var(--pop-yellow);
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  text-shadow: 1px 1px 0 var(--pop-black);
+}
+
 /* ===== KAŞ GALLERY ===== */
 .kas-gallery {
   background: var(--pop-orange);
@@ -1027,6 +1135,47 @@ body {
   </div>
 </section>
 
+<!-- ===== FAKE REVIEWS ===== -->
+<section class="reviews">
+  <h2 class="section-title" style="color: var(--pop-black); text-shadow: 3px 3px 0 var(--pop-yellow);">ОТЗЫВЫ, КОТОРЫХ МЫ НЕ ПОЛУЧАЛИ</h2>
+  <p class="reviews-subtitle">* мероприятие ещё не произошло, но отзывы уже есть</p>
+  <div class="reviews-grid">
+    <div class="review-card comic-border-thick">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">Я вообще не понимаю, что происходит, блять. Почему они собрались в Каше без меня? Мы в OpenAI делаем AGI, а тут какие-то ребята на берегу моря обсуждают ИИ и им весело. Это нечестно.</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background: var(--pop-blue);">&#x1F468;&#x200D;&#x1F4BC;</div>
+        <div>
+          <div class="review-author-name">Sam Altman</div>
+          <div class="review-author-title">CEO OpenAI, не приглашён</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card comic-border-thick">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">Если бы у меня был Anthropic, я бы, конечно, сделал Claude ещё раньше. Но у меня не было Anthropic. У меня была Полосатый рейс и 33 квадратных метра. Зато какие фильмы! А вы тут с нейросетями своими...</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background: var(--pop-yellow);">&#x1F60A;</div>
+        <div>
+          <div class="review-author-name">Евгений Леонов</div>
+          <div class="review-author-title">Народный артист, путешественник во времени</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card comic-border-thick">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">Я пришла на мероприятие ПРО ИИ, а мне дали кашу. Обычную. Гречневую. С маслом. И знаете что? Это был лучший доклад про нейросети в моей жизни. Пять звёзд, кашу доела.</p>
+      <div class="review-author">
+        <div class="review-avatar" style="background: var(--pop-orange);">&#x1F469;&#x200D;&#x1F373;</div>
+        <div>
+          <div class="review-author-name">Бабушка из Каша</div>
+          <div class="review-author-title">Шеф-повар, эксперт по кашам</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== KAŞ GALLERY ===== -->
 <section class="kas-gallery">
   <h2 class="section-title" style="color: var(--pop-white);">КАШ — ЭТО МАГИЯ</h2>
@@ -1129,7 +1278,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.topic-card, .gallery-item, .speaker-card, .location-photo-wrap, .location-info').forEach(el => {
+document.querySelectorAll('.topic-card, .gallery-item, .speaker-card, .location-photo-wrap, .location-info, .review-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px) rotate(-2deg)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
