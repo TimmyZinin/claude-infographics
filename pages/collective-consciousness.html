@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коллективное сознание и будущее человечества</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;600;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5EDE0; --warm: #FAF6EF; --charcoal: #3A3228;
+  --terra: #C2573A; --terra-deep: #9E3A22; --terra-lt: #E8967E;
+  --moss: #3B6B4A; --moss-lt: #5A9A6E;
+  --amber: #D4A72C; --amber-lt: #F0D98A;
+  --burg: #7B2340; --gray: #7A7068; --gray-lt: #B0A89E;
+  --sand: #EDE3D3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{font-family:'Nunito',sans-serif;color:var(--charcoal);background:#2E2821}
+
+.slide{width:100%;min-height:100vh;scroll-snap-align:start;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,6vw,6rem)}
+.slide-inner{max-width:1100px;margin:0 auto;width:100%}
+
+h1,.h1{font-family:'Cormorant Garamond',serif;font-weight:700;line-height:1.05}
+h2,.h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.4rem);line-height:1.15;margin-bottom:1rem}
+h3,.h3{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(1rem,2vw,1.3rem)}
+.sub{font-size:.85rem;color:var(--gray);margin-bottom:1.5rem}
+.quote{font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.35}
+.handwritten{font-family:'Caveat',cursive}
+.accent-bar{position:absolute;left:0;top:0;width:100%;height:5px}
+
+/* Card system */
+.cards{display:grid;gap:1.2rem;margin-top:1rem}
+.cards-2{grid-template-columns:1fr 1fr}
+.cards-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:768px){.cards-2,.cards-3{grid-template-columns:1fr}}
+.card{border-radius:8px;padding:1.5rem;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.card.terra::before{background:var(--terra)}.card.moss::before{background:var(--moss)}
+.card.amber::before{background:var(--amber)}.card.burg::before{background:var(--burg)}
+
+.stat{font-family:'Cormorant Garamond',serif;font-weight:700;line-height:1}
+
+/* Timeline */
+.timeline{display:flex;gap:0;margin:2rem 0;position:relative}
+.timeline::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:var(--gray-lt);transform:translateY(-50%)}
+.tl-node{flex:1;text-align:center;position:relative;padding:3.5rem 0.3rem 0}
+.tl-dot{width:16px;height:16px;border-radius:50%;position:absolute;top:calc(50% - 8px);left:50%;transform:translateX(-50%);z-index:1}
+
+/* Progress bars */
+.prog-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.prog-label{width:80px;font-weight:700;font-size:.85rem;text-align:right;flex-shrink:0}
+.prog-track{flex:1;height:22px;background:var(--sand);border-radius:4px;overflow:hidden;position:relative}
+.prog-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:.7rem;color:var(--charcoal)}
+
+/* Scenarios */
+.scenario{border-radius:8px;padding:1.5rem;color:#fff;display:flex;flex-direction:column}
+.scenario .prob{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:2rem}
+
+/* Dot grid */
+.grid-panel{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+@media(max-width:700px){.grid-panel{grid-template-columns:1fr}}
+.dot-grid{display:grid;grid-template-columns:repeat(50,1fr);gap:1px;aspect-ratio:1;border-radius:6px;overflow:hidden;background:var(--warm)}
+.dot-grid .d{aspect-ratio:1;border-radius:1px}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:.3rem .8rem;margin-top:.5rem;font-size:.72rem;color:var(--gray)}
+.leg{display:flex;align-items:center;gap:.3rem}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.leg strong{color:var(--charcoal)}
+
+/* Table */
+table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.85rem}
+th{background:var(--terra);color:#fff;padding:.5rem .7rem;text-align:left;font-weight:600}
+td{padding:.45rem .7rem;border-bottom:1px solid var(--sand)}
+tr:nth-child(even) td{background:var(--warm)}
+
+/* Insight bar */
+.insight{background:var(--charcoal);color:var(--cream);padding:.8rem 1.2rem;border-radius:6px;font-family:'Cormorant Garamond',serif;font-style:italic;text-align:center;font-size:.95rem;margin-top:1rem}
+
+/* Flow */
+.flow{display:flex;gap:0;margin:1.5rem 0;flex-wrap:wrap}
+.flow-block{flex:1;min-width:120px;padding:1rem;text-align:center;color:#fff}
+.flow-block h3{color:#fff;font-size:1.2rem}
+.flow-arrow{display:flex;align-items:center;font-size:1.5rem;color:var(--gray);padding:0 .3rem}
+
+/* Risks */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1rem}
+@media(max-width:600px){.risk-grid{grid-template-columns:1fr}}
+.risk-card{padding:1rem;border-radius:6px;border:1px solid rgba(255,255,255,.1)}
+.risk-card h4{margin-bottom:.3rem;font-family:'Cormorant Garamond',serif}
+.risk-card p{font-size:.8rem;opacity:.85}
+.severity-bar{height:4px;border-radius:2px;margin-top:.5rem;background:rgba(255,255,255,.1)}
+.severity-fill{height:100%;border-radius:2px}
+
+/* Nav dots */
+.nav{position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:99}
+.nav a{width:8px;height:8px;border-radius:50%;background:var(--gray-lt);opacity:.5;transition:.2s}
+.nav a:hover,.nav a.active{opacity:1;background:var(--terra);transform:scale(1.3)}
+
+/* Noise overlay */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+/* Decorative circles */
+.deco{position:absolute;border-radius:50%;pointer-events:none}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav" id="nav"></nav>
+
+<!-- S1: TITLE -->
+<section class="slide" id="s1" style="background:var(--charcoal)">
+  <div class="deco" style="width:400px;height:400px;left:-100px;top:-50px;background:var(--terra);opacity:.12"></div>
+  <div class="deco" style="width:500px;height:500px;right:-150px;bottom:-100px;background:var(--moss);opacity:.1"></div>
+  <div class="deco" style="width:300px;height:300px;left:30%;top:-80px;background:var(--amber);opacity:.08"></div>
+  <div class="slide-inner">
+    <h1 style="font-size:clamp(2.5rem,7vw,5rem);color:var(--cream)">КОЛЛЕКТИВНОЕ<br>СОЗНАНИЕ</h1>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3vw,1.8rem);color:var(--terra-lt);font-style:italic;margin-top:.3rem">и будущее человечества</p>
+    <p style="color:var(--gray-lt);font-size:.85rem;margin-top:1.5rem">Глубокое исследование · 2026</p>
+    <p style="color:var(--gray-lt);font-size:.8rem;margin-top:3rem">Zinin Corporation</p>
+  </div>
+</section>
+
+<!-- S2: TOC -->
+<section class="slide" id="s2" style="background:var(--cream)">
+  <div class="accent-bar" style="background:var(--terra)"></div>
+  <div class="slide-inner">
+    <h2>Содержание исследования</h2>
+    <div style="columns:2;column-gap:2rem;margin-top:1rem" id="toc"></div>
+  </div>
+</section>
+
+<!-- S3: CI DEFINITION -->
+<section class="slide" id="s3" style="background:var(--cream)">
+  <div class="slide-inner" style="display:grid;grid-template-columns:42% 1fr;gap:2rem">
+    <div style="background:var(--moss);border-radius:10px;padding:2rem;color:#fff;display:flex;flex-direction:column;justify-content:center">
+      <div style="font-size:2.5rem;margin-bottom:1rem">🧠</div>
+      <h2 style="color:#fff;font-size:clamp(1.3rem,3vw,1.8rem)">Что такое коллективный интеллект?</h2>
+      <p style="margin-top:1rem;font-style:italic;opacity:.8;font-size:.9rem">Эмерджентная способность групп решать задачи эффективнее, чем отдельные индивиды.</p>
+    </div>
+    <div>
+      <div class="stat" style="font-size:clamp(2rem,5vw,3.2rem);color:var(--terra)">$5.07B</div>
+      <p style="color:var(--gray);margin-bottom:1.2rem">рынок платформ CI в 2023 году</p>
+      <div class="stat" style="font-size:clamp(2rem,5vw,3.2rem);color:var(--moss)">$29.2B</div>
+      <p style="color:var(--gray);margin-bottom:1.2rem">прогноз к 2030 году (CAGR 28.4%)</p>
+      <hr style="border:none;height:1px;background:var(--gray-lt);margin:1rem 0">
+      <p style="font-size:.9rem">MIT Center for Collective Intelligence исследует, как группы людей и компьютеров формируют распределённые интеллектуальные системы.</p>
+      <p style="font-size:.75rem;color:var(--gray-lt);margin-top:1rem">Источник: MIT CCI, Grand View Research</p>
+    </div>
+  </div>
+</section>
+
+<!-- S4: RESEARCHERS -->
+<section class="slide" id="s4" style="background:var(--warm)">
+  <div class="accent-bar" style="background:var(--amber)"></div>
+  <div class="slide-inner">
+    <h2>Архитекторы идеи коллективного разума</h2>
+    <div id="researchers"></div>
+  </div>
+</section>
+
+<!-- S5: MESSENGERS -->
+<section class="slide" id="s5" style="background:var(--charcoal)">
+  <div class="deco" style="width:600px;height:600px;right:-200px;top:-100px;background:var(--terra);opacity:.07"></div>
+  <div class="slide-inner">
+    <div style="font-size:2rem;margin-bottom:.5rem">🌐</div>
+    <h2 style="color:var(--cream)">Мессенджеры как нейронные сети общества</h2>
+    <div id="neurons" style="margin:1.5rem 0"></div>
+    <p class="quote" style="color:var(--gray-lt);font-size:.85rem;margin-top:1.5rem">«Всемирная паутина напоминает организацию мозга, где веб-страницы играют роль нейронов, а гиперссылки — роль синапсов.» — Ф. Хейлиген</p>
+  </div>
+</section>
+
+<!-- S6: JUNG & NOOSPHERE -->
+<section class="slide" id="s6" style="background:var(--cream)">
+  <div style="position:absolute;top:0;left:0;right:0;height:100px;background:var(--burg)"></div>
+  <div class="slide-inner" style="position:relative;z-index:1">
+    <h2 style="color:#fff;margin-bottom:1.5rem">Юнг, мемы и ноосфера</h2>
+    <div class="cards cards-2">
+      <div class="card burg" style="background:var(--warm)">
+        <h3 style="color:var(--burg)">Коллективное бессознательное</h3>
+        <p style="margin-top:.7rem;font-size:.9rem;color:var(--gray)">Юнг описал слой психики, содержащий архетипы — общие для человечества паттерны. Интернет-мемы (по Докинзу) — культурные единицы, формирующие цифровое коллективное бессознательное: общий слой паттернов, доступный каждому подключённому.</p>
+      </div>
+      <div class="card amber" style="background:var(--warm)">
+        <h3 style="color:var(--amber)">Ноосфера Тейяра де Шардена</h3>
+        <p style="margin-top:.7rem;font-size:.9rem;color:var(--gray)">В 1950-х предвидел «ноосферу» — сферу разума, охватывающую Землю. Интернет — технологическая реализация ноосферы: слой мысли, обволакивающий планету. Каждый пользователь — нейрон планетарного мозга.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S7: TIMELINE -->
+<section class="slide" id="s7" style="background:var(--warm)">
+  <div class="slide-inner">
+    <h2>Глобальный мозг: хронология идеи</h2>
+    <div class="timeline" id="timeline"></div>
+    <p class="quote" style="text-align:center;color:var(--gray);font-size:.9rem;margin-top:1rem">Фазовый переход: члены нашего вида становятся нейронами планетарного мозга, используя Интернет как общий экзокортекс.</p>
+  </div>
+</section>
+
+<!-- S8: HOMO DEUS -->
+<section class="slide" id="s8" style="background:var(--charcoal)">
+  <div class="accent-bar" style="background:var(--terra)"></div>
+  <div class="deco" style="width:500px;height:500px;left:-150px;top:100px;background:var(--terra);opacity:.06"></div>
+  <div class="slide-inner">
+    <h2 style="color:var(--terra-lt);font-size:clamp(1.8rem,4vw,2.8rem)">HOMO DEUS</h2>
+    <p class="sub" style="color:var(--gray-lt)">Концепция Юваля Ной Харари</p>
+    <div id="harari" style="margin:1rem 0"></div>
+    <p class="quote" style="color:var(--amber-lt);margin-top:1.5rem">«Технохуманизм: мы должны использовать технологии для создания Homo Deus — значительно превосходящей человеческой модели.»</p>
+  </div>
+</section>
+
+<!-- S9: COGNITIVE SPLIT -->
+<section class="slide" id="s9" style="background:var(--cream)">
+  <div class="slide-inner">
+    <h2>Когнитивный разрыв: два пути</h2>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;margin-top:1rem">
+      <div style="background:var(--moss);border-radius:10px;padding:1.5rem;color:#fff">
+        <h3 style="color:#fff;font-size:1.3rem;margin-bottom:1rem">СОЗДАТЕЛЬ</h3>
+        <div id="creator"></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center">
+        <div style="width:50px;height:50px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;color:#fff;font-size:.9rem">VS</div>
+      </div>
+      <div style="background:var(--terra);border-radius:10px;padding:1.5rem;color:#fff">
+        <h3 style="color:#fff;font-size:1.3rem;margin-bottom:1rem">ВЕДОМЫЙ</h3>
+        <div id="follower"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S10: DOT GRIDS (NEW!) -->
+<section class="slide" id="s10" style="background:var(--cream)">
+  <div class="accent-bar" style="background:var(--terra)"></div>
+  <div class="slide-inner">
+    <h2>Когнитивный разрыв: кто создаёт будущее?</h2>
+    <p class="sub">Каждая точка ≈ 3.2 млн человек · 2 500 точек = 8.1 млрд · февраль 2026</p>
+    <div class="grid-panel">
+      <div>
+        <h3 style="text-align:center;margin-bottom:.5rem">Взаимодействие с AI</h3>
+        <div class="dot-grid" id="grid-ai"></div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:#C8C0B4"></div> Не пользовались AI <strong>~6.8B (84%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:#6BAF7B"></div> Бесплатные чат-боты <strong>~1.3B (16%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:#C9A83A"></div> Платят $20/мес <strong>~15–25M (0.3%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:var(--terra)"></div> Coding scaffold <strong>~2–5M (0.04%)</strong></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="text-align:center;margin-bottom:.5rem">Мировой доход (в месяц)</h3>
+        <div class="dot-grid" id="grid-income"></div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:#993A23"></div> &lt;$65 бедность <strong>~700M (8.6%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:var(--terra)"></div> $65–300 <strong>~2.8B (34.6%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:var(--terra-lt)"></div> $300–1K <strong>~2.3B (28.4%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div> $1K–3K <strong>~1.5B (18.5%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:var(--moss-lt)"></div> $3K–10K <strong>~550M (6.8%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:var(--moss)"></div> $10K–80K <strong>~240M (3%)</strong></div>
+          <div class="leg"><div class="leg-dot" style="background:var(--burg)"></div> &gt;$80K top0.1% <strong>~10M</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="insight">Те, кто пишут код с AI (~0.04%) и те, кто зарабатывают >$3 000/мес (~10%) — практически одни и те же люди. Когнитивный разрыв = экономический разрыв.</div>
+  </div>
+</section>
+
+<!-- S11: SINGULARITY -->
+<section class="slide" id="s11" style="background:var(--warm)">
+  <div class="accent-bar" style="background:var(--terra)"></div>
+  <div class="slide-inner">
+    <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap">
+      <div class="stat" style="font-size:clamp(3rem,8vw,5rem);color:var(--terra)">2045</div>
+      <p style="font-size:1.1rem">Прогноз Рэя Курцвейла: AI превзойдёт человеческий интеллект</p>
+    </div>
+    <hr style="border:none;height:1px;background:var(--gray-lt);margin:1.5rem 0">
+    <p style="color:var(--gray);line-height:1.6">Ник Бостром (Оксфорд, «Superintelligence», 2014): суперинтеллект может быть несовместим с благополучием обычных людей. Если технологии усиления доступны только элите — возникнут два разных вида на одной планете.</p>
+    <p style="margin-top:1rem;line-height:1.6">Neuralink (Маск): «Добавление AI-слоя к лимбической системе мозга». Телепатия, загрузка знаний, контроль устройств мыслью, обмен эмоциями.</p>
+  </div>
+</section>
+
+<!-- S12: SUPERORGANISMS -->
+<section class="slide" id="s12" style="background:var(--charcoal)">
+  <div class="deco" style="width:500px;height:500px;right:-150px;top:-80px;background:var(--moss);opacity:.1"></div>
+  <div class="slide-inner">
+    <div style="font-size:2rem;margin-bottom:.5rem">👥</div>
+    <h2 style="color:var(--cream)">Суперорганизмы и сверхличности</h2>
+    <div id="superorg" style="margin-top:1.5rem"></div>
+  </div>
+</section>
+
+<!-- S13: PSYCHO-EMOTIONAL & RELIGION -->
+<section class="slide" id="s13" style="background:var(--cream)">
+  <div style="position:absolute;top:0;left:0;right:0;height:100px;background:var(--burg)"></div>
+  <div class="slide-inner" style="position:relative;z-index:1">
+    <h2 style="color:#fff">Психоэмоциональное состояние и новые формы веры</h2>
+    <div class="cards cards-3" style="margin-top:1.5rem">
+      <div class="card terra" style="background:var(--warm)">
+        <h3 style="color:var(--terra)">Dataism — религия данных</h3>
+        <p style="margin-top:.5rem;font-size:.85rem;color:var(--gray)">Харари: данные становятся высшей ценностью. Алгоритмы знают нас лучше, чем мы сами. Вера в «невидимую руку данных» заменяет веру в Бога.</p>
+      </div>
+      <div class="card moss" style="background:var(--warm)">
+        <h3 style="color:var(--moss)">Церковь верующих растёт</h3>
+        <p style="margin-top:.5rem;font-size:.85rem;color:var(--gray)">К 2050 религиозные общины составят 87% населения (Pew Research). Технология не убивает веру — она усиливает поиск смысла.</p>
+      </div>
+      <div class="card amber" style="background:var(--warm)">
+        <h3 style="color:var(--amber)">Эмоциональное заражение</h3>
+        <p style="margin-top:.5rem;font-size:.85rem;color:var(--gray)">Исследование Facebook (2014, N=689K): эмоции буквально распространяются через соцсети. Нейроинтерфейсы → буквальная эмпатия.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S14: PROPERTY -->
+<section class="slide" id="s14" style="background:var(--warm)">
+  <div class="accent-bar" style="background:var(--amber)"></div>
+  <div class="slide-inner">
+    <h2>Будущее собственности, эмоций и приватности</h2>
+    <div id="property" style="margin-top:1rem"></div>
+  </div>
+</section>
+
+<!-- S15: NATURE -->
+<section class="slide" id="s15" style="background:var(--moss)">
+  <div class="deco" style="width:600px;height:600px;right:-200px;top:-150px;background:var(--moss-lt);opacity:.25"></div>
+  <div class="slide-inner">
+    <div style="font-size:2rem;margin-bottom:.5rem">🌿</div>
+    <h2 style="color:#fff">Связь с природой через расширенное сознание</h2>
+    <div id="nature" style="margin-top:1.5rem"></div>
+  </div>
+</section>
+
+<!-- S16: DECENTRALIZATION -->
+<section class="slide" id="s16" style="background:var(--cream)">
+  <div class="accent-bar" style="background:var(--terra)"></div>
+  <div class="slide-inner">
+    <h2>Децентрализация: протоколы свободы</h2>
+    <div id="defi-bars" style="margin-top:1rem"></div>
+    <div style="background:var(--warm);border-radius:8px;padding:1.2rem;margin-top:1.2rem;display:flex;align-items:center;gap:1rem;box-shadow:0 2px 12px rgba(58,50,40,.08)">
+      <div class="stat" style="font-size:2.2rem;color:var(--amber);flex-shrink:0">$25B+</div>
+      <p style="font-size:.9rem;color:var(--gray)">активов под управлением DAO. Uniswap, MakerDAO, Gitcoin — «компании» на смарт-контрактах.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S17: NETWORK STATES -->
+<section class="slide" id="s17" style="background:var(--charcoal)">
+  <div class="deco" style="width:400px;height:400px;left:-100px;bottom:-50px;background:var(--amber);opacity:.08"></div>
+  <div class="slide-inner">
+    <h2 style="color:var(--amber-lt)">Сетевые государства</h2>
+    <p class="sub" style="color:var(--gray-lt)">Баладжи Шринивасан — The Network State, 2022</p>
+    <div id="netstate" style="margin:1rem 0"></div>
+    <div style="background:rgba(212,167,44,.12);border-radius:8px;padding:1rem;margin-top:1.5rem">
+      <p style="color:var(--cream);font-size:.95rem">2025: Шринивасан купил остров около Сингапура. Network School в Малайзии. Кампусы: Дубай, Токио, Майами. Это не теория — это уже происходит.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S18: FUNGAL COMPUTING -->
+<section class="slide" id="s18" style="background:var(--cream)">
+  <div class="slide-inner" style="display:grid;grid-template-columns:42% 1fr;gap:2rem">
+    <div style="background:var(--moss);border-radius:10px;padding:2rem;color:#fff">
+      <h2 style="color:#fff;font-size:clamp(1.3rem,3vw,2rem)">Грибные компьютеры</h2>
+      <div class="stat" style="font-size:3.5rem;color:var(--amber-lt);margin-top:1rem">97%</div>
+      <p style="opacity:.8">точность на MNIST</p>
+      <div class="stat" style="font-size:2.2rem;color:var(--amber-lt);margin-top:1rem">965 га</div>
+      <p style="opacity:.8">самый большой гриб = природный суперкомпьютер</p>
+    </div>
+    <div>
+      <h3 style="color:var(--moss)">Эндрю Адамацки</h3>
+      <p style="font-size:.8rem;color:var(--gray);margin-bottom:1rem">Unconventional Computing Lab, UWE</p>
+      <div id="fungal"></div>
+    </div>
+  </div>
+</section>
+
+<!-- S19: DNA/QUANTUM/NEUROMORPHIC -->
+<section class="slide" id="s19" style="background:var(--warm)">
+  <div class="slide-inner">
+    <h2>Вычисления за пределами кремния</h2>
+    <div class="cards cards-3" style="margin-top:1rem">
+      <div class="card terra" style="background:#fff">
+        <div style="font-size:1.5rem">🧬</div>
+        <h3 style="color:var(--terra)">ДНК</h3>
+        <div class="stat" style="font-size:2rem;color:var(--terra);margin:.5rem 0">215 PB/г</div>
+        <p style="font-size:.85rem;color:var(--gray)">Миллиарды параллельных операций. Хранение на тысячелетия.</p>
+      </div>
+      <div class="card moss" style="background:#fff">
+        <div style="font-size:1.5rem">⚛️</div>
+        <h3 style="color:var(--moss)">Квантовые</h3>
+        <div class="stat" style="font-size:2rem;color:var(--moss);margin:.5rem 0">1000+</div>
+        <p style="font-size:.85rem;color:var(--gray)">кубитов IBM. Google Sycamore — квантовое превосходство.</p>
+      </div>
+      <div class="card amber" style="background:#fff">
+        <div style="font-size:1.5rem">🧠</div>
+        <h3 style="color:var(--amber)">Нейроморфные</h3>
+        <div class="stat" style="font-size:2rem;color:var(--amber);margin:.5rem 0">1000×</div>
+        <p style="font-size:.85rem;color:var(--gray)">эффективнее. Intel Loihi, IBM TrueNorth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S20: WETWARE -->
+<section class="slide" id="s20" style="background:var(--charcoal)">
+  <div class="deco" style="width:500px;height:500px;right:-100px;top:-80px;background:var(--burg);opacity:.1"></div>
+  <div class="slide-inner">
+    <h2 style="color:var(--cream)">Wetware: живые компьютеры</h2>
+    <p style="color:var(--cream);margin-top:1rem;line-height:1.6">Cortical Labs: нейроны, выращенные на кремниевых чипах, научились играть в Pong. Самовосстановление, адаптация, эволюция — качества, недоступные кремнию.</p>
+    <hr style="border:none;height:1px;background:var(--gray);margin:1.5rem 0">
+    <p style="color:var(--terra-lt);line-height:1.6">Мемристоры обнаружены в потовых протоках кожи, крови и листьях растений. «Вероятнее всего, все живые растения являются мемристорами.»</p>
+    <p style="color:var(--gray-lt);font-style:italic;margin-top:1.5rem;font-size:.9rem">Exascale → Zettascale (10²¹ ops/sec, ~2035) → моделирование мозга в реальном времени</p>
+  </div>
+</section>
+
+<!-- S21: NUCLEAR DATA CENTERS -->
+<section class="slide" id="s21" style="background:var(--cream)">
+  <div class="accent-bar" style="background:var(--amber)"></div>
+  <div class="slide-inner">
+    <h2>Ядерные дата-центры Big Tech</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1rem 0">
+      <div style="background:var(--warm);border-radius:8px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(58,50,40,.06)"><div class="stat" style="font-size:1.8rem;color:var(--amber)">460</div><p style="font-size:.75rem;color:var(--gray)">ТВт·ч 2024</p></div>
+      <div style="background:var(--warm);border-radius:8px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(58,50,40,.06)"><div class="stat" style="font-size:1.8rem;color:var(--terra)">945</div><p style="font-size:.75rem;color:var(--gray)">ТВт·ч 2030</p></div>
+      <div style="background:var(--warm);border-radius:8px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(58,50,40,.06)"><div class="stat" style="font-size:1.8rem;color:var(--burg)">1 300</div><p style="font-size:.75rem;color:var(--gray)">ТВт·ч 2035</p></div>
+      <div style="background:var(--warm);border-radius:8px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(58,50,40,.06)"><div class="stat" style="font-size:1.8rem;color:var(--moss)">$10B+</div><p style="font-size:.75rem;color:var(--gray)">инвестиции</p></div>
+    </div>
+    <table>
+      <tr><th>Компания</th><th>Проект</th><th>Мощность</th><th>Срок</th></tr>
+      <tr><td>Microsoft</td><td>Three Mile Island</td><td>835 МВт</td><td>2028</td></tr>
+      <tr><td>Google</td><td>Kairos Power SMR</td><td>500 МВт</td><td>2030+</td></tr>
+      <tr><td>Amazon</td><td>X-energy SMR</td><td>320–960 МВт</td><td>2030+</td></tr>
+      <tr><td>Meta</td><td>RFP ядерная генерация</td><td>1–4 ГВт</td><td>2030+</td></tr>
+      <tr><td>Oracle</td><td>3× SMR дата-центр</td><td>1+ ГВт</td><td>TBD</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- S22: ECONOMICS -->
+<section class="slide" id="s22" style="background:var(--warm)">
+  <div class="slide-inner">
+    <h2>Экономика коллективного сознания</h2>
+    <div class="flow">
+      <div class="flow-block" style="background:var(--amber);border-radius:8px 0 0 8px"><h3>Внимание</h3><p style="font-size:.75rem;opacity:.8;margin-top:.3rem">Attention economy</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-block" style="background:var(--terra-lt)"><h3>Данные</h3><p style="font-size:.75rem;opacity:.8;margin-top:.3rem">Data economy</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-block" style="background:var(--terra)"><h3>Вычисления</h3><p style="font-size:.75rem;opacity:.8;margin-top:.3rem">Compute economy</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-block" style="background:var(--burg);border-radius:0 8px 8px 0"><h3>Сознание</h3><p style="font-size:.75rem;opacity:.8;margin-top:.3rem">Consciousness economy</p></div>
+    </div>
+    <p style="color:var(--gray);line-height:1.6;margin-top:1rem">Radical Markets (Вейл & Познер): квадратичное голосование, COST. Post-scarcity: если AI + робототехника + ядерная энергия → изобилие, ценность смещается к дефицитному: человеческое внимание, подлинные отношения, смысл.</p>
+  </div>
+</section>
+
+<!-- S23: SURVEILLANCE -->
+<section class="slide" id="s23" style="background:var(--charcoal)">
+  <div class="accent-bar" style="background:var(--terra)"></div>
+  <div class="slide-inner">
+    <div style="font-size:2rem;margin-bottom:.5rem">👁️</div>
+    <h2 style="color:var(--cream)">Надзор, контроль и полиция мысли</h2>
+    <div class="risk-grid" id="risks"></div>
+  </div>
+</section>
+
+<!-- S24: RELATIONSHIPS -->
+<section class="slide" id="s24" style="background:var(--cream)">
+  <div style="position:absolute;top:0;left:0;right:0;height:100px;background:var(--burg)"></div>
+  <div class="slide-inner" style="position:relative;z-index:1">
+    <h2 style="color:#fff">Отношения, размножение и личная жизнь</h2>
+    <div class="cards cards-3" style="margin-top:1.5rem">
+      <div class="card terra" style="background:var(--warm)">
+        <h3 style="color:var(--terra)">Размытие границ «Я»</h3>
+        <p style="margin-top:.5rem;font-size:.85rem;color:var(--gray)">Приватность → из пространственной в когнитивную. «Я» растворяется в коллективном сознании. Новые формы: полиамория, digital intimacy, AI-компаньоны.</p>
+      </div>
+      <div class="card burg" style="background:var(--warm)">
+        <h3 style="color:var(--burg)">Измена и верность</h3>
+        <p style="margin-top:.5rem;font-size:.85rem;color:var(--gray)">Если сознание разделено — скрытность невозможна. Концепция «измены» теряет смысл в прозрачном обществе.</p>
+      </div>
+      <div class="card moss" style="background:var(--warm)">
+        <h3 style="color:var(--moss)">Размножение 2.0</h3>
+        <p style="margin-top:.5rem;font-size:.85rem;color:var(--gray)">Генная инженерия → технологический отбор. Ectogenesis. Отношения = духовные и когнитивные.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S25: THREE SCENARIOS -->
+<section class="slide" id="s25" style="background:var(--warm)">
+  <div class="slide-inner">
+    <h2>Три сценария будущего</h2>
+    <div class="cards cards-3" style="margin-top:1rem">
+      <div class="scenario" style="background:var(--moss)">
+        <div class="prob">30%</div>
+        <h3 style="color:#fff;margin:.5rem 0">Симбиотическая цивилизация</h3>
+        <p style="font-size:.85rem;opacity:.9">Мирная интеграция с AI. Коллективный разум решает глобальные проблемы. Децентрализация, свобода, восстановление экосистем.</p>
+      </div>
+      <div class="scenario" style="background:var(--amber);color:var(--charcoal)">
+        <div class="prob" style="color:var(--charcoal)">50%</div>
+        <h3 style="color:var(--charcoal);margin:.5rem 0">Управляемый раскол</h3>
+        <p style="font-size:.85rem;color:var(--charcoal);opacity:.85">Homo Deus и обычные люди параллельно. Когнитивный разрыв без катастрофы. Хаотичное формирование глобального мозга.</p>
+      </div>
+      <div class="scenario" style="background:var(--terra)">
+        <div class="prob">20%</div>
+        <h3 style="color:#fff;margin:.5rem 0">Неоевгеника и контроль</h3>
+        <p style="font-size:.85rem;opacity:.9">Элита монополизирует апгрейды. Нейронадзор. «Бесполезный класс» в цифровых гетто. Полиция мысли.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S26: CONCLUSIONS -->
+<section class="slide" id="s26" style="background:var(--charcoal)">
+  <div class="deco" style="width:400px;height:400px;left:-100px;top:-50px;background:var(--terra);opacity:.08"></div>
+  <div class="deco" style="width:500px;height:500px;right:-150px;bottom:-100px;background:var(--moss);opacity:.07"></div>
+  <div class="deco" style="width:300px;height:300px;left:30%;top:-80px;background:var(--amber);opacity:.06"></div>
+  <div class="slide-inner">
+    <h2 style="color:var(--cream)">Что делать уже сейчас</h2>
+    <div id="actions" style="margin:1.5rem 0"></div>
+    <p class="quote" style="color:var(--terra-lt);margin-top:2rem;font-size:1.1rem">«Коллективное сознание неизбежно. Вопрос — каким оно будет: утопией эмпатии или антиутопией контроля.»</p>
+  </div>
+</section>
+
+<script>
+// TOC
+const tocData = [
+  ["01","Коллективный разум и цифровые платформы"],["02","Глобальный мозг: от метафоры к реальности"],
+  ["03","Homo Deus vs «бесполезный класс»"],["04","Суперорганизмы и сверхличности"],
+  ["05","Психоэмоциональное и религия в эпоху CI"],["06","Собственность, эмоции и приватность"],
+  ["07","Связь с природой через технологии"],["08","Децентрализация и сетевые государства"],
+  ["09","Вычисления за пределами кремния"],["10","Ядерные дата-центры Big Tech"],
+  ["11","Экономика коллективного сознания"],["12","Надзор, контроль и полиция мысли"],
+  ["13","Отношения и размножение будущего"]
+];
+document.getElementById('toc').innerHTML = tocData.map(([n,t])=>`<p style="margin-bottom:.4rem"><strong style="color:var(--terra);font-family:'Cormorant Garamond',serif">${n}</strong> <span style="color:var(--gray);font-size:.9rem">${t}</span></p>`).join('');
+
+// Researchers
+const res=[{n:"Пьер Леви",y:"1997",d:"«Никто не знает всего, каждый знает что-то, всё знание живёт в человечестве»",c:"terra"},{n:"Говард Рейнгольд",y:"2002",d:"Smart Mobs — «умные толпы», скоординированные действия без централизации",c:"moss"},{n:"Фрэнсис Хейлиген",y:"2012",d:"Global Brain Institute — математическая теория планетарного суперорганизма",c:"amber"},{n:"Томас Мэлоун",y:"2018+",d:"MIT: как программировать глобальный мозг для коллективных решений",c:"burg"}];
+document.getElementById('researchers').innerHTML=res.map(r=>`<div style="display:flex;gap:1rem;margin-bottom:1rem;padding:.8rem;background:var(--warm);border-radius:6px;border-left:4px solid var(--${r.c})"><div><strong style="font-family:'Cormorant Garamond',serif;font-size:1.1rem">${r.n}</strong> <span style="color:var(--${r.c});font-weight:700;font-size:.85rem">${r.y}</span><p style="color:var(--gray);font-size:.85rem;margin-top:.2rem">${r.d}</p></div></div>`).join('');
+
+// Neurons
+const neurons=["Каждый чат — кластер нейронов","Каждое пересланное сообщение — синаптический импульс","Правило Хебба: чаты, активные вместе, связываются вместе","Telegram, Discord, Signal — распределённые нейронные сети"];
+document.getElementById('neurons').innerHTML=neurons.map(n=>`<p style="color:var(--cream);margin-bottom:.5rem"><span style="color:var(--amber);margin-right:.5rem">◆</span>${n}</p>`).join('');
+
+// Timeline
+const tl=[{y:"1955",t:"Ноосфера",d:"Тейяр де Шарден",c:"amber"},{y:"1982",t:"Global Brain",d:"Питер Рассел",c:"moss"},{y:"1997",t:"Коллективный\nинтеллект",d:"Пьер Леви",c:"terra"},{y:"2012",t:"Global Brain\nInstitute",d:"Хейлиген",c:"burg"},{y:"2024",t:"AI + CI",d:"MIT, CIP",c:"moss"}];
+document.getElementById('timeline').innerHTML=tl.map(t=>`<div class="tl-node"><div style="font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--${t.c});font-size:1.1rem;position:absolute;top:0;width:100%;text-align:center">${t.y}</div><div class="tl-dot" style="background:var(--${t.c})"></div><div style="margin-top:1.5rem;font-weight:600;font-size:.85rem">${t.t.replace('\n','<br>')}</div><div style="font-size:.75rem;color:var(--gray)">${t.d}</div></div>`).join('');
+
+// Harari
+const hp=["Элита получит доступ к биоинженерии и AI для апгрейда","Возникнет «высшая каста модернизированных суперлюдей»","Экономическое неравенство → биологическое неравенство","«Бесполезный класс» — экономически ненужные люди","Dataism — новая религия, где данные = высшая ценность"];
+document.getElementById('harari').innerHTML=hp.map(p=>`<p style="color:var(--cream);margin-bottom:.5rem"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--terra-lt);margin-right:.5rem"></span>${p}</p>`).join('');
+
+// Creator/Follower
+const cr=["Сливается с AI — кентавр","Объединяется в суперорганизмы","Создаёт, владеет активами","Нейроинтерфейсы, апгрейды","Экспоненциальный рост"];
+const fl=["Отрицает машину","Потребляет, не создаёт","Экономический тупик","«Бесполезный класс»","Нисходящее развитие"];
+document.getElementById('creator').innerHTML=cr.map(c=>`<p style="margin-bottom:.4rem">→ ${c}</p>`).join('');
+document.getElementById('follower').innerHTML=fl.map(f=>`<p style="margin-bottom:.4rem">→ ${f}</p>`).join('');
+
+// Dot grids
+function buildGrid(id,segs){const el=document.getElementById(id);const dots=[];for(const s of segs)for(let i=0;i<s.count;i++)dots.push(s.color);while(dots.length<2500)dots.push(segs[0].color);const f=document.createDocumentFragment();for(let i=0;i<2500;i++){const d=document.createElement('div');d.className='d';d.style.background=dots[i];f.appendChild(d)}el.appendChild(f)}
+buildGrid('grid-ai',[{color:'#C8C0B4',count:2091},{color:'#6BAF7B',count:400},{color:'#C9A83A',count:8},{color:'#C2573A',count:1}]);
+buildGrid('grid-income',[{color:'#993A23',count:216},{color:'#C2573A',count:865},{color:'#E8967E',count:710},{color:'#D4A72C',count:463},{color:'#5A9A6E',count:170},{color:'#3B6B4A',count:74},{color:'#7B2340',count:2}]);
+
+// Superorganisms
+const so=[{n:"Эдвард О. Уилсон",d:"отдельный муравей глуп, но колония — интеллектуальна. Этот принцип масштабируется на человеческие сообщества."},{n:"Distributed cognition (Хатчинс)",d:"познание распределено между людьми и артефактами. Чат — идеальная среда: мысли одного дополняются другими."},{n:"Бен Гертцель — «mindplex»",d:"коллекция интеллектуальных систем с собственным «театром сознания», тесно взаимодействующих."}];
+document.getElementById('superorg').innerHTML=so.map(s=>`<p style="color:var(--cream);margin-bottom:1rem"><strong style="color:var(--amber-lt)">${s.n}:</strong> ${s.d}</p>`).join('');
+
+// Property
+const prop=[{l:"Собственность",d:"От владения → к доступу. Shared economy, токенизация. Рифкин: предельная стоимость → 0.",c:"terra"},{l:"Эмоции",d:"Эмоциональное заражение в сетях. Нейроинтерфейсы = буквальная эмпатия. Или невыносимая перегрузка?",c:"moss"},{l:"Приватность",d:"Дэвид Брин: взаимная прозрачность лучше тотальной слежки. Приватность = когнитивная, не физическая.",c:"amber"}];
+document.getElementById('property').innerHTML=prop.map(p=>`<div style="background:#fff;border-radius:6px;padding:1rem;margin-bottom:.8rem;border-left:4px solid var(--${p.c});box-shadow:0 2px 8px rgba(58,50,40,.06)"><strong style="color:var(--${p.c});font-family:'Cormorant Garamond',serif;font-size:1.05rem">${p.l}</strong><p style="color:var(--gray);font-size:.9rem;margin-top:.3rem">${p.d}</p></div>`).join('');
+
+// Nature
+const nat=[{t:"Стефано Манкузо",d:"Растения обладают аналогами нервной системы, принимают решения"},{t:"«Wood Wide Web»",d:"Микоризные сети грибов соединяют деревья в подземную коммуникационную сеть"},{t:"Моника Гальяно",d:"Мимоза стыдливая способна к обучению, сохраняя «память» неделями"},{t:"Панпсихизм",d:"Чалмерс, Тонони: сознание — фундаментальное свойство материи"}];
+document.getElementById('nature').innerHTML=nat.map(n=>`<p style="color:#fff;margin-bottom:.8rem"><strong style="color:var(--amber-lt)">${n.t}:</strong> ${n.d}</p>`).join('');
+
+// DeFi bars
+const defi=[{n:"IPFS",d:"Распределённое хранение",w:85},{n:"Arweave",d:"Вечное хранилище",w:70},{n:"Farcaster",d:"Децентрализованный социальный протокол",w:55},{n:"Lens",d:"Web3 социальный граф",w:50},{n:"Nostr",d:"Устойчивый к цензуре протокол",w:45},{n:"Akash",d:"Облачные вычисления, –85% от AWS",w:50}];
+document.getElementById('defi-bars').innerHTML=defi.map(d=>`<div class="prog-row"><div class="prog-label" style="color:var(--terra)">${d.n}</div><div class="prog-track"><div class="prog-fill" style="width:${d.w}%;background:var(--terra-lt)">${d.d}</div></div></div>`).join('');
+
+// Network State
+const ns=["Онлайн-сообщество с моральной инновацией","Интегрированная криптовалюта","Консенсусное правительство на смарт-контракте","Архипелаг краудфандированных территорий","Дипломатическое признание"];
+document.getElementById('netstate').innerHTML=ns.map(p=>`<p style="color:var(--cream);margin-bottom:.5rem"><span style="color:var(--amber);margin-right:.5rem">◆</span>${p}</p>`).join('');
+
+// Fungal
+const fu=["Мицелий реагирует на импульсы подобно нейронам","Логические схемы AND, OR, NOT в живых грибах","Самовосстановление и реконфигурация","Nature (2022): прототип грибного компьютера","«Грибные здания будут расти и ремонтировать себя»"];
+document.getElementById('fungal').innerHTML=fu.map(f=>`<p style="margin-bottom:.5rem">→ ${f}</p>`).join('');
+
+// Risks
+const risks=[{t:"Surveillance Capitalism",d:"Зубофф: поведенческий излишек → рынки поведенческих фьючерсов",c:"terra-lt",sev:90},{t:"Социальный кредит",d:"Китайская модель: рейтинг граждан. Низкий = ограничения на всё",c:"amber-lt",sev:70},{t:"Нейрополитика",d:"Нейроинтерфейсы → чтение мыслей государством",c:"terra-lt",sev:45},{t:"Евгеника 2.0",d:"CRISPR + designer babies. Кто решает, что «улучшенный»?",c:"amber-lt",sev:50}];
+document.getElementById('risks').innerHTML=risks.map(r=>`<div class="risk-card"><h4 style="color:var(--${r.c})">${r.t}</h4><p style="color:var(--cream)">${r.d}</p><div class="severity-bar"><div class="severity-fill" style="width:${r.sev}%;background:var(--${r.c})"></div></div></div>`).join('');
+
+// Actions
+const acts=[{n:"01",t:"Строить сообщества — зародыши суперорганизмов"},{n:"02",t:"Осваивать AI — быть создателем, не потребителем"},{n:"03",t:"Инвестировать в децентрализацию — крипто, DAO"},{n:"04",t:"Развивать связь с природой — технологическую и духовную"},{n:"05",t:"Формировать этику коллективного разума"},{n:"06",t:"Создавать — код, контент, бизнесы на стыке человека и машины"}];
+document.getElementById('actions').innerHTML=acts.map(a=>`<p style="color:var(--cream);margin-bottom:.6rem"><strong style="color:var(--amber);font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-right:.5rem">${a.n}</strong>${a.t}</p>`).join('');
+
+// Nav dots
+const slides=document.querySelectorAll('.slide');
+document.getElementById('nav').innerHTML=[...slides].map((_,i)=>`<a href="#s${i+1}"></a>`).join('');
+const navDots=document.querySelectorAll('.nav a');
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const i=[...slides].indexOf(e.target);navDots.forEach((d,j)=>d.classList.toggle('active',j===i))}})},{threshold:.4});
+slides.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
