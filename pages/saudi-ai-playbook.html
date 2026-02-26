@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saudi Arabia AI Playbook — Zinin Corporation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #D4A843;
+  --gold-light: #F2D98B;
+  --gold-pale: #FFF8E7;
+  --coral: #E8634A;
+  --coral-light: #FF9680;
+  --emerald: #2D8A6E;
+  --emerald-light: #5CC4A0;
+  --sand: #F5EDE0;
+  --sand-dark: #E8DCC8;
+  --warm-white: #FFFDF7;
+  --charcoal: #2C2418;
+  --warm-gray: #6B5D4F;
+  --warm-gray-light: #9B8E7E;
+  --accent-purple: #9B6B9E;
+  --accent-amber: #E8A030;
+  --gradient-hero: linear-gradient(135deg, #D4A843 0%, #E8634A 50%, #9B6B9E 100%);
+  --gradient-card: linear-gradient(180deg, #FFFDF7 0%, #F5EDE0 100%);
+  --shadow-sm: 0 2px 8px rgba(44,36,24,0.06);
+  --shadow-md: 0 4px 24px rgba(44,36,24,0.1);
+  --shadow-lg: 0 12px 48px rgba(44,36,24,0.14);
+  --shadow-glow: 0 0 40px rgba(212,168,67,0.2);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--sand);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--warm-white);
+  color: var(--charcoal);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ===== NAVIGATION ===== */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255,253,247,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212,168,67,0.15);
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.nav-bar.scrolled {
+  box-shadow: var(--shadow-sm);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--coral);
+  letter-spacing: -0.5px;
+}
+.nav-links {
+  display: flex;
+  gap: 6px;
+}
+.nav-link {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--warm-gray);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.nav-link:hover, .nav-link.active {
+  background: var(--gold-pale);
+  color: var(--charcoal);
+}
+.nav-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--gradient-hero);
+  transition: width 0.15s ease;
+  width: 0%;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232,99,74,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-light);
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 32px;
+  animation: fadeInDown 0.8s ease;
+}
+.hero-badge::before {
+  content: '🇸🇦';
+  font-size: 16px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+  max-width: 900px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+.hero h1 em {
+  font-style: normal;
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--warm-gray);
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+.hero-stat {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.hero-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold-light);
+}
+.hero-stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--coral);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.hero-stat:nth-child(2) .hero-stat-value { color: var(--emerald); }
+.hero-stat:nth-child(3) .hero-stat-value { color: var(--gold); }
+.hero-stat:nth-child(4) .hero-stat-value { color: var(--accent-purple); }
+.hero-stat-label {
+  font-size: 14px;
+  color: var(--warm-gray);
+  font-weight: 500;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 80px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  margin-bottom: 48px;
+}
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--coral);
+  margin-bottom: 12px;
+}
+.section-tag::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--coral);
+  border-radius: 2px;
+}
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 900;
+  color: var(--charcoal);
+  line-height: 1.15;
+  max-width: 700px;
+}
+
+/* ===== HUMAIN SECTION ===== */
+.humain-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.humain-main {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #2C2418 0%, #4A3828 100%);
+  border-radius: var(--radius);
+  padding: 48px;
+  color: var(--sand);
+  position: relative;
+  overflow: hidden;
+}
+.humain-main::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212,168,67,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.humain-main h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.humain-main p {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+}
+.humain-agent-note {
+  margin-top: 24px;
+  background: rgba(212,168,67,0.12);
+  border: 1px solid rgba(212,168,67,0.25);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  position: relative;
+  z-index: 1;
+}
+.humain-agent-note strong {
+  color: var(--gold-light);
+}
+.humain-card {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: all 0.3s ease;
+}
+.humain-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.humain-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--charcoal);
+}
+.humain-card p {
+  font-size: 14px;
+  color: var(--warm-gray);
+  line-height: 1.6;
+}
+
+/* ===== PARTNERSHIPS TABLE ===== */
+.partnerships-wrap {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 32px;
+}
+.partnerships-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.partnerships-table th {
+  background: var(--sand);
+  padding: 16px 24px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--warm-gray);
+  border-bottom: 1px solid var(--sand-dark);
+}
+.partnerships-table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(232,220,200,0.5);
+  transition: background 0.2s;
+}
+.partnerships-table tr:hover td {
+  background: var(--gold-pale);
+}
+.partnerships-table .partner-name {
+  font-weight: 700;
+  color: var(--charcoal);
+}
+.partnerships-table .deal-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--coral);
+  font-size: 15px;
+}
+
+/* ===== TIMELINE ===== */
+.timeline-section {
+  background: var(--sand);
+  padding: 80px 0;
+  position: relative;
+}
+.timeline-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A843' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.timeline-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+  z-index: 1;
+}
+.timeline {
+  position: relative;
+  padding: 40px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--gold-light), var(--coral-light), var(--emerald-light));
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 48px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.timeline-item:nth-child(odd) {
+  flex-direction: row;
+}
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.timeline-content {
+  width: calc(50% - 40px);
+  background: var(--warm-white);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.timeline-content:hover {
+  box-shadow: var(--shadow-md);
+  transform: scale(1.02);
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 4px solid var(--warm-white);
+  box-shadow: 0 0 0 3px var(--gold-light);
+  z-index: 2;
+  top: 30px;
+}
+.timeline-item:nth-child(2) .timeline-dot { background: var(--coral); box-shadow: 0 0 0 3px var(--coral-light); }
+.timeline-item:nth-child(3) .timeline-dot { background: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-light); }
+.timeline-item:nth-child(4) .timeline-dot { background: var(--accent-purple); box-shadow: 0 0 0 3px rgba(155,107,158,0.3); }
+.timeline-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.timeline-item:nth-child(2) .timeline-date { color: var(--coral); }
+.timeline-item:nth-child(3) .timeline-date { color: var(--emerald); }
+.timeline-item:nth-child(4) .timeline-date { color: var(--accent-purple); }
+.timeline-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+.timeline-desc {
+  font-size: 14px;
+  color: var(--warm-gray);
+  line-height: 1.6;
+}
+.timeline-tasks {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.timeline-task {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--charcoal);
+  padding: 8px 12px;
+  background: var(--gold-pale);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.timeline-task:hover {
+  background: var(--gold-light);
+}
+.timeline-task.checked {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.task-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--gold);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-top: 1px;
+}
+.timeline-task.checked .task-check {
+  background: var(--emerald);
+  border-color: var(--emerald);
+}
+.timeline-task.checked .task-check::after {
+  content: '✓';
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ===== SALARY SECTION ===== */
+.salary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.salary-card {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all 0.3s ease;
+}
+.salary-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.salary-role {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+}
+.salary-bar-wrap {
+  margin-bottom: 8px;
+}
+.salary-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--warm-gray);
+  margin-bottom: 6px;
+}
+.salary-bar {
+  height: 10px;
+  background: var(--sand);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.salary-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1s ease;
+  width: 0%;
+}
+.salary-bar-fill.coral { background: linear-gradient(90deg, var(--coral-light), var(--coral)); }
+.salary-bar-fill.gold { background: linear-gradient(90deg, var(--gold-light), var(--gold)); }
+.salary-bar-fill.emerald { background: linear-gradient(90deg, var(--emerald-light), var(--emerald)); }
+.salary-bar-fill.purple { background: linear-gradient(90deg, rgba(155,107,158,0.5), var(--accent-purple)); }
+
+.salary-highlight {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--emerald) 0%, #1D6B54 100%);
+  color: white;
+  border: none;
+  padding: 36px;
+}
+.salary-highlight:hover {
+  transform: translateY(-2px);
+}
+.salary-highlight .salary-role {
+  color: var(--gold-light);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.salary-highlight-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 8px;
+}
+.salary-highlight p {
+  opacity: 0.8;
+  font-size: 15px;
+}
+
+/* ===== VISA SECTION ===== */
+.visa-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.visa-card {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.visa-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.visa-card.recommended {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-glow);
+}
+.visa-card.recommended::before {
+  content: '★ РЕКОМЕНДУЕТСЯ';
+  position: absolute;
+  top: 16px;
+  right: -32px;
+  background: var(--gold);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 40px;
+  transform: rotate(45deg);
+}
+.visa-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.visa-icon.gold { background: var(--gold-pale); }
+.visa-icon.coral { background: rgba(232,99,74,0.1); }
+.visa-icon.emerald { background: rgba(45,138,110,0.1); }
+.visa-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.visa-card p {
+  font-size: 13px;
+  color: var(--warm-gray);
+  line-height: 1.6;
+}
+.visa-price {
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--coral);
+}
+
+/* ===== EVENTS SECTION ===== */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.event-card {
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.event-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+.event-card:nth-child(1) { background: linear-gradient(135deg, var(--coral), #C94A34); }
+.event-card:nth-child(2) { background: linear-gradient(135deg, var(--gold), #B8902A); }
+.event-card:nth-child(3) { background: linear-gradient(135deg, var(--emerald), #1D6B54); }
+.event-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+.event-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 900;
+  opacity: 0.15;
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  line-height: 1;
+}
+.event-priority {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+.event-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.event-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+.event-desc {
+  font-size: 14px;
+  opacity: 0.85;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+.event-budget {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* ===== KEY PEOPLE ===== */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.person-card {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.person-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.person-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+  font-family: 'Playfair Display', serif;
+}
+.person-avatar.gold { background: var(--gold-pale); color: var(--gold); }
+.person-avatar.coral { background: rgba(232,99,74,0.1); color: var(--coral); }
+.person-avatar.emerald { background: rgba(45,138,110,0.1); color: var(--emerald); }
+.person-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.person-role {
+  font-size: 13px;
+  color: var(--warm-gray);
+  margin-bottom: 12px;
+}
+.person-tag {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.person-tag.priority { background: rgba(232,99,74,0.1); color: var(--coral); }
+.person-tag.vc { background: rgba(45,138,110,0.1); color: var(--emerald); }
+.person-tag.gov { background: var(--gold-pale); color: var(--gold); }
+
+/* ===== WEB3 SECTION ===== */
+.web3-alert {
+  background: linear-gradient(135deg, rgba(232,99,74,0.08), rgba(212,168,67,0.08));
+  border: 1px solid rgba(232,99,74,0.2);
+  border-left: 4px solid var(--coral);
+  border-radius: var(--radius-sm);
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+.web3-alert strong {
+  color: var(--coral);
+}
+.web3-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.web3-do, .web3-dont {
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.web3-do {
+  background: rgba(45,138,110,0.05);
+  border: 1px solid rgba(45,138,110,0.15);
+}
+.web3-dont {
+  background: rgba(232,99,74,0.05);
+  border: 1px solid rgba(232,99,74,0.15);
+}
+.web3-do h4 { color: var(--emerald); margin-bottom: 16px; font-size: 16px; }
+.web3-dont h4 { color: var(--coral); margin-bottom: 16px; font-size: 16px; }
+.web3-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--charcoal);
+  line-height: 1.5;
+}
+
+/* ===== YOUR ADVANTAGE ===== */
+.advantage-section {
+  background: linear-gradient(135deg, #2C2418 0%, #3D3020 50%, #2C2418 100%);
+  padding: 80px 0;
+  color: var(--sand);
+  position: relative;
+  overflow: hidden;
+}
+.advantage-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23D4A843' fill-opacity='0.05'%3E%3Ccircle cx='40' cy='40' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.advantage-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+  position: relative;
+  z-index: 1;
+}
+.advantage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.advantage-card {
+  background: rgba(255,253,247,0.05);
+  border: 1px solid rgba(212,168,67,0.15);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: all 0.3s ease;
+}
+.advantage-card:hover {
+  background: rgba(255,253,247,0.08);
+  border-color: rgba(212,168,67,0.3);
+  transform: translateY(-4px);
+}
+.advantage-emoji {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+.advantage-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 10px;
+}
+.advantage-card p {
+  font-size: 14px;
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+/* ===== ECOSYSTEM MAP ===== */
+.eco-map {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+.eco-node {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.eco-node:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+.eco-node-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.eco-node-name {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.eco-node-desc {
+  font-size: 11px;
+  color: var(--warm-gray);
+}
+.eco-node-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--coral);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ===== COLLAPSIBLE ===== */
+.collapsible {
+  background: var(--gradient-card);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.collapsible:hover {
+  border-color: var(--gold-light);
+}
+.collapsible-header {
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.collapsible-header:hover {
+  background: var(--gold-pale);
+}
+.collapsible-title {
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.collapsible-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.collapsible.open .collapsible-arrow {
+  transform: rotate(180deg);
+}
+.collapsible-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.collapsible.open .collapsible-body {
+  max-height: 600px;
+}
+.collapsible-content {
+  padding: 0 28px 24px;
+  font-size: 14px;
+  color: var(--warm-gray);
+  line-height: 1.7;
+}
+
+/* ===== FOOTER CTA ===== */
+.footer-cta {
+  text-align: center;
+  padding: 80px 60px;
+  background: var(--gold-pale);
+  position: relative;
+}
+.footer-cta h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+.footer-cta p {
+  font-size: 16px;
+  color: var(--warm-gray);
+  max-width: 600px;
+  margin: 0 auto 32px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--gradient-hero);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== BACK TO TOP ===== */
+.back-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--charcoal);
+  color: var(--gold-light);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+.back-top.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.back-top:hover {
+  transform: translateY(-3px);
+  background: var(--coral);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== TOOLTIP ===== */
+.tip {
+  position: relative;
+  border-bottom: 1px dashed var(--gold);
+  cursor: help;
+}
+.tip:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--charcoal);
+  color: var(--sand);
+  padding: 8px 14px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+.divider hr {
+  border: none;
+  height: 1px;
+  background: var(--sand-dark);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav-bar" id="navbar">
+  <div class="nav-logo">🏗️ SA AI Playbook</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#hero">Обзор</a>
+    <a class="nav-link" href="#humain">HUMAIN</a>
+    <a class="nav-link" href="#ecosystem">Экосистема</a>
+    <a class="nav-link" href="#timeline">План</a>
+    <a class="nav-link" href="#salary">Зарплаты</a>
+    <a class="nav-link" href="#visa">Визы</a>
+    <a class="nav-link" href="#events">Ивенты</a>
+    <a class="nav-link" href="#web3">Web3</a>
+    <a class="nav-link" href="#advantage">Козыри</a>
+  </div>
+  <div class="nav-progress" id="navProgress"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Персональный стратегический план</div>
+    <h1>Saudi Arabia AI: <em>Золотая лихорадка</em> для Zinin Corporation</h1>
+    <p class="hero-subtitle">Саудовская Аравия строит третью крупнейшую AI-инфраструктуру в мире. HUMAIN создаёт платформу мульти-агентных систем — точно то, что строишь ты. Окно открыто — действуй сейчас.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value">$40B+</div>
+        <div class="hero-stat-label">Инвестиции в AI до 2030</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">0%</div>
+        <div class="hero-stat-label">Подоходный налог</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">+28.7%</div>
+        <div class="hero-stat-label">Рост AI-найма в год</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">150+</div>
+        <div class="hero-stat-label">AI-агентов в HUMAIN OS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- HUMAIN SECTION -->
+<section class="section" id="humain">
+  <div class="section-header">
+    <div class="section-tag">Главный игрок</div>
+    <h2>HUMAIN — строит то же, что и ты, но в масштабе государства</h2>
+  </div>
+
+  <div class="humain-grid">
+    <div class="humain-main">
+      <h3>Что такое HUMAIN?</h3>
+      <p>Full-stack AI компания, принадлежащая PIF (суверенный фонд $930B+). Запущена 12 мая 2025 лично Мохаммедом бин Салманом. Управляет всей цепочкой: дата-центры → облако → модели → приложения. CEO — Tareq Amin (ex-Rakuten, TIME 100 AI 2025).</p>
+      <div class="humain-agent-note">
+        <strong>🔑 Ключевой факт для тебя:</strong> HUMAIN ONE — их агентная ОС — оркестрирует 150+ AI-агентов в HR, финансах, юриспруденции. Amin публично заявил, что бухгалтерия сведена к 1 человеку. Это архитектурно идентично твоим 7-агентным Claude Code командам на Docker/Hetzner — но в масштабе страны.
+      </div>
+    </div>
+    <div class="humain-card">
+      <h4>🧠 CEO: Tareq Amin</h4>
+      <p>Иордано-американский технолог, ex-Rakuten Mobile, ex-Reliance Jio. TIME 100 AI 2025. Публично говорит о мульти-агентной оркестрации. Главный контакт для networking на LEAP.</p>
+    </div>
+    <div class="humain-card">
+      <h4>🔬 Deputy CEO: Dr. Yaser Al-Onaizan</h4>
+      <p>Ex-AWS, ex-IBM Watson. Руководит разработкой AI-моделей, включая ALLaM (арабская LLM, 500B+ лингвистических единиц). Отвечает за техническую стратегию.</p>
+    </div>
+  </div>
+
+  <div class="partnerships-wrap">
+    <table class="partnerships-table">
+      <thead>
+        <tr>
+          <th>Партнёр</th>
+          <th>Сумма сделки</th>
+          <th>Что строят</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="partner-name">Nvidia</td><td class="deal-value">~$14B</td><td>600,000 чипов за 3 года, 35,000 GB300 систем</td></tr>
+        <tr><td class="partner-name">AMD</td><td class="deal-value">~$10B</td><td>500 MW AI compute, Instinct MI450 GPU</td></tr>
+        <tr><td class="partner-name">xAI (Маск)</td><td class="deal-value">500+ MW</td><td>Крупнейший дата-центр xAI вне США + $3B инвестиция</td></tr>
+        <tr><td class="partner-name">AWS</td><td class="deal-value">$5.3B</td><td>"AI Zone" в Эр-Рияде, 150,000 AI-ускорителей</td></tr>
+        <tr><td class="partner-name">Blackstone / AirTrunk</td><td class="deal-value">~$3B</td><td>Кампус дата-центров, первый проект AirTrunk на Ближнем Востоке</td></tr>
+        <tr><td class="partner-name">Google Cloud + PIF</td><td class="deal-value">$10B</td><td>AI Hub</td></tr>
+        <tr><td class="partner-name">Groq</td><td class="deal-value">$1.5B</td><td>Крупнейший AI inference hub в мире</td></tr>
+        <tr><td class="partner-name">HUMAIN Ventures</td><td class="deal-value">$10B</td><td>Глобальный VC-фонд для AI-стартапов</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ECOSYSTEM -->
+<section class="section" id="ecosystem">
+  <div class="section-header">
+    <div class="section-tag">Экосистема</div>
+    <h2>Кто ещё платит за AI-экспертизу в Саудовской Аравии</h2>
+  </div>
+
+  <div class="eco-map">
+    <div class="eco-node">
+      <div class="eco-node-icon">🛢️</div>
+      <div class="eco-node-name">Saudi Aramco</div>
+      <div class="eco-node-desc">MetaBRAIN LLM (1T параметров)</div>
+      <div class="eco-node-value">$4B AI-value в 2024</div>
+    </div>
+    <div class="eco-node">
+      <div class="eco-node-icon">📡</div>
+      <div class="eco-node-name">STC Group</div>
+      <div class="eco-node-desc">Center3 дата-центры</div>
+      <div class="eco-node-value">1 GW к 2030</div>
+    </div>
+    <div class="eco-node">
+      <div class="eco-node-icon">🏙️</div>
+      <div class="eco-node-name">NEOM</div>
+      <div class="eco-node-desc">Когнитивный город + The Line</div>
+      <div class="eco-node-value">$500B проект</div>
+    </div>
+    <div class="eco-node">
+      <div class="eco-node-icon">🧪</div>
+      <div class="eco-node-name">SDAIA</div>
+      <div class="eco-node-desc">Нацстратегия AI + ALLaM</div>
+      <div class="eco-node-value">Top 15 AI к 2030</div>
+    </div>
+    <div class="eco-node">
+      <div class="eco-node-icon">🎓</div>
+      <div class="eco-node-name">KAUST</div>
+      <div class="eco-node-desc">Cisco AI Institute</div>
+      <div class="eco-node-value">GenAI CoE</div>
+    </div>
+    <div class="eco-node">
+      <div class="eco-node-icon">💰</div>
+      <div class="eco-node-name">STV Fund</div>
+      <div class="eco-node-desc">$100M AI фонд (Google-backed)</div>
+      <div class="eco-node-value">MENA AI стартапы</div>
+    </div>
+    <div class="eco-node">
+      <div class="eco-node-icon">🏦</div>
+      <div class="eco-node-name">Sanabil</div>
+      <div class="eco-node-desc">PIF-owned, $8B капитала</div>
+      <div class="eco-node-value">$2B+/год</div>
+    </div>
+    <div class="eco-node">
+      <div class="eco-node-icon">⚡</div>
+      <div class="eco-node-name">DataVolt</div>
+      <div class="eco-node-desc">AI Factory в NEOM Oxagon</div>
+      <div class="eco-node-value">$5B / 1.5 GW</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <div class="timeline-inner">
+    <div class="section-header">
+      <div class="section-tag" style="color: var(--emerald);">План действий</div>
+      <h2>Твоя дорожная карта на 6 месяцев</h2>
+      <p style="color: var(--warm-gray); margin-top: 12px; font-size: 15px;">Нажимай на задачи, чтобы отметить выполненные ✓</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item" data-anim>
+        <div class="timeline-content">
+          <div class="timeline-date">Февраль — Март 2026</div>
+          <div class="timeline-title">🚀 Подготовка плацдарма</div>
+          <div class="timeline-desc">Построй цифровое присутствие и зарегистрируйся на ключевых платформах.</div>
+          <div class="timeline-tasks">
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Зарегистрироваться на LEAP 2026 (onegiantleap.com)
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              LinkedIn-контент о мульти-агентных системах + теги #Vision2030 #HUMAIN #AgenticAI
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Follow + engage: Tareq Amin, Dr. Alghamdi, STV, HUMAIN в LinkedIn
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Регистрация на Bayt.com, GulfTalent
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Связаться с Hays Saudi Arabia, AIQU, Jadeer (рекрутинг)
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Написать в Russian-Saudi Business Council (rsbc.global)
+            </div>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+      </div>
+
+      <div class="timeline-item" data-anim>
+        <div class="timeline-content">
+          <div class="timeline-date">Апрель 2026</div>
+          <div class="timeline-title">🎯 LEAP 2026 + DeepFest</div>
+          <div class="timeline-desc">Главный networking-ивент года. 100,000+ участников. Бюджет ~$3-5K.</div>
+          <div class="timeline-tasks">
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Посетить LEAP 2026 (13-16 апреля, Эр-Рияд)
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Networking: стенды HUMAIN, SDAIA, Saudi AI стартапы
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Запланировать follow-up встречи ДО выезда из Эр-Рияда
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Подготовить 1-pager Zinin Corp + case study агентной системы
+            </div>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+      </div>
+
+      <div class="timeline-item" data-anim>
+        <div class="timeline-content">
+          <div class="timeline-date">Май — Июнь 2026</div>
+          <div class="timeline-title">💼 Первые контракты</div>
+          <div class="timeline-desc">Конвертируй контакты в контракты. Global Blockchain Show 29-30 июня.</div>
+          <div class="timeline-tasks">
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Конвертировать LEAP-контакты в консалтинг-проекты
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Посетить Global Blockchain Show (29-30 июня, Эр-Рияд)
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Исследовать партнёрство с Bell Integration / Vstorm
+            </div>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+      </div>
+
+      <div class="timeline-item" data-anim>
+        <div class="timeline-content">
+          <div class="timeline-date">Q3 2026</div>
+          <div class="timeline-title">🏠 Закрепление позиций</div>
+          <div class="timeline-desc">GAIN Summit + решение о резидентстве и долгосрочной базе.</div>
+          <div class="timeline-tasks">
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              GAIN Summit (15-17 сентября) — главный гос. AI-ивент
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Оценить Premium Residency (Special Talent track)
+            </div>
+            <div class="timeline-task" onclick="this.classList.toggle('checked')">
+              <div class="task-check"></div>
+              Рассмотреть Cloud Computing SEZ для Zinin Corp
+            </div>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALARY -->
+<section class="section" id="salary">
+  <div class="section-header">
+    <div class="section-tag" style="color: var(--emerald);">Зарплаты и ставки</div>
+    <h2>Сколько платят AI-специалистам — и твоя позиция на рынке</h2>
+  </div>
+
+  <div class="salary-grid">
+    <div class="salary-highlight">
+      <div class="salary-role">Твоя ставка — $200/час</div>
+      <div class="salary-highlight-value">Конкурентна ✓</div>
+      <p>Середина рынка для опытных AI-консультантов. Ниже ставок западных Big 4, но выше локальных. Проектные контракты: $40K–$400K. Ретейнеры: $2K–$10K/мес.</p>
+    </div>
+
+    <div class="salary-card" data-animate-bar>
+      <div class="salary-role">AI/ML Engineer (Senior)</div>
+      <div class="salary-bar-wrap">
+        <div class="salary-bar-label"><span>$90K</span><span>$128K</span></div>
+        <div class="salary-bar"><div class="salary-bar-fill coral" data-width="60"></div></div>
+      </div>
+    </div>
+    <div class="salary-card" data-animate-bar>
+      <div class="salary-role">AI Solutions Architect</div>
+      <div class="salary-bar-wrap">
+        <div class="salary-bar-label"><span>$58K</span><span>$154K</span></div>
+        <div class="salary-bar"><div class="salary-bar-fill gold" data-width="75"></div></div>
+      </div>
+    </div>
+    <div class="salary-card" data-animate-bar>
+      <div class="salary-role">Director of AI</div>
+      <div class="salary-bar-wrap">
+        <div class="salary-bar-label"><span>$150K</span><span>$200K+</span></div>
+        <div class="salary-bar"><div class="salary-bar-fill emerald" data-width="85"></div></div>
+      </div>
+    </div>
+    <div class="salary-card" data-animate-bar>
+      <div class="salary-role">Senior AI Scientist (глоб.)</div>
+      <div class="salary-bar-wrap">
+        <div class="salary-bar-label"><span>$200K</span><span>$420K</span></div>
+        <div class="salary-bar"><div class="salary-bar-fill purple" data-width="95"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top: 24px; font-size: 14px; color: var(--warm-gray); text-align: center;">
+    💡 Важно: 0% подоходного налога означает, что $95K в Эр-Рияде ≈ $135K в Нью-Йорке после налогов. Плюс housing allowance (25-30%), страховка, перелёты.
+  </p>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- VISA -->
+<section class="section" id="visa">
+  <div class="section-header">
+    <div class="section-tag" style="color: var(--accent-amber);">Визы и резидентство</div>
+    <h2>Как легально работать в Саудовской Аравии</h2>
+    <p style="color: var(--warm-gray); margin-top: 8px; font-size: 15px;">🇷🇺 Бонус: В декабре 2025 подписано соглашение о безвизовом режиме Россия—СА (90 дней)</p>
+  </div>
+
+  <div class="visa-cards">
+    <div class="visa-card">
+      <div class="visa-icon gold">📋</div>
+      <h4>Employment Visa (Iqama)</h4>
+      <p>Работодатель-спонсор. Оформление 1-3 недели для high-skilled. AI-специалисты — приоритетная категория с июля 2025.</p>
+      <div class="visa-price">Самый простой путь</div>
+    </div>
+    <div class="visa-card recommended">
+      <div class="visa-icon coral">⏱️</div>
+      <h4>Temporary Work Visa</h4>
+      <p>1 год, до 6 месяцев пребывания. Идеально для консалтинга. SAR 1,000 (~$266). Возобновлена для россиян с июля 2025.</p>
+      <div class="visa-price">~$266 / год</div>
+    </div>
+    <div class="visa-card">
+      <div class="visa-icon emerald">🏠</div>
+      <h4>Premium Residency</h4>
+      <p>Без спонсора. Special Talent Track (5 лет, продляется). Полная независимость. Entrepreneur Track: SAR 400K+ в VC.</p>
+      <div class="visa-price">SAR 100K/год (~$26,660)</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="collapsible" onclick="this.classList.toggle('open')">
+      <div class="collapsible-header">
+        <div class="collapsible-title">🏭 Cloud Computing SEZ — особая экономическая зона</div>
+        <div class="collapsible-arrow">▼</div>
+      </div>
+      <div class="collapsible-body">
+        <div class="collapsible-content">
+          Корпоративный налог всего 5% на 20 лет (вместо стандартных 20%). Гибкие правила найма иностранцев. Ускоренное оформление виз. Прямо релевантно для AI-инфраструктурной компании. Regional HQ Program: 30-летние налоговые каникулы + 10-летнее освобождение от Saudization.
+        </div>
+      </div>
+    </div>
+    <div class="collapsible" onclick="this.classList.toggle('open')">
+      <div class="collapsible-header">
+        <div class="collapsible-title">🇷🇺 Безвизовый режим Россия–Саудовская Аравия</div>
+        <div class="collapsible-arrow">▼</div>
+      </div>
+      <div class="collapsible-body">
+        <div class="collapsible-content">
+          Подписан 1 декабря 2025 — Россия первая страна с таким статусом для обычных паспортов. 90 дней безвизового пребывания для туризма и бизнеса. Пока не ратифицирован (февраль 2026). До активации — eVisa онлайн (множественный въезд, 90 дней, 1 год, оформление 24-72 часа).
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- EVENTS -->
+<section class="section" id="events">
+  <div class="section-header">
+    <div class="section-tag" style="color: var(--accent-purple);">Ивенты 2026</div>
+    <h2>Три обязательных конференции</h2>
+  </div>
+
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-number">01</div>
+      <div class="event-priority">Приоритет #1</div>
+      <div class="event-name">LEAP 2026</div>
+      <div class="event-date">13–16 апреля, Эр-Рияд</div>
+      <div class="event-desc">100,000+ участников. Включает DeepFest (AI). HUMAIN CEO запускает продукты здесь. Главная точка входа.</div>
+      <div class="event-budget">Бюджет: ~$3-5K (перелёт + проживание + билет)</div>
+    </div>
+    <div class="event-card">
+      <div class="event-number">02</div>
+      <div class="event-priority">Приоритет #2</div>
+      <div class="event-name">Global Blockchain Show</div>
+      <div class="event-date">29–30 июня, Эр-Рияд</div>
+      <div class="event-desc">10,000+ участников. Co-located с Global AI Show. Идеальное пересечение Web3 + AI для твоего профиля.</div>
+      <div class="event-budget">Бюджет: ~$2-3K</div>
+    </div>
+    <div class="event-card">
+      <div class="event-number">03</div>
+      <div class="event-priority">Приоритет #3</div>
+      <div class="event-name">GAIN Summit</div>
+      <div class="event-date">15–17 сентября, Эр-Рияд</div>
+      <div class="event-desc">Флагман SDAIA под патронажем Наследного Принца. Самый престижный государственный AI-ивент.</div>
+      <div class="event-budget">Бюджет: ~$3-4K</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- KEY PEOPLE -->
+<section class="section" id="people">
+  <div class="section-header">
+    <div class="section-tag">Ключевые контакты</div>
+    <h2>С кем начать networking</h2>
+  </div>
+
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="person-avatar gold">TA</div>
+      <div class="person-name">Tareq Amin</div>
+      <div class="person-role">CEO, HUMAIN</div>
+      <div class="person-tag priority">LinkedIn — приоритет #1</div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar coral">AA</div>
+      <div class="person-name">Dr. Abdullah Alghamdi</div>
+      <div class="person-role">President, SDAIA</div>
+      <div class="person-tag gov">Архитектор нац. AI стратегии</div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar emerald">YO</div>
+      <div class="person-name">Dr. Yaser Al-Onaizan</div>
+      <div class="person-role">Deputy CEO, HUMAIN</div>
+      <div class="person-tag priority">Ex-AWS, Ex-IBM Watson</div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar gold">STV</div>
+      <div class="person-name">STV Fund</div>
+      <div class="person-role">$800M+ VC, $100M AI Fund</div>
+      <div class="person-tag vc">Google-backed AI VC</div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar coral">SA</div>
+      <div class="person-name">Sanabil Investments</div>
+      <div class="person-role">PIF-owned, $8B капитала</div>
+      <div class="person-tag vc">$2B+ инвестиций в год</div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar emerald">RS</div>
+      <div class="person-name">RSBC</div>
+      <div class="person-role">Рос.-Сауд. Бизнес Совет</div>
+      <div class="person-tag gov">rsbc.global — warm intro</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- WEB3 -->
+<section class="section" id="web3">
+  <div class="section-header">
+    <div class="section-tag" style="color: var(--accent-amber);">Web3 стратегия</div>
+    <h2>Как правильно позиционировать Web3 в Саудовской Аравии</h2>
+  </div>
+
+  <div class="web3-alert">
+    <strong>⚠️ Важно:</strong> Криптовалюта формально в «серой зоне» в СА. Но: 14% саудовцев уже владеют крипто, в ноябре 2025 анонсирован нац. стейблкоин, а Web3 Alliance of Saudi Arabia (WASA) основан The Sandbox + Animoca Brands в феврале 2025. NFT не запрещены.
+  </div>
+
+  <div class="web3-grid">
+    <div class="web3-do">
+      <h4>✅ Позиционируй так:</h4>
+      <div class="web3-item">→ Enterprise blockchain infrastructure</div>
+      <div class="web3-item">→ AI Agents for Web3 Infrastructure</div>
+      <div class="web3-item">→ Tokenization и real-world assets (RWA)</div>
+      <div class="web3-item">→ Decentralized AI orchestration</div>
+      <div class="web3-item">→ MCP servers + agent-to-agent protocols</div>
+      <div class="web3-item">→ NEOM Web3 Accelerator (FutureSpark)</div>
+    </div>
+    <div class="web3-dont">
+      <h4>❌ Избегай фокуса на:</h4>
+      <div class="web3-item">✕ Cryptocurrency trading / DeFi спекуляции</div>
+      <div class="web3-item">✕ Крипто-маркетинг как основная экспертиза</div>
+      <div class="web3-item">✕ Meme-токены, pump-and-dump проекты</div>
+      <div class="web3-item">✕ Обход банковских ограничений</div>
+      <div class="web3-item">✕ Нелицензированные биржевые операции</div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="advantage-section" id="advantage">
+  <div class="advantage-inner">
+    <div class="section-header">
+      <div class="section-tag" style="color: var(--gold-light);">Твои козыри</div>
+      <h2 style="color: var(--gold-light);">Почему именно ты подходишь для этого рынка</h2>
+    </div>
+
+    <div class="advantage-grid">
+      <div class="advantage-card">
+        <div class="advantage-emoji">🤖</div>
+        <h4>Рабочая агентная архитектура</h4>
+        <p>7 специализированных Claude-агентов на Docker/Hetzner — не PowerPoint, а продакшн. 90-95% AI-пилотов проваливаются (Amin). Ты — тот, кто доводит до результата.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-emoji">🌐</div>
+        <h4>Web3 + AI пересечение</h4>
+        <p>Papaya (Web3 биллинг), MCP серверы, M2M маркетинг — это уникальная комбинация для WASA и NEOM FutureSpark. Мало кто совмещает оба мира.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-emoji">💰</div>
+        <h4>Конкурентная ставка</h4>
+        <p>$200/час — золотая середина: ниже McKinsey ($500+), но выше локальных. Принимаешь крипто — актуально для саудовских стартапов.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-emoji">🇷🇺</div>
+        <h4>Российский мост</h4>
+        <p>Безвизовое соглашение + RSBC + INNOPROM миссии. 100+ российских компаний уже в СА. VisionLabs (10+ лет) показывает путь.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-emoji">🇹🇷</div>
+        <h4>Географическая близость</h4>
+        <p>Каш → Эр-Рияд: ~3.5 часа перелёта. Часовая разница минимальна. Можно легко летать на встречи и ивенты.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-emoji">📱</div>
+        <h4>Content Factory</h4>
+        <p>Опыт построения контент-фабрик (Сборка, AI-блогеры) — прямо применим для саудовских компаний, которым нужна AI-генерация контента.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta" id="action">
+  <h2>Следующий шаг — зарегистрируйся на LEAP 2026</h2>
+  <p>Окно возможностей открыто прямо сейчас. Инфраструктуру строят — нужны люди, которые заставят её работать. Это ты.</p>
+  <a class="cta-btn" href="https://onegiantleap.com" target="_blank" rel="noopener">
+    Перейти на LEAP 2026 →
+  </a>
+  <p style="margin-top: 24px; font-size: 13px; color: var(--warm-gray-light);">
+    Связь с Сашей → Написать благодарность и попросить intro в антимонопольное подразделение World Bank / HUMAIN
+  </p>
+</section>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Navigation scroll handling
+const navbar = document.getElementById('navbar');
+const navProgress = document.getElementById('navProgress');
+const backTop = document.getElementById('backTop');
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollY / docHeight) * 100;
+
+  navProgress.style.width = progress + '%';
+  navbar.classList.toggle('scrolled', scrollY > 50);
+  backTop.classList.toggle('visible', scrollY > 600);
+
+  // Active nav link
+  const navLinks = document.querySelectorAll('.nav-link');
+  sections.forEach((section, i) => {
+    const top = section.offsetTop - 120;
+    const bottom = top + section.offsetHeight;
+    if (scrollY >= top && scrollY < bottom) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const matchingLink = document.querySelector(`.nav-link[href="#${section.id}"]`);
+      if (matchingLink) matchingLink.classList.add('active');
+    }
+  });
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Animate salary bars
+      if (entry.target.hasAttribute('data-animate-bar')) {
+        const bar = entry.target.querySelector('.salary-bar-fill');
+        if (bar) bar.style.width = bar.dataset.width + '%';
+      }
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.timeline-item[data-anim], .fade-in, [data-animate-bar]').forEach(el => observer.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
